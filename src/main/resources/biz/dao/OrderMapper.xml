@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="biz.dao.OrderMapper">
+  <resultMap id="BaseResultMap" type="biz.domain.Order">
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="student_name" jdbcType="VARCHAR" property="studentName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="motify_time" jdbcType="TIMESTAMP" property="motifyTime" />
+    <result column="mobile_phone" jdbcType="INTEGER" property="mobilePhone" />
+    <result column="qq" jdbcType="INTEGER" property="qq" />
+    <result column="wechat" jdbcType="VARCHAR" property="wechat" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="channel_id" jdbcType="INTEGER" property="channelId" />
+    <result column="list_source" jdbcType="INTEGER" property="listSource" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="order_status_id" jdbcType="INTEGER" property="orderStatusId" />
+    <result column="remake" jdbcType="VARCHAR" property="remake" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id, student_name, create_time, motify_time, mobile_phone, qq, wechat, phone, 
+    channel_id, list_source, user_id, order_status_id, remake
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="biz.domain.Order">
+    insert into order (order_id, student_name, create_time, 
+      motify_time, mobile_phone, qq, 
+      wechat, phone, channel_id, 
+      list_source, user_id, order_status_id, 
+      remake)
+    values (#{orderId,jdbcType=INTEGER}, #{studentName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{motifyTime,jdbcType=TIMESTAMP}, #{mobilePhone,jdbcType=INTEGER}, #{qq,jdbcType=INTEGER}, 
+      #{wechat,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{channelId,jdbcType=INTEGER}, 
+      #{listSource,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{orderStatusId,jdbcType=INTEGER}, 
+      #{remake,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="biz.domain.Order">
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="studentName != null">
+        student_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="motifyTime != null">
+        motify_time,
+      </if>
+      <if test="mobilePhone != null">
+        mobile_phone,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="wechat != null">
+        wechat,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="channelId != null">
+        channel_id,
+      </if>
+      <if test="listSource != null">
+        list_source,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="orderStatusId != null">
+        order_status_id,
+      </if>
+      <if test="remake != null">
+        remake,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="studentName != null">
+        #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="motifyTime != null">
+        #{motifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mobilePhone != null">
+        #{mobilePhone,jdbcType=INTEGER},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=INTEGER},
+      </if>
+      <if test="wechat != null">
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null">
+        #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="listSource != null">
+        #{listSource,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatusId != null">
+        #{orderStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="remake != null">
+        #{remake,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="biz.domain.Order">
+    update order
+    <set>
+      <if test="studentName != null">
+        student_name = #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="motifyTime != null">
+        motify_time = #{motifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mobilePhone != null">
+        mobile_phone = #{mobilePhone,jdbcType=INTEGER},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=INTEGER},
+      </if>
+      <if test="wechat != null">
+        wechat = #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null">
+        channel_id = #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="listSource != null">
+        list_source = #{listSource,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatusId != null">
+        order_status_id = #{orderStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="remake != null">
+        remake = #{remake,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="biz.domain.Order">
+    update order
+    set student_name = #{studentName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      motify_time = #{motifyTime,jdbcType=TIMESTAMP},
+      mobile_phone = #{mobilePhone,jdbcType=INTEGER},
+      qq = #{qq,jdbcType=INTEGER},
+      wechat = #{wechat,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      channel_id = #{channelId,jdbcType=INTEGER},
+      list_source = #{listSource,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      order_status_id = #{orderStatusId,jdbcType=INTEGER},
+      remake = #{remake,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>
