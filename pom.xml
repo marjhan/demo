@@ -169,8 +169,37 @@
     		<artifactId>mysql-connector-java</artifactId>
     		<version>5.1.24</version>
 		</dependency>
+		<dependency>
+   			<groupId>org.mybatis.generator</groupId>
+    		<artifactId>mybatis-generator-core</artifactId>
+    		<version>1.3.5</version>
+		</dependency>
+		<dependency>  
+    		<groupId>org.apache.velocity</groupId>  
+    		<artifactId>velocity</artifactId>  
+    		<version>1.5</version>  
+		</dependency>  
+		<dependency>  
+    		<groupId>velocity-tools</groupId>  
+    		<artifactId>velocity-tools-generic</artifactId>  
+    		<version>1.2</version>  
+		</dependency>
     </dependencies>  
   <build>
     <finalName>order</finalName>
   </build>
+  <profiles>
+		<profile>
+			<id>local</id>
+			<build>
+				<filters>
+					<filter>profile.local.properties</filter>
+				</filters>
+			</build>
+			<activation>
+				<activeByDefault>true</activeByDefault><!--默认启用的是本地环境配置 -->
+			</activation>
+		</profile>
+		
+	</profiles>
 </project>
