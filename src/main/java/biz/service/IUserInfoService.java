@@ -1,10 +1,10 @@
 package biz.service;
 
-import biz.req.UserGetReq;
-import biz.res.UserGetRes;
+import biz.req.UserInfoGetReq;
+import biz.res.UserInfoGetRes;
 
 public interface IUserInfoService {
 	
-	public UserGetRes getUserInfo(UserGetReq userGetReq);
+	public UserInfoGetRes getUserInfo(UserInfoGetReq userInfOGetReq);
 
 }

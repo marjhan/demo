@@ -3,15 +3,15 @@ package biz.action;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.spi.ErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import biz.common.exception.BusinessException;
-import biz.common.exception.ErrorCode;
 import biz.common.util.ParamConstants;
-import biz.req.UserGetReq;
+import biz.req.UserInfoGetReq;
 import biz.res.LoginRes;
-import biz.res.UserGetRes;
+import biz.res.UserInfoGetRes;
 import biz.service.IUserInfoService;
 import biz.session.provider.SessionProvider;
 /** 
@@ -57,10 +57,10 @@ public class WebsiteBaseAction {
      * session中获取完整的用户信息.
      * @return 返回参数
      */
-	public UserGetRes getUserInfo(HttpServletRequest request){
+	public UserInfoGetRes getUserInfo(HttpServletRequest request){
 		loginRes = getLoginRes(request);
 		if(loginRes != null) {
-			UserGetReq req = new UserGetReq();
+			UserInfoGetReq req = new UserInfoGetReq();
 			req.setUser_id(loginRes.getUser_id());
 			return userInfoService.getUserInfo(req);
 		}
@@ -80,7 +80,7 @@ public class WebsiteBaseAction {
 				loginName = loginName.substring(0, 3) + "******" + loginName.substring(loginName.length() - 4, loginName.length());
 			} catch (Exception e) {
 				logger.info(e);
-				throw new BusinessException(ErrorCode.DEFAULT_ERROR);
+				throw new BusinessException("000","数据错误");
 			}
 		}
 		//用户登录信息

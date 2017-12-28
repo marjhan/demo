@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import biz.common.exception.BusinessException;
-import biz.common.exception.ErrorCode;
 import biz.common.util.ParamConstants;
 import biz.res.LoginRes;
 import biz.session.provider.SessionProvider;
@@ -101,7 +100,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 				String requestURL = request.getRequestURL().toString();
 				System.out.println(requestURL);
 				if(isAjaxRequest(request)){
-					throw new BusinessException(ErrorCode.DEFAULT_ERROR);	
+					throw new BusinessException(ParamConstants.INTERCEPTOR_NO_LOGIN, "请登录！");	
 				}else{
 					String redirect = request.getContextPath() + "/login/login.html";
 					response.sendRedirect(redirect);

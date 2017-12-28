@@ -1,13 +1,12 @@
-package biz.req;
-
+package biz.res;
 /** 
 * @author  xuzc
-* @date 2017年12月28日 下午1:18:52 
+* @date 2017年12月28日 下午1:18:35 
 * @version 1.0 
 * @parameter  
 * @since  
 * @return  */
-public class UserGetReq {
+public class UserInfoGetRes {
 
 	public Integer user_id;
 	
