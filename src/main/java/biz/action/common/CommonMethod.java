@@ -18,7 +18,7 @@ import biz.session.provider.SessionProvider;
 
 /**
  * 提供一些公共方法.
- * @author xufy12864.
+ * @author xuzc.
  * 
  */
 public class CommonMethod extends WebsiteBaseAction{

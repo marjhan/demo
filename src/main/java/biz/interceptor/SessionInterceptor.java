@@ -79,15 +79,15 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		/**根据配置文件获取无需登录即可发送的请求.*/
-		String[] freeReq = freePath.trim().split(";");
-		String url = request.getRequestURI();
-		boolean ok = true;
-		for(String free : freeReq){
-			if(url.endsWith(free)){
-				ok = false;
-				break;
-			}
-		}
+//		String[] freeReq = freePath.trim().split(";");
+//		String url = request.getRequestURI();
+		boolean ok = false;
+//		for(String free : freeReq){
+//			if(url.endsWith(free)){
+//				ok = false;
+//				break;
+//			}
+//		}
 		
 		String ip=this.getIpAddr2(request);
 		request.getSession().setAttribute("ip", ip);

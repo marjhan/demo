@@ -37,15 +37,14 @@ import biz.req.LoginReq;
 import biz.req.ResetPasswordReq;
 import biz.res.ErrorTimesRes;
 import biz.res.LoginRes;
-import biz.service.IUserInfoService;
 import biz.service.IUserLoginRegisterService;
 import biz.session.provider.SessionProvider;
 /**
  * 登录注册.
- * @author xufy12864.
+ * @author xuzc
  */
 @Controller
-@RequestMapping("/teng/user")
+@RequestMapping("/sts/user")
 public class UserLoginRegisterAction extends WebsiteBaseAction{
 	/**session提供.*/
 	@Autowired
@@ -53,9 +52,6 @@ public class UserLoginRegisterAction extends WebsiteBaseAction{
 	/**登录注册接口.*/
 	@Autowired
 	private IUserLoginRegisterService userLoginRegisterService;
-	/**用户信息接口.*/
-	@Autowired
-	private IUserInfoService userInfoService;
 	@Value("${app.server.host}")
 	private String host;
 	@Value("${app.server.port}")
@@ -109,7 +105,7 @@ public class UserLoginRegisterAction extends WebsiteBaseAction{
 	@RequestMapping(value = "/toLogin")
 	public  String toLogin(Model model, HttpServletRequest request, HttpServletResponse response) {
 		SetUserInfoToPage(request);
-		return "redirect:"+ "http://"+host +"/service/index.html";
+		return "redirect:"+ "http://"+host+":"+port+"/service/index.html";
 	}
 	
 	/**
@@ -130,9 +126,6 @@ public class UserLoginRegisterAction extends WebsiteBaseAction{
 	    req.setIp(ip);
 	    try {
 	    	LoginRes loginRes = userLoginRegisterService.login(req);
-//	    	UserInfoGetReq userInfoGetReq = new UserInfoGetReq();
-//	    	userInfoGetReq.setUser_id(loginRes.getUser_id());
-//	    	UserInfoGetRes userInfoGetRes = userInfoService.getUserInfo(userInfoGetReq);
 	    	sessionProvider.setAttribute(request, response, ParamConstants.USER_ID, loginRes);
 	    	ResponseContext.setValue(loginRes);
 		} catch (BusinessException e) {

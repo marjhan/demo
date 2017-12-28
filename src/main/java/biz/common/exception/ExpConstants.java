@@ -3,7 +3,7 @@ package biz.common.exception;
 /**
  * 异常编码定义.
  * 
- * @author chenhl
+ * @author xuzc
  * @version 1.0 2014-3-11
  * @since 1.0
  */

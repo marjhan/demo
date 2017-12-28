@@ -13,7 +13,7 @@ import org.dom4j.io.SAXReader;
 /**
  * 异常管理器.
  * 
- * @author chenhl
+ * @author xuzc
  * @version 1.0 2014-3-11
  * @since 1.0
  */

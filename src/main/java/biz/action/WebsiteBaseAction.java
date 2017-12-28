@@ -3,7 +3,6 @@ package biz.action;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.spi.ErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -42,8 +41,6 @@ public class WebsiteBaseAction {
 	public  LoginRes loginRes=null;
 	
 	public String image = null;
-	@Value("${pacific.userId}")
-	private String pacificUserId;
     /**
      * session中获取用户信息.
      * @return 返回参数
