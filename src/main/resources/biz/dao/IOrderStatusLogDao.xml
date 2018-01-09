@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="biz.dao.IOrderStatusLogDao">
+  <resultMap id="BaseResultMap" type="biz.domain.OrderStatusLog">
+    <id column="order_status_log_id" jdbcType="INTEGER" property="orderStatusLogId" />
+    <result column="order_status_log" jdbcType="VARCHAR" property="orderStatusLog" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="motify_time" jdbcType="TIMESTAMP" property="motifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_status_log_id, order_status_log, create_time, motify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_status_log
+    where order_status_log_id = #{orderStatusLogId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_status_log
+    where order_status_log_id = #{orderStatusLogId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="biz.domain.OrderStatusLog">
+    insert into order_status_log (order_status_log_id, order_status_log, 
+      create_time, motify_time)
+    values (#{orderStatusLogId,jdbcType=INTEGER}, #{orderStatusLog,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{motifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="biz.domain.OrderStatusLog">
+    insert into order_status_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderStatusLogId != null">
+        order_status_log_id,
+      </if>
+      <if test="orderStatusLog != null">
+        order_status_log,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="motifyTime != null">
+        motify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderStatusLogId != null">
+        #{orderStatusLogId,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatusLog != null">
+        #{orderStatusLog,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="motifyTime != null">
+        #{motifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="biz.domain.OrderStatusLog">
+    update order_status_log
+    <set>
+      <if test="orderStatusLog != null">
+        order_status_log = #{orderStatusLog,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="motifyTime != null">
+        motify_time = #{motifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where order_status_log_id = #{orderStatusLogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="biz.domain.OrderStatusLog">
+    update order_status_log
+    set order_status_log = #{orderStatusLog,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      motify_time = #{motifyTime,jdbcType=TIMESTAMP}
+    where order_status_log_id = #{orderStatusLogId,jdbcType=INTEGER}
+  </update>
+</mapper>

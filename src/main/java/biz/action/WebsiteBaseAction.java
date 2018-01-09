@@ -58,7 +58,7 @@ public class WebsiteBaseAction {
 		loginRes = getLoginRes(request);
 		if(loginRes != null) {
 			UserInfoGetReq req = new UserInfoGetReq();
-			req.setUser_id(loginRes.getUser_id());
+			req.setUser_id(loginRes.getUserId());
 			return userInfoService.getUserInfo(req);
 		}
 		return null;
@@ -73,7 +73,7 @@ public class WebsiteBaseAction {
 		String loginName = "";
 		if(loginRes != null) {
 			try {
-				loginName = loginRes.getUser_name();
+				loginName = loginRes.getUserName();
 				loginName = loginName.substring(0, 3) + "******" + loginName.substring(loginName.length() - 4, loginName.length());
 			} catch (Exception e) {
 				logger.info(e);

@@ -9,52 +9,51 @@ package biz.req;
 public class LoginReq {
 	
 
-	public Integer user_id;
+	public Integer userId;
 
-	public String user_name;
+	public String userName;
 
 	public String password;
 
 	public String ip;
-	
+
 	/**
-	 * @return the user_id
+	 * @return the userId
 	 */
-	public Integer getUser_id() {
-		return user_id;
+	public Integer getUserId() {
+		return userId;
 	}
 
 	/**
-	 * @param user_id the user_id to set
+	 * @param userId the userId to set
 	 */
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	/**
-	 * @return the user_name
+	 * @return the userName
 	 */
-	public String getUser_name() {
-		return user_name;
+	public String getUserName() {
+		return userName;
 	}
 
 	/**
-	 * @param user_name the user_name to set
+	 * @param userName the userName to set
 	 */
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-
 	/**
-	 * @return the password
+	 * @return the passWord
 	 */
 	public String getPassword() {
 		return password;
 	}
 
 	/**
-	 * @param password the password to set
+	 * @param passWord the passWord to set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -73,5 +72,6 @@ public class LoginReq {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
+	
 	
 }

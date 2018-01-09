@@ -16,7 +16,7 @@ public class User {
     /**
      * 密码
      */
-    private String password;
+    private String passWord;
 
     /**
      * 真实姓名
@@ -79,16 +79,16 @@ public class User {
      * 密码
      * @return password 密码
      */
-    public String getPassword() {
-        return password;
+    public String getPassWord() {
+        return passWord;
     }
 
     /**
      * 密码
      * @param password 密码
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
     }
 
     /**

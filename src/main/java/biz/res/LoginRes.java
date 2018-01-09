@@ -9,37 +9,86 @@ package biz.res;
 public class LoginRes {
 	
 
-	public Integer user_id;
+	public Integer userId;
 
-	public String user_name;
+	public String userName;
+
+	public String realName;
+
+	public Integer roleId;
+
+	public String roleName;
+
+	/**
+	 * @return the userId
+	 */
+	public Integer getUserId() {
+		return userId;
+	}
+
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	/**
+	 * @return the userName
+	 */
+	public String getUserName() {
+		return userName;
+	}
+
+	/**
+	 * @param userName the userName to set
+	 */
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	/**
+	 * @return the realName
+	 */
+	public String getRealName() {
+		return realName;
+	}
+
+	/**
+	 * @param realName the realName to set
+	 */
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+
+	/**
+	 * @return the roleId
+	 */
+	public Integer getRoleId() {
+		return roleId;
+	}
+
+	/**
+	 * @param roleId the roleId to set
+	 */
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
+
+	/**
+	 * @return the roleName
+	 */
+	public String getRoleName() {
+		return roleName;
+	}
+
+	/**
+	 * @param roleName the roleName to set
+	 */
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
 	
-	/**
-	 * @return the user_id
-	 */
-	public Integer getUser_id() {
-		return user_id;
-	}
-
-	/**
-	 * @param user_id the user_id to set
-	 */
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
-	}
-
-	/**
-	 * @return the user_name
-	 */
-	public String getUser_name() {
-		return user_name;
-	}
-
-	/**
-	 * @param user_name the user_name to set
-	 */
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
-	}
 	
 	
 }

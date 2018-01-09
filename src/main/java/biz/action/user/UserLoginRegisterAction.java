@@ -102,10 +102,55 @@ public class UserLoginRegisterAction extends WebsiteBaseAction{
 	 * @param req 请求.
 	 * @return 返回.
 	 */
-	@RequestMapping(value = "/toLogin")
-	public  String toLogin(Model model, HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/login")
+	public  String login(Model model, HttpServletRequest request, HttpServletResponse response) {
+		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
+		if(loginRes==null){
+//			KeyPair keyPair = (KeyPair) sessionProvider.getAttribute(request, ParamConstants.KEYPAIR);
+//			if (null == keyPair) {
+//				// 如果为空 获取密钥对存入 session
+//				keyPair = RSAUtils.generateKeyPair2();
+//				sessionProvider.setAttribute(request, response, ParamConstants.KEYPAIR, keyPair);
+//			}
+			return "login/login";			
+		}
+		return "index";
+//		SetUserInfoToPage(request);
+//		return "redirect:"+ "http://"+host+":"+port+"/service/index.html";
+	}
+	/**
+	 * 登录.
+	 * @param req 请求.
+	 * @return 返回.
+	 */
+	@RequestMapping(value="/toLogin",method=RequestMethod.POST)
+	public @ResponseBody ResponseEntity toLogin(HttpServletRequest request,HttpServletResponse response,@Valid LoginReq req){
+		ErrorTimesRes errorTimesRes = (ErrorTimesRes)sessionProvider.getAttribute(request, FrontConstants.ERROR_KEY+req.getUserName().trim());
+		if (errorTimesRes == null) {
+			errorTimesRes = new ErrorTimesRes();
+		}
+		/**对密码进行解密.*/
+		req.setPassword(CommonMethod.getPassword(req.getPassword(), request, response, sessionProvider));
+		
+	    String ip=(String)request.getSession().getAttribute("ip");
+	    req.setIp(ip);
+	    try {
+	    	LoginRes loginRes = userLoginRegisterService.login(req);
+	    	sessionProvider.setAttribute(request, response, ParamConstants.USER_ID, loginRes);
+	    	ResponseContext.setValue(loginRes);
+		} catch (BusinessException e) {
+			Logger.getLogger(UserLoginRegisterAction.class).info("login" + e);
+			String errorCode = e.getError_code();
+			if(FrontConstants.ERROR_CODE_5103007.equals(errorCode)) {
+				errorTimesRes.setError_times(errorTimesRes.getError_times() + 1);
+				sessionProvider.setAttribute(request, response, FrontConstants.ERROR_KEY+req.getUserName().trim(), errorTimesRes);
+			}
+			throw new BusinessException(e.getError_code(), e.getError_info());
+		}
+		//登录成功清除密码错误信息
+		sessionProvider.removeAttribute(request, response, FrontConstants.ERROR_KEY+req.getUserName().trim());
 		SetUserInfoToPage(request);
-		return "redirect:"+ "http://"+host+":"+port+"/service/index.html";
+		return  ResponseContext.getResponseEntity();
 	}
 	
 	/**
@@ -113,13 +158,13 @@ public class UserLoginRegisterAction extends WebsiteBaseAction{
 	 * @param req 请求.
 	 * @return 返回.
 	 */
-	@RequestMapping(value="/login",method=RequestMethod.POST)
+	/*@RequestMapping(value="/toLogin",method=RequestMethod.POST)
 	public @ResponseBody ResponseEntity login(HttpServletRequest request,HttpServletResponse response,@Valid LoginReq req){
 		ErrorTimesRes errorTimesRes = (ErrorTimesRes)sessionProvider.getAttribute(request, FrontConstants.ERROR_KEY+req.getUser_name().trim());
 		if (errorTimesRes == null) {
 			errorTimesRes = new ErrorTimesRes();
 		}
-		/**对密码进行解密.*/
+		*//**对密码进行解密.*//*
 		req.setPassword(CommonMethod.getPassword(req.getPassword(), request, response, sessionProvider));
 		
 	    String ip=(String)request.getSession().getAttribute("ip");
@@ -141,8 +186,8 @@ public class UserLoginRegisterAction extends WebsiteBaseAction{
 		sessionProvider.removeAttribute(request, response, FrontConstants.ERROR_KEY+req.getUser_name().trim());
 	    return  ResponseContext.getResponseEntity();
 	}
-	public @ResponseBody ResponseEntity loginback(HttpServletRequest request,HttpServletResponse response,@Valid LoginReq req){
-		/**对密码进行解密.*/
+ 	public @ResponseBody ResponseEntity loginback(HttpServletRequest request,HttpServletResponse response,@Valid LoginReq req){
+		*//**对密码进行解密.*//*
 		req.setPassword(CommonMethod.getPassword(req.getPassword(), request, response, sessionProvider));
 		
 	    String ip=(String)request.getSession().getAttribute("ip");
@@ -151,7 +196,7 @@ public class UserLoginRegisterAction extends WebsiteBaseAction{
 		ResponseContext.setValue(loginRes);
 		sessionProvider.setAttribute(request, response, ParamConstants.USER_ID, loginRes);
 		return  ResponseContext.getResponseEntity();
-	}
+	}*/
 	
 	/**
 	 * 找回密码.
@@ -199,7 +244,7 @@ public class UserLoginRegisterAction extends WebsiteBaseAction{
      * @create: 2012-5-30 上午10:42:51 xuwf.
      * @history:.
      */
-	@RequestMapping(value = "/getModulusExponent")
+	@RequestMapping(value = "/getModulusExponent",method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity getActiveModulusExponent(HttpServletRequest request,HttpServletResponse response) {
 		KeyPair keyPair = (KeyPair)sessionProvider.getAttribute(request, ParamConstants.KEYPAIR);
 		if(keyPair == null) {
@@ -255,7 +300,7 @@ public class UserLoginRegisterAction extends WebsiteBaseAction{
 	public Map<String,Object> toSure(LoginRes loginRes, String user_id){		
 		HashMap<String, Object> returnMap = new HashMap<String, Object>();
 		if(loginRes != null && user_id != null){
-			if(user_id.equals(loginRes.getUser_id())){
+			if(user_id.equals(loginRes.getUserId())){
 				returnMap.put("isLogin", true);
 			}else{
 				throw new BusinessException(ParamConstants.ERROR_NO_2, "非法登录!");

@@ -79,15 +79,15 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		/**根据配置文件获取无需登录即可发送的请求.*/
-//		String[] freeReq = freePath.trim().split(";");
-//		String url = request.getRequestURI();
-		boolean ok = false;
-//		for(String free : freeReq){
-//			if(url.endsWith(free)){
-//				ok = false;
-//				break;
-//			}
-//		}
+		String[] freeReq = freePath.trim().split(";");
+		String url = request.getRequestURI();
+		boolean ok = true;
+		for(String free : freeReq){
+			if(url.endsWith(free)){
+				ok = false;
+				break;
+			}
+		}
 		
 		String ip=this.getIpAddr2(request);
 		request.getSession().setAttribute("ip", ip);
@@ -95,14 +95,14 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 		/**如果是需要前置登录的请求需要根据session判断其是否登录.*/
 		if(ok){
 			LoginRes loginRes = (LoginRes) SessionProvider.getAttribute(request, ParamConstants.USER_ID);
-			if(loginRes == null || loginRes.getUser_id()==null){	
+			if(loginRes == null || loginRes.getUserId()==null){	
 // 				request.getRequestDispatcher("/itn/teng/user/toLogin.json").forward(request,response);
 				String requestURL = request.getRequestURL().toString();
 				System.out.println(requestURL);
 				if(isAjaxRequest(request)){
 					throw new BusinessException(ParamConstants.INTERCEPTOR_NO_LOGIN, "请登录！");	
 				}else{
-					String redirect = request.getContextPath() + "/login/login.html";
+					String redirect = request.getContextPath() + "/sts/user/login.html";
 					response.sendRedirect(redirect);
 					return false;
 				}
