@@ -1,0 +1,55 @@
+#parse("/screen/include/header-console.vm")
+<title>$title</title>
+<style>
+	.hidetd{display:none;}
+</style>
+</head>
+
+<body ms-controller=$js_name class="ms-controller">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="header-left">
+                <a class="logo" href="/sts/sales/list.html"></a>
+                <a class="gl-header-manage fs-16" href="/sts/home/index.html">管理中心</a>
+            </div>
+            <ul class="gl-header-menu ms-controller" ms-controller="header">
+                <li>
+                    <a><span ms-attr-title="username">{{username}}</span></a>
+                </li>
+                <li>
+                    <a id="cas_logout_url" class="login" href="">退出</a>
+                </li>
+				<!--
+                <li>
+                    <a class="apidoc" href="/api.html">开发文档</a>
+                </li>
+				-->
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="sidebar">
+            	<ul class="nav nav-sidebar">
+                    <li><a><i class="parent-up"></i>销售管理</a></li>
+                    <li class=#if($active=="sales")"active"#else""#end><a href="/sts/sales/list.html"><i class="child-3-1"></i>销售信息</a></li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li><a><i class="parent-up"></i>系统管理</a></li>
+					<li class=#if($active=="option")"active"#else""#end><a href="/sts/option/user.html"><i class="child-1-6"></i>用户管理</a></li>
+                </ul>
+			
+			<script>
+				$(".sidebar .nav-sidebar").each(function(){
+					$(this).find("li").each(function(){
+						if($(this).hasClass("active")){
+							$(this).parent().addClass("active");
+							$(this).parent().children("li:first-child").find("i").removeClass("parent-up").addClass("parent-down");
+						}
+					})
+				})
+			</script>
+			
+			</div>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

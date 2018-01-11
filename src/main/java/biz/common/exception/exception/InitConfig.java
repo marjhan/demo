@@ -1,4 +1,4 @@
-package biz.common.exception;
+package biz.common.exception.exception;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

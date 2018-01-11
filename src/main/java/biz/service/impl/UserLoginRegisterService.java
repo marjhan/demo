@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import biz.common.exception.BusinessException;
+import biz.common.util.FrontConstants;
 import biz.dao.IRoleDao;
 import biz.dao.IUserDao;
 import biz.domain.Role;
@@ -53,7 +54,7 @@ public class UserLoginRegisterService implements IUserLoginRegisterService{
 				return loginRes;
 			}
 		}else{
-			throw new BusinessException("000", "密码错误");	
+			throw new BusinessException(FrontConstants.ERROR_CODE_5103007, "密码错误");	
 		}
 	}
 

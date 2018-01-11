@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+	
+	<!-- web接入层 自定义错误 -->	
+	<exception errorCode="-1001" errorInfo="缺少必填项" description="协议必须字段缺失"></exception>
+	<exception errorCode="-1002" errorInfo="网络异常" description="网络不通"></exception>
+	<exception errorCode="-1003" errorInfo="数据库异常" description="数据库错误"></exception>
+	<exception errorCode="-1004" errorInfo="系统异常" description="未知异常"></exception>
+	<!-- CEP平台系统错误 -->
+	<!-- 打包解包中的错误 -->
+	<exception errorCode="65" errorInfo="系统忙，请稍后再试" description="打包解包过程中，行索引超出范围"></exception>
+	<exception errorCode="66" errorInfo="系统忙，请稍后再试" description="打包解包过程中，列索引超出范围"></exception>
+	<exception errorCode="67" errorInfo="系统忙，请稍后再试" description="打包解包过程中，指定的行列位置无效"></exception>
+	<exception errorCode="68" errorInfo="系统忙，请稍后再试" description="打包解包过程中，列名不存在"></exception>
+	<exception errorCode="69" errorInfo="系统忙，请稍后再试" description="打包解包过程中，列类型无效"></exception>
+	<!-- 本地通道插件错误号 -->
+	<exception errorCode="70" errorInfo="系统忙，请稍后再试" description="打包解包过程中，列类型强制转换失败"></exception>
+	<exception errorCode="73" errorInfo="系统忙，请稍后再试" description="服务调用，同步请求等待应应答超时"></exception>
+	<exception errorCode="74" errorInfo="系统忙，请稍后再试" description="发送同步请求错误，队列满或者请求被拒绝"></exception>
+	<exception errorCode="75" errorInfo="系统忙，请稍后再试" description="发送异步事件错误，队列满或者请求被拒绝"></exception>
+	<exception errorCode="76" errorInfo="系统忙，请稍后再试" description="同步请求在等待事件池中注册失败"></exception>
+	<exception errorCode="77" errorInfo="系统忙，请稍后再试" description="调用服务传入的事件无效，为null或者对于同步调用传入的不是请求类事件"></exception>
+	<exception errorCode="78" errorInfo="系统忙，请稍后再试" description="发送同步请求错误，传入的不是请求事件"></exception>
+	<!-- CEP核心错误号 -->
+	<exception errorCode="81" errorInfo="系统忙，请稍后再试" description="请求被分发队列拒绝，队列满等：事件标识（事件号，服务号，别名等）、队列号"></exception>
+	<exception errorCode="82" errorInfo="系统忙，请稍后再试" description="分发线程，路由无法转发：事件标识（事件号，服务号，别名等）、线程名"></exception>
+	<exception errorCode="83" errorInfo="系统忙，请稍后再试" description="分发线程，在解析路由配置项的时候，出现错误"></exception>
+	<exception errorCode="84" errorInfo="系统忙，请稍后再试" description="在路由配置中，nodeName指向了自己，造成循环路由"></exception>
+	<exception errorCode="85" errorInfo="系统忙，请稍后再试" description="无效的内部路由"></exception>
+	
+	<!-- T2通信中的错误号 -->
+	<exception errorCode="97" errorInfo="系统忙，请稍后再试" description="服务器端端口监听失败"></exception>
+	<exception errorCode="98" errorInfo="系统忙，请稍后再试" description="T2通道解析报文失败"></exception>
+	<exception errorCode="99" errorInfo="系统忙，请稍后再试" description="T2通道收到的包的大小已经超过缓冲区可以容纳的大小，已经不能成功收取报文了"></exception>
+	<exception errorCode="100" errorInfo="系统忙，请稍后再试" description="T2通道发送报文失败，该连接已经失效，被断开"></exception>
+	<exception errorCode="101" errorInfo="系统忙，请稍后再试" description="T2服务器端发送队列满，或者被拒绝"></exception>
+	<exception errorCode="102" errorInfo="系统忙，请稍后再试" description="根据路由标示，无法找到合适的通信连接"></exception>
+	<exception errorCode="103" errorInfo="系统忙，请稍后再试" description="事件打包失败"></exception>
+	
+	<exception errorCode="10190501" errorInfo="不是有效手机号码" description="手机号码校验"></exception>
+	<exception errorCode="10109506" errorInfo="密码错误" description="会话中未取得秘钥信息"></exception>
+	<exception errorCode="10101501" errorInfo="请先登录系统" description="执行需要登录为前提的调用"></exception>
+</Root>

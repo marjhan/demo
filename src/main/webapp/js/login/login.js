@@ -140,25 +140,19 @@ require(["domReady!","avalon","jquery","common/common","jquery.cookie","validati
                     },
                     callback : function( data){
                         removeError("username");
-                        if(data.userId!=""){
-                            $.cookie("_a_", data.userId, { path: '/', expires: 10 });
-                            $.cookie("_n_", model.strFilter(data.userName), { path: '/', expires: 10 });
-                            $.cookie("_un_", data.userName, { path: '/', expires: 10 });
-                            model.$goPage(data);
-                        }else{
-                            $.cookie("_a_","",{path: '/',expires:-1});
-                            $.cookie("_n_","",{path: '/',expires:-1});
-                            $.cookie("_t_","",{path: '/',expires:-1});
-                        }
-                        can_click = true;
-                    },
-                    failure:function(r){
-                        if(model.show){
-                            model.changeValidateCode();
-                        }
-                        /*密码错误*/
-                        if(r.error_code=="5103007"){
-                            showError(null,null,r.error_info);
+                        if(!data.errorCode){
+                        	if(data.userId){
+                        		$.cookie("_a_", data.userId, { path: '/', expires: 10 });
+                        		$.cookie("_n_", model.strFilter(data.userName), { path: '/', expires: 10 });
+                        		$.cookie("_un_", data.userName, { path: '/', expires: 10 });
+                        		model.$goPage(data);
+                        	}else{
+                        		$.cookie("_a_","",{path: '/',expires:-1});
+                        		$.cookie("_n_","",{path: '/',expires:-1});
+                        		$.cookie("_t_","",{path: '/',expires:-1});
+                        	}
+                        }else if(data.errorCode=="5103007"){
+                            showError(null,null,r.errorInfo);
                             var name = model.username;
                             model.imgcode ="";
                             model.password = "";
@@ -169,14 +163,14 @@ require(["domReady!","avalon","jquery","common/common","jquery.cookie","validati
                             }else{
                                 model.show = false;
                             }
-                        }else if(r.error_code == "10109506"){
+                        }else if(data.errorCode == "10109506"){
                         	common.getRSA();
-                            showError(null,null,r.error_info)
+                            showError(null,null,data.errorInfo)
                         }else{
-                            showError(null,null,"网络异常！");
+                            showError(null,null,data.errorInfo);
                         }
                         can_click = true;
-                    }
+                    },
                 })
             }
         },
@@ -184,7 +178,7 @@ require(["domReady!","avalon","jquery","common/common","jquery.cookie","validati
             if($.cookie("_u_")&&($.cookie("_u_").indexOf("openplat")>-1||$.cookie("_u_").indexOf("cms")>-1)){
                 window.location.href =$.cookie("_u_");
             }else{
-                window.location.href ="/sts/home/index.html";
+                window.location.href ="/sts/sales/list.html";
             }
         },
         strFilter:function(str){

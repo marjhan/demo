@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 
 import biz.action.WebsiteBaseAction;
 import biz.common.exception.BusinessException;
-import biz.common.exception.ExpConfig;
+import biz.common.exception.exception.ExpConfig;
 import biz.common.util.ErrcodeConstants;
 import biz.common.util.ParamConstants;
 import biz.common.util.RSAUtils;

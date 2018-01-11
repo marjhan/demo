@@ -27,4 +27,13 @@ public class ParamConstants {
 	 * .
 	 */
     public static final String ERROR_NO_2 = "2";
+	
+	/**应答返回——错误编号,标志是正确应答还是错误应答.*/
+	public static final String RESPONSE_ERROR_NO = "error_no";
+	/**应答返回——错误信息,对错误信息的描述.*/
+	public static final String RESPONSE_ERROR_INFO = "error_info";
+	/**应答返回——错误编号,具体系统定义错误码.*/
+	public static final String RESPONSE_ERROR_CODE = "error_code";
+	/**应答返回——系统辅助信息,用于排查定位问题.*/
+	public static final String RESPONSE_ERROR_EXTINFO = "error_extinfo";
 }

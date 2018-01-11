@@ -1,0 +1,206 @@
+@charset "UTF-8";
+
+/* 清除浮动 */
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.clearfix::before, .clearfix::after {
+	display: table;
+	content: "";
+	line-height: 0;
+}
+
+body{
+	font-family:'Microsoft Yahei' !important;//网站默认字体样式
+	font-size:12px;//网站默认字体大小
+}
+
+h2,h3{font-weight:500;}
+
+//变量区
+@color-01:#0ae;//网站主题色
+@color-02:#575757;
+
+@font-size-01:14px;
+@font-size-02:16px;
+
+
+/* 属性封装 ****************************************************/
+.d(@a:inline-block){
+	display:@a;
+}
+.b(@a:2px,@b:solid,@c:#aaa){
+	border:@a @b @c;
+}
+.b_l(@a:1px,@b:solid,@c:#0ae){
+	border-left:@a @b @c;
+}
+.b_b(@a:1px,@b:solid,@c:#0ae){
+	border-bottom:@a @b @c;
+}
+.c(@a:#0ae){
+	color:@a;
+}
+.p_l(@a:4px){
+	padding-left:@a;
+}
+.p_b(@a:15px){
+	padding-bottom:@a;
+}
+.f_s(@a:14px){
+	font-size:@a;
+}
+.m_b(@a:20px){
+	margin-bottom: 20px;
+}
+.m_r(@a:22px){
+	margin-right:@a;
+}
+.m_l(@a:10px){
+	margin-left:@a;
+}
+.m_t(@a:2px){
+	margin-top:@a;
+}
+.w(@a:100px){
+	width:@a;
+}
+.h(@a:30px){
+	height:@a;
+}
+.b_c(@a:#0ae){
+	background-color:@a;
+}
+.t_c(@a:center){
+	text-align:@a;
+}
+.l_h(@a:30px){
+	line-height:@a;
+}
+.f(@a:left){
+	float:@a;
+}
+.b_r(@a:50%){
+	border-radius:@a;
+}
+.c(@a:#444){
+	color:@a;
+}
+.cus(@a:pointer){
+	cursor:@a;
+}
+.bk(@a:'',@b:center,@c:center){
+	background:url(@a) no-repeat @b @c;
+}
+.t_i(@a:10px){
+	text-indent:@a;
+}
+
+//居中
+.center{
+	.h(17px);
+	.l_h(17px);
+}
+
+/* 按钮组件 ********************************************/
+.button_01{//宽度110，高度30，背景色蓝色
+	.d();
+	.w();
+	.h();
+	.b_c();
+	.c(#fff);
+	.l_h();
+	.t_c();
+}
+
+.button_02{//宽度101，高度30，背景色蓝色
+	.d();
+	.w(101px);
+	.h();
+	.b_c();
+	.c(#fff);
+	.l_h();
+	.t_c();
+}
+
+
+
+/* 按钮组件 ********************************************/
+
+
+
+
+//应用详情页的模块title样式，左边蓝色边框，一个标题，一个下划线
+.common_title {
+	.b_b(1px,solid,#bbb);
+	.p_b();
+	.m_b();
+	
+	h2{
+		.f_s();
+		color: @color-02;
+		.p_l();
+		.b_l(2px,solid,#0ae);
+	}
+}
+
+//key-value格式的样式，表单展示类的item,左边是标题，右边是内容
+.common_form_item{
+	
+	label{
+		.c(#444);
+		.m_r();
+	}
+	span{
+		.c(#ff721a);
+		.f_s();
+	}
+}
+
+//key-object格式的样式，表单操作类的item,左边是标题，右边是操作内容盒子
+.common_form_item_01{
+	
+	label{
+		.c(#444);
+		.m_r();
+		.f();
+	}
+	div.content{
+		.d();
+		.f();
+	}
+}
+
+//key-value格式的radio展示类样式，左边是radio，右边是内容
+.common_radio_item{
+	.center;
+	
+	.choose{
+		.cus();
+		.f();
+		
+		i{
+			.d();
+			.w(14px);
+			.h(14px);
+			.b_r();
+			.m_t(2px);
+			.cus();
+			.f();
+			.bk('/images/console/radio.png',center,top);
+		}
+		i.active{
+			.bk('/images/console/radio.png',center,bottom);
+		}
+		span{
+			.c();
+			.m_l();
+			.f();
+		}
+	}
+	
+}

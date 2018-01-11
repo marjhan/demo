@@ -1,0 +1,46 @@
+<!--这个页面全部都是给console模块用的弹框-->
+
+<div class="black_overlay" id="fade" ></div><!--黑色遮罩-->
+<!-- 安全中心页面   begin***********************************************************************-->
+<!--弹框1：修改密码-->
+<div id="ChangePassword" class="ChangePassword">
+	<div class="popup">
+    	<a ms-controller="common" class="close" ms-click="close('ChangePassword')"></a>
+    	<h2>修改密码</h2>
+        <div class="ui-item">
+            <label class="ui-label">原密码</label>
+            <div class="ui-content">
+                <input type="password" class="ui-input error" id="old_password" ms-duplex="old_password" ms-blur="u1()">
+				<span class="validation" id="u1"></span>
+           </div>
+		</div>
+        <div class="ui-item">
+            <label class="ui-label">新密码</label>
+            <div class="ui-content">
+                <input type="password" class="ui-input" id="new_password" ms-duplex="new_password" ms-blur="u2()">
+				<span class="validation" id="u2" style="width:390px;">不能为空</span>
+			</div>
+            <p class="ui-prompt-gray">长度为6~14字符 支持数字、大小写字母和特殊符号</p>
+            <p class="ui-prompt-gray">
+                <span class="in" id="v1">弱</span>
+                <span class="in" id="v2">中</span>
+                <span class="in" id="v3">强</span>
+			</p>
+        </div>
+        <div class="ui-item">
+            <label class="ui-label">确认新密码</label>
+            <div class="ui-content">
+                <input type="password" class="ui-input" id="new_password_1" ms-duplex="new_password_1" ms-blur="u3()">
+                <span class="validation" id="u3" style="width:390px;"></span>
+            </div>
+        </div>
+        <div class="ui-item">
+            <a class="ui-btn" ms-click="changePassword()">保存</a>
+        </div>
+    </div>
+</div>
+<!--弹框1：修改密码-->
+
+<!-- 安全中心页面   over***********************************************************************-->
+
+

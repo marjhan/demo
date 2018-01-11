@@ -66,13 +66,12 @@
 		<url-pattern>*.json</url-pattern>
 	</servlet-mapping>
 
-	<!--初始化配置
+	<!--初始化配置-->
 	<servlet>
 		<servlet-name>init</servlet-name>
-		<servlet-class>biz.common.exception.InitConfig</servlet-class>
+		<servlet-class>biz.common.exception.exception.InitConfig</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-	 -->
 	<welcome-file-list>
 		<welcome-file>/index.vm</welcome-file>
 	</welcome-file-list>

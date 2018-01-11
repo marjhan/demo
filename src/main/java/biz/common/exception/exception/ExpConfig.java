@@ -1,4 +1,4 @@
-package biz.common.exception;
+package biz.common.exception.exception;
 
 import java.io.InputStream;
 import java.util.HashMap;

@@ -1,0 +1,119 @@
+#set($title="我的服务")
+#set($js_name="sales")
+#set($active="sales")
+<!--控台框架上半部 begin-->
+#parse("/screen/sales/include/console-upper.vm")
+<!--控台框架上半部 over-->
+<link href="/cssmin/style.css?" rel="stylesheet" />
+<!--我的服务内容区 begin****************************************************************************************-->
+
+	<!-- 服务操作  begin -->
+    <span class="span_1" ms-click="test">服务名称</span><input type="text" class="input_1" id="service_name"  ms-duplex="service_name"/>
+    <span class="span_1">应用名称</span><input type="text" class="input_1"	 id="client_name" ms-duplex="client_name"/>
+    <span class="span_1">服务环境</span>
+    <div class="input_2_parent"><input type="text" class="input_2" id="environment_type" ms-duplex="environment_type"  readonly="readonly" value="请选择服务环境" />
+        <ul id="evn_type">
+        	<li ms-click="changeEnv('')">全部</li>
+            <li  ms-click="changeEnv(1)">测试</li>
+            <li  ms-click="changeEnv(2)">生产</li>
+        </ul>
+    </div>
+    <span class="span_1">使用状态</span>
+    <div class="input_2_parent" id="prdStatus"><input type="text" class="input_2" id="service_status" ms-duplex="service_status_prd"  readonly="readonly" value="请选择服务使用状态" />
+        <ul ms-attr-prdStatus="prd" id="status">
+        	<li ms-click="setServiceStatus('')">全部</li>
+            <li ms-click="setServiceStatus(8)">正常</li>
+            <li ms-click="setServiceStatus(9)">到期</li>
+            <li ms-click="setServiceStatus(10)">未开通</li>
+        </ul>
+    </div>
+     <span class="span_1">交付方式</span>
+    <div class="input_2_parent"><input type="text" class="input_2" id="service_type" readonly="readonly" ms-duplex="service_type" value="请选择交付方式" />
+        <ul>
+        	<li ms-click="setAlternation('')">全部</li>
+        	#foreach ($alternation in $!alternationMode)
+            <li ms-click="setAlternation('$alternation.id')">$alternation.alternation_name</li>
+            #end
+        </ul>
+    </div>
+    <p style="float:left;margin-top:15px;"><a class="search_button" ms-click="seach()">搜索</a><a class="reset_botton" ms-click="reset()" style="margin-right:0;">重置</a></p>
+	<!-- 服务操作  over -->
+
+	<!-- 列表显示  begin -->
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>服务名称</th>
+                    <th>应用名称</th>
+                    <th>服务环境</th>
+                    <th>使用状态</th>
+					<th>购买/申请时间</th>
+                    <th>交付方式</th>
+                    <th>已调用/全部</th>
+                    <th>服务到期时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="serviceInfo">
+                <tr ms-repeat-item="serviceList">
+                    <td ms-if="item.service_status == 1 || item.service_status==''">{{item.service_name}}<a ms-class="make2">已下架</a></td>
+                    <td ms-if="item.service_status != 1 && item.service_status!=''"><a ms-click="jumpDetail(item.service_id,item.service_status)">{{item.service_name}}</a></td>
+                    <td ms-attr-title="{{item.client_name}}">{{item.client_name}}</td>
+                    <td>
+                     <span ms-if="item.environment_type==2">生产环境</span>
+                     <span ms-if="item.environment_type==1">测试环境</span>
+                    </td>
+                    <td>
+    					<span ms-if="item.service_apply_status==8 || item.service_apply_status==2">正常</span>
+                        <span ms-if="item.service_apply_status==1">审核中</span>
+                        <span ms-if="item.service_apply_status==3">商务拒绝<a ms-class="make1" ms-title="{{item.auditInfo}}"></a></span>
+                        <span ms-if="item.service_apply_status==9">到期 </span>
+					</td>
+                    <td>{{item.service_start_time}}</td>
+                    <td>
+					<span ms-if="item.alternation_name !=null && item.alternation_name !=''">{{item.alternation_name}}</span>
+					<span ms-if="item.alternation_name ==null || item.alternation_name ==''">--</span>
+					</td>
+                    <td>
+                    	<span ms-if="item.combo_type==0 && item.totalTimes>0 && item.useTimes<=item.totalTimes && item.alternation_id =='1'">{{item.useTimes}}次/{{item.totalTimes}}次</span>
+                    	<span ms-if="item.combo_type==0 && item.totalTimes>0 && item.useTimes>item.totalTimes  && item.alternation_id =='1'">{{item.totalTimes}}次/{{item.totalTimes}}次</span>
+                    	<span ms-if="item.combo_type==0 && (item.totalTimes==null || item.totalTimes<0) && item.alternation_id =='1'">{{item.useTimes}}次/不限</span>
+                    	<span ms-if="item.combo_type==1 || item.combo_type==null || item.alternation_id !='1'">--/不限</span>
+                    </td>
+                    <td>
+                    <span>{{item.service_end_time}}</span>
+                   <!-- <span ms-if="item.service_apply_status==2 ||item.service_apply_status==5 || item.service_apply_status==9">{{item.service_end_time}}</span>
+                    <span ms-if="item.service_apply_status==1 ||item.service_apply_status==4 || item.service_apply_status==3 ||item.service_apply_status==6">--</span>
+                  -->  
+                    </td>
+                    <td ms-if="item.service_status!=1 && item.service_status!=''">
+                    <span ms-if="item.alternation_id=='2' ||item.use_notice!=''"> <a ms-href="/detail.html?serial_number={{item.serial_number}}">查看详情</a></span>
+                    <!-- online_type=1显示在线测试按钮 -->
+                    <span style="margin-right:3px;" ms-if="item.plugin_code!='datacheckServices'"><a ms-if="item.online_type==1" ms-href="/tool.html?service_id={{item.service_id}}" >在线测试</a></span>
+                    <!-- 数据核查服务跳转页面 -->
+                    <span style="margin-right:3px;" ms-if="item.plugin_code=='datacheckServices'"><a ms-href="{{item.plugin_url}}??service_id={{item.service_id}}&app_key={{item.appkey}}" >直接查询</a></span>
+                    <!--服务是付费服务的并且环境是生产，服务没有过期则先是续费按钮 -->
+                    <span ms-if="item.environment_type==2"><a ms-click="jumpDetail(item.service_id,item.service_status)">续费</a></span>
+                     <span ms-if="item.environment_type==1 && (item.service_apply_status==3 || item.service_apply_status==9)"><a ms-click="jumpDetail(item.service_id,item.service_status)">重新申请</a></span>
+                    <!--服务是付费服务，申请的测试scope，并且服务没有被下架，则显示从新申请按钮-->
+                    <span ms-if="(item.service_apply_status==2 || item.service_apply_status==5) && item.online_type!=1 && item.use_type==0">--</span>
+                    </td>
+                    <td ms-if="item.service_status==1 || item.service_status==''">
+                   		--
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--分页-->
+    <div id="pageInfo" ms-widget="pager servicePage" style="margin-top: 20px;float: right;" data-duplex-changed="$render"></div>
+    <!--分页-->
+	<!-- 列表显示  over -->
+	
+<!--我的服务内容区 over****************************************************************************************-->
+
+<!--控台框架下半部 begin-->
+#parse("/screen/sales/include/console-lower.vm")
+<!--控台框架下半部 begin-->
+        

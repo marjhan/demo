@@ -19,6 +19,10 @@ public class LoginRes {
 
 	public String roleName;
 
+	public String errorCode;
+
+	public String errorInfo;
+
 	/**
 	 * @return the userId
 	 */
@@ -88,7 +92,34 @@ public class LoginRes {
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
-	
+
+	/**
+	 * @return the errorCode
+	 */
+	public String getErrorCode() {
+		return errorCode;
+	}
+
+	/**
+	 * @param errorCode the errorCode to set
+	 */
+	public void setErrorCode(String errorCode) {
+		this.errorCode = errorCode;
+	}
+
+	/**
+	 * @return the errorInfo
+	 */
+	public String getErrorInfo() {
+		return errorInfo;
+	}
+
+	/**
+	 * @param errorInfo the errorInfo to set
+	 */
+	public void setErrorInfo(String errorInfo) {
+		this.errorInfo = errorInfo;
+	}
 	
 	
 }

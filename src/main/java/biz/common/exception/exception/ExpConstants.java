@@ -1,4 +1,4 @@
-package biz.common.exception;
+package biz.common.exception.exception;
 
 /**
  * 异常编码定义.

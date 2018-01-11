@@ -59,19 +59,19 @@
 		<property name="resourceLoaderPath" value="/WEB-INF/views" />
 		<property name="configLocation" value="/WEB-INF/conf/velocity.properties" />
 		<property name="velocityProperties">
-            <props>
-                <prop key="input.encoding">utf-8</prop>
-                <prop key="output.encoding">utf-8</prop>
-            </props>
-        </property>
+			<props>
+				<prop key="input.encoding">utf-8</prop>
+				<prop key="output.encoding">utf-8</prop>
+			</props>
+		</property>
 	</bean>
 
 	<!-- 配置后缀 -->
 	<bean id="velocityViewResolver"
 		class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
 		<property name="contentType">
-            <value>text/html;charset=utf-8</value>
-        </property>
+			<value>text/html;charset=utf-8</value>
+		</property>
 		<property name="prefix" value="/screen/" />
 		<property name="suffix" value=".vm" />
 	</bean>
@@ -110,4 +110,33 @@
 		<property name="providerClass" value="org.hibernate.validator.HibernateValidator" 
 		/> </bean> -->
 
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:i18n/messages" />
+		<property name="useCodeAsDefaultMessage" value="false" />
+	</bean>
+
+	<!-- 异常修饰管理类 -->
+	<bean id="exceptionDecoratorManager"
+		class="biz.common.exceptions.decorator.ExceptionDecoratorManager">
+		<!-- 自身包路径 方位错误定位 -->
+		<property name="basePackage" value="biz" />
+		<!--异常映射配置管理类 -->
+		<property name="exceptionMapping" ref="exceptionMapping" />
+		<!-- 国际化资源配置 -->
+		<property name="messageSource" ref="messageSource" />
+	</bean>
+	<!-- 异常映射配置 -->
+	<bean id="exceptionMappings" abstract="true">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="SessionTimeoutException">404</prop>
+				<prop key="java.lang.Exception">404</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="exceptionMapping" class="biz.common.exceptions.config.ExceptionMapping"
+		parent="exceptionMappings" />
 </beans>  

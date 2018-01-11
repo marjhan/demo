@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -106,17 +107,11 @@ public class UserLoginRegisterAction extends WebsiteBaseAction{
 	public  String login(Model model, HttpServletRequest request, HttpServletResponse response) {
 		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
 		if(loginRes==null){
-//			KeyPair keyPair = (KeyPair) sessionProvider.getAttribute(request, ParamConstants.KEYPAIR);
-//			if (null == keyPair) {
-//				// 如果为空 获取密钥对存入 session
-//				keyPair = RSAUtils.generateKeyPair2();
-//				sessionProvider.setAttribute(request, response, ParamConstants.KEYPAIR, keyPair);
-//			}
 			return "login/login";			
 		}
-		return "index";
-//		SetUserInfoToPage(request);
-//		return "redirect:"+ "http://"+host+":"+port+"/service/index.html";
+//		return "index";
+		SetUserInfoToPage(request);
+		return "redirect:"+ "http://"+host+":"+port+"/sts/sales/list.html";
 	}
 	/**
 	 * 登录.
@@ -140,12 +135,15 @@ public class UserLoginRegisterAction extends WebsiteBaseAction{
 	    	ResponseContext.setValue(loginRes);
 		} catch (BusinessException e) {
 			Logger.getLogger(UserLoginRegisterAction.class).info("login" + e);
-			String errorCode = e.getError_code();
-			if(FrontConstants.ERROR_CODE_5103007.equals(errorCode)) {
-				errorTimesRes.setError_times(errorTimesRes.getError_times() + 1);
-				sessionProvider.setAttribute(request, response, FrontConstants.ERROR_KEY+req.getUserName().trim(), errorTimesRes);
-			}
-			throw new BusinessException(e.getError_code(), e.getError_info());
+			// 增加错误次数
+			errorTimesRes.setError_times(errorTimesRes.getError_times() + 1);
+			sessionProvider.setAttribute(request, response, FrontConstants.ERROR_KEY + req.getUserName().trim(),
+					errorTimesRes);
+	    	LoginRes loginRes = new LoginRes();
+	    	loginRes.setErrorCode(e.getError_code());
+	    	loginRes.setErrorInfo(e.getError_info());
+			ResponseContext.setValue(loginRes);
+			return  ResponseContext.getResponseEntity();
 		}
 		//登录成功清除密码错误信息
 		sessionProvider.removeAttribute(request, response, FrontConstants.ERROR_KEY+req.getUserName().trim());
@@ -267,6 +265,23 @@ public class UserLoginRegisterAction extends WebsiteBaseAction{
 		ResponseContext.setValue(map);
 		return ResponseContext.getResponseEntity();
 	}
+	
+	/**
+	 * 用户行为.
+	 * 
+	 * @return 返回.
+	 */
+	@RequestMapping(value = "/setUserBehavior")
+	public @ResponseBody ResponseEntity setUserAgreement(HttpServletRequest request, HttpServletResponse response,String userBehavior) {
+		
+		if(StringUtils.isNotEmpty(userBehavior)){
+			sessionProvider.setAttribute(request, response, "userLoginBehavior", userBehavior);
+		} else {
+			sessionProvider.setAttribute(request, response, "userLoginBehavior", "");
+		}
+		ResponseContext.setValue(null);
+		return ResponseContext.getResponseEntity();
+	}
 	 
 	/**
 	 * 退出登录.
@@ -291,6 +306,28 @@ public class UserLoginRegisterAction extends WebsiteBaseAction{
 		ResponseContext.setValue(toSure(loginRes,user_id));
 		return ResponseContext.getResponsenull();
 	}
+	
+	/**
+	 * 判断是否登录.
+	 * 
+	 * @param req
+	 *            请求参数.
+	 * @return 参数返回.
+	 */
+	@RequestMapping(value = { "/islogin", "/is_login" }, method = RequestMethod.POST)
+	public @ResponseBody ResponseEntity isLogin(HttpServletRequest request) {
+		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
+
+		if (loginRes != null) {
+			
+			ResponseContext.setValue(loginRes);
+		} else {
+
+			ResponseContext.setValue(false);
+		}
+		return ResponseContext.getResponseEntity();
+	}
+	
 	/**
 	 * 判断登录情况.
 	 * @param loginRes 入参.

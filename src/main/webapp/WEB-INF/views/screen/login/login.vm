@@ -22,6 +22,21 @@
     <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+	<link href="/cssmin/sts.css" rel="stylesheet" />
+    <style>
+        .contain-explain{
+            display: none;
+        }
+        .ui-item:hover{
+            border: 1px solid #3a9bff;
+        }
+        .hideDiv{
+            display: none;
+        }
+        .login-contain .ui-title{padding-bottom:0px;padding-top:10px;}
+        .login-contain .sl-error{top:52px;}
+        .login-contain .sl-error{width:300px;}
+    </style>	
 </head>
 <body ms-controller="login">
 <div class="container">
@@ -46,6 +61,7 @@
                 </div>
             </div>
 
+            <div class="ui-title"></div>
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-3">
                     <div class="btn btn-md btn-primary btn-block"  ms-click="submitI()">登录</div>

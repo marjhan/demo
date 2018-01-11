@@ -2,11 +2,11 @@ package biz.common.exception;
 
 /***
  * 
- * iTN网站 后台通用异常.
- * @author chenhl.
+ * i后台通用异常.
+ * @author xuzc.
  * 
  */
-public class BusinessException extends BaseException {
+public class BusinessException extends RemotingServiceException {
 	/**
 	 * .
 	 */

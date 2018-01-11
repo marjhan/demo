@@ -155,39 +155,10 @@ define(["jquery","jquery.cookie","avalon","jquery.blockUI"],function ($){
                 async:false,
                 callback:function (r){
                 	if(r!=false){
-                		if(r.nikeName){
-							nikeName=$.trim(r.nikeName);                			/*var str1 = nikeName.substring(0,3);
-                            var str2 = nikeName.substring(nikeName.length-4,nikeName.length);
-                            nikeName=str1+"****"+str2;*/
-                    		if(/^1[3|4|5|7|8]\d{9}$/.test(nikeName) || /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/.test(nikeName)){
-                    			var str1 = nikeName.substring(0,3);
-                                var str2 = nikeName.substring(nikeName.length-4,nikeName.length);
-                                nikeName=str1+"****"+str2;
-                    		}/*else{
-                    			if(nikeName.length>11){
-                        			var str1 = nikeName.substring(0,11);
-                        			nikeName=str1;
-                        		}else{
-                        			return nikeName;
-                        		}
-                    		}*/
+                		if(r.realName){
+							nikeName=$.trim(r.userName);          
                         }else{
-                        	nikeName=r.hsid;
-                        	var str1 = nikeName.substring(0,3);
-                            var str2 = nikeName.substring(nikeName.length-4,nikeName.length);
-                            nikeName=str1+"****"+str2;
-                        }
-                        if(r.userActive == "1"){
-                        	_ajax({
-                        		url:"user/updatePwdSuccess.json",
-                                async:false,
-                                callback:function(r){
-                                	tips("您的账号已锁定，请联系客服开通！");
-                                	setTimeout(function(){
-                                		window.location.href=r;
-                                	},2000)
-                                }
-                        	})
+                        	nikeName=$.trim(r.userName);
                         }
                 	}
                 	
