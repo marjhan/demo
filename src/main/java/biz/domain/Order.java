@@ -14,6 +14,11 @@ public class Order {
     private String studentName;
 
     /**
+     * 基本信息
+     */
+    private String info;
+
+    /**
      * 创建时间
      */
     private Date createTime;
@@ -26,12 +31,12 @@ public class Order {
     /**
      * 手机号
      */
-    private Integer mobilePhone;
+    private String mobilePhone;
 
     /**
      * QQ
      */
-    private Integer qq;
+    private String qq;
 
     /**
      * 微信号
@@ -70,7 +75,7 @@ public class Order {
 
     /**
      * 订单id
-     * @return order_id 订单id
+     * @return orderId 订单id
      */
     public Integer getOrderId() {
         return orderId;
@@ -86,7 +91,7 @@ public class Order {
 
     /**
      * 学生姓名
-     * @return student_name 学生姓名
+     * @return studentName 学生姓名
      */
     public String getStudentName() {
         return studentName;
@@ -101,8 +106,24 @@ public class Order {
     }
 
     /**
+     * 基本信息
+     * @return info 基本信息
+     */
+	public String getInfo() {
+		return info;
+	}
+
+	 /**
+     * 基本信息
+     * @param info 基本信息
+     */
+	public void setInfo(String info) {
+		this.info = info;
+	}
+
+	/**
      * 创建时间
-     * @return create_time 创建时间
+     * @return createTime 创建时间
      */
     public Date getCreateTime() {
         return createTime;
@@ -118,7 +139,7 @@ public class Order {
 
     /**
      * 修改时间
-     * @return motify_time 修改时间
+     * @return motifyTime 修改时间
      */
     public Date getMotifyTime() {
         return motifyTime;
@@ -134,9 +155,9 @@ public class Order {
 
     /**
      * 手机号
-     * @return mobile_phone 手机号
+     * @return mobilePhone 手机号
      */
-    public Integer getMobilePhone() {
+    public String getMobilePhone() {
         return mobilePhone;
     }
 
@@ -144,7 +165,7 @@ public class Order {
      * 手机号
      * @param mobilePhone 手机号
      */
-    public void setMobilePhone(Integer mobilePhone) {
+    public void setMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
     }
 
@@ -152,7 +173,7 @@ public class Order {
      * QQ
      * @return qq QQ
      */
-    public Integer getQq() {
+    public String getQq() {
         return qq;
     }
 
@@ -160,7 +181,7 @@ public class Order {
      * QQ
      * @param qq QQ
      */
-    public void setQq(Integer qq) {
+    public void setQq(String qq) {
         this.qq = qq;
     }
 
@@ -198,7 +219,7 @@ public class Order {
 
     /**
      * 渠道id
-     * @return channel_id 渠道id
+     * @return channelId 渠道id
      */
     public Integer getChannelId() {
         return channelId;
@@ -214,7 +235,7 @@ public class Order {
 
     /**
      * 名单来源id
-     * @return list_source 名单来源id
+     * @return listSource 名单来源id
      */
     public Integer getListSource() {
         return listSource;
@@ -230,7 +251,7 @@ public class Order {
 
     /**
      * 用户id
-     * @return user_id 用户id
+     * @return userId 用户id
      */
     public Integer getUserId() {
         return userId;
@@ -246,7 +267,7 @@ public class Order {
 
     /**
      * 订单状态id
-     * @return order_status_id 订单状态id
+     * @return orderStatusId 订单状态id
      */
     public Integer getOrderStatusId() {
         return orderStatusId;

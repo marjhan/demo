@@ -178,7 +178,7 @@ require(["domReady!","avalon","jquery","common/common","jquery.cookie","validati
             if($.cookie("_u_")&&($.cookie("_u_").indexOf("openplat")>-1||$.cookie("_u_").indexOf("cms")>-1)){
                 window.location.href =$.cookie("_u_");
             }else{
-                window.location.href ="/sts/sales/list.html";
+                window.location.href ="/sts/order/list.html";
             }
         },
         strFilter:function(str){

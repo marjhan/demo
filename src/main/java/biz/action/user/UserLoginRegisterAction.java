@@ -111,7 +111,7 @@ public class UserLoginRegisterAction extends WebsiteBaseAction{
 		}
 //		return "index";
 		SetUserInfoToPage(request);
-		return "redirect:"+ "http://"+host+":"+port+"/sts/sales/list.html";
+		return "redirect:"+ "http://"+host+":"+port+"/sts/order/list.html";
 	}
 	/**
 	 * 登录.

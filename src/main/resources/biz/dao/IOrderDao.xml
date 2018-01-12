@@ -4,10 +4,11 @@
   <resultMap id="BaseResultMap" type="biz.domain.Order">
     <id column="order_id" jdbcType="INTEGER" property="orderId" />
     <result column="student_name" jdbcType="VARCHAR" property="studentName" />
+    <result column="info" jdbcType="VARCHAR" property="info" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="motify_time" jdbcType="TIMESTAMP" property="motifyTime" />
-    <result column="mobile_phone" jdbcType="INTEGER" property="mobilePhone" />
-    <result column="qq" jdbcType="INTEGER" property="qq" />
+    <result column="mobile_phone" jdbcType="VARCHAR" property="mobilePhone" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
     <result column="wechat" jdbcType="VARCHAR" property="wechat" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="channel_id" jdbcType="INTEGER" property="channelId" />
@@ -17,7 +18,7 @@
     <result column="remake" jdbcType="VARCHAR" property="remake" />
   </resultMap>
   <sql id="Base_Column_List">
-    order_id, student_name, create_time, motify_time, mobile_phone, qq, wechat, phone, 
+    order_id, student_name, info, create_time, motify_time, mobile_phone, qq, wechat, phone, 
     channel_id, list_source, user_id, order_status_id, remake
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -31,13 +32,13 @@
     where order_id = #{orderId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="biz.domain.Order">
-    insert into order (order_id, student_name, create_time, 
+    insert into order (order_id, student_name, info, create_time, 
       motify_time, mobile_phone, qq, 
       wechat, phone, channel_id, 
       list_source, user_id, order_status_id, 
       remake)
-    values (#{orderId,jdbcType=INTEGER}, #{studentName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{motifyTime,jdbcType=TIMESTAMP}, #{mobilePhone,jdbcType=INTEGER}, #{qq,jdbcType=INTEGER}, 
+    values (#{orderId,jdbcType=INTEGER}, #{studentName,jdbcType=VARCHAR}, #{info,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{motifyTime,jdbcType=TIMESTAMP}, #{mobilePhone,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, 
       #{wechat,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{channelId,jdbcType=INTEGER}, 
       #{listSource,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{orderStatusId,jdbcType=INTEGER}, 
       #{remake,jdbcType=VARCHAR})
@@ -50,6 +51,9 @@
       </if>
       <if test="studentName != null">
         student_name,
+      </if>
+      <if test="info != null">
+        info,
       </if>
       <if test="createTime != null">
         create_time,
@@ -92,6 +96,9 @@
       <if test="studentName != null">
         #{studentName,jdbcType=VARCHAR},
       </if>
+      <if test="info != null">
+        #{info,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -99,10 +106,10 @@
         #{motifyTime,jdbcType=TIMESTAMP},
       </if>
       <if test="mobilePhone != null">
-        #{mobilePhone,jdbcType=INTEGER},
+        #{mobilePhone,jdbcType=VARCHAR},
       </if>
       <if test="qq != null">
-        #{qq,jdbcType=INTEGER},
+        #{qq,jdbcType=VARCHAR},
       </if>
       <if test="wechat != null">
         #{wechat,jdbcType=VARCHAR},
@@ -133,6 +140,9 @@
       <if test="studentName != null">
         student_name = #{studentName,jdbcType=VARCHAR},
       </if>
+      <if test="info != null">
+        info = #{info,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -140,10 +150,10 @@
         motify_time = #{motifyTime,jdbcType=TIMESTAMP},
       </if>
       <if test="mobilePhone != null">
-        mobile_phone = #{mobilePhone,jdbcType=INTEGER},
+        mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
       </if>
       <if test="qq != null">
-        qq = #{qq,jdbcType=INTEGER},
+        qq = #{qq,jdbcType=VARCHAR},
       </if>
       <if test="wechat != null">
         wechat = #{wechat,jdbcType=VARCHAR},
@@ -172,10 +182,11 @@
   <update id="updateByPrimaryKey" parameterType="biz.domain.Order">
     update order
     set student_name = #{studentName,jdbcType=VARCHAR},
+      info = #{info,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       motify_time = #{motifyTime,jdbcType=TIMESTAMP},
-      mobile_phone = #{mobilePhone,jdbcType=INTEGER},
-      qq = #{qq,jdbcType=INTEGER},
+      mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
       wechat = #{wechat,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       channel_id = #{channelId,jdbcType=INTEGER},
