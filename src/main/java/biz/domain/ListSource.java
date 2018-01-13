@@ -1,6 +1,6 @@
 package biz.domain;
 
-public class LitsSource {
+public class ListSource {
     /**
      * 名单来源id
      */
@@ -10,6 +10,11 @@ public class LitsSource {
      * 名单来源
      */
     private String listSourceName;
+
+    /**
+     * 状态
+     */
+    private String status;
 
     /**
      * 名单来源id
@@ -42,4 +47,19 @@ public class LitsSource {
     public void setListSourceName(String listSourceName) {
         this.listSourceName = listSourceName;
     }
+
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+    
 }

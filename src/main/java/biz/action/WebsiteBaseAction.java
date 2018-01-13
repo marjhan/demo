@@ -74,7 +74,8 @@ public class WebsiteBaseAction {
 		if(loginRes != null) {
 			try {
 				loginName = loginRes.getUserName();
-				loginName = loginName.substring(0, 3) + "******" + loginName.substring(loginName.length() - 4, loginName.length());
+				if(loginName.length()>3)
+					loginName = loginName.substring(0, 3) + "******" + loginName.substring(loginName.length() - 4, loginName.length());
 			} catch (Exception e) {
 				logger.info(e);
 				throw new BusinessException("000","数据错误");

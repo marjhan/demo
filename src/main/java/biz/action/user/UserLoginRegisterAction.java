@@ -288,11 +288,11 @@ public class UserLoginRegisterAction extends WebsiteBaseAction{
 	 * @return 返回.
 	 */
 	@RequestMapping(value = "/loginExit",method = RequestMethod.GET)
-	public String loginExit(Model model, HttpServletRequest request, HttpServletResponse response ) {
+	public @ResponseBody ResponseEntity loginExit(Model model, HttpServletRequest request, HttpServletResponse response ) {
 		sessionProvider.removeAttribute(request, response, ParamConstants.USER_ID);
 		request.getSession().invalidate();
 		ResponseContext.setValue(null);
-		return "redirect:/service/index.html";
+		return ResponseContext.getResponseEntity();
 	}
 	
 	/**

@@ -8,12 +8,12 @@
 		<result column="real_name" jdbcType="VARCHAR" property="realName" />
 		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 		<result column="motify_time" jdbcType="TIMESTAMP" property="motifyTime" />
-		<result column="user_status" jdbcType="CHAR" property="userStatus" />
+		<result column="status" jdbcType="CHAR" property="status" />
 		<result column="role_id" jdbcType="INTEGER" property="roleId" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		user_id, user_name, password, real_name, create_time, motify_time,
-		user_status, role_id
+		status, role_id
 	</sql>
 
 	<sql id="Base_From">
@@ -25,6 +25,12 @@
 		<include refid="Base_Column_List" />
 		<include refid="Base_From" />
 		where user_id = #{userId,jdbcType=INTEGER}
+	</select>
+	<select id="queryUserInfoList" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		<include refid="Base_From" />
+		where status = 1
 	</select>
 	<select id="selectByUserName" parameterType="java.lang.String"
 		resultMap="BaseResultMap">
@@ -40,11 +46,11 @@
 	<insert id="insert" parameterType="biz.domain.User">
 		insert into user (user_id, user_name, password,
 		real_name, create_time, motify_time,
-		user_status, role_id)
+		status, role_id)
 		values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR},
 		#{password,jdbcType=VARCHAR},
 		#{realName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{motifyTime,jdbcType=TIMESTAMP},
-		#{userStatus,jdbcType=CHAR}, #{roleId,jdbcType=INTEGER})
+		#{status,jdbcType=CHAR}, #{roleId,jdbcType=INTEGER})
 	</insert>
 	<insert id="insertSelective" parameterType="biz.domain.User">
 		insert into user
@@ -67,8 +73,8 @@
 			<if test="motifyTime != null">
 				motify_time,
 			</if>
-			<if test="userStatus != null">
-				user_status,
+			<if test="status != null">
+				status,
 			</if>
 			<if test="roleId != null">
 				role_id,
@@ -93,8 +99,8 @@
 			<if test="motifyTime != null">
 				#{motifyTime,jdbcType=TIMESTAMP},
 			</if>
-			<if test="userStatus != null">
-				#{userStatus,jdbcType=CHAR},
+			<if test="status != null">
+				#{status,jdbcType=CHAR},
 			</if>
 			<if test="roleId != null">
 				#{roleId,jdbcType=INTEGER},
@@ -119,8 +125,8 @@
 			<if test="motifyTime != null">
 				motify_time = #{motifyTime,jdbcType=TIMESTAMP},
 			</if>
-			<if test="userStatus != null">
-				user_status = #{userStatus,jdbcType=CHAR},
+			<if test="status != null">
+				status = #{status,jdbcType=CHAR},
 			</if>
 			<if test="roleId != null">
 				role_id = #{roleId,jdbcType=INTEGER},
@@ -135,7 +141,7 @@
 		real_name = #{realName,jdbcType=VARCHAR},
 		create_time = #{createTime,jdbcType=TIMESTAMP},
 		motify_time = #{motifyTime,jdbcType=TIMESTAMP},
-		user_status = #{userStatus,jdbcType=CHAR},
+		status = #{status,jdbcType=CHAR},
 		role_id = #{roleId,jdbcType=INTEGER}
 		where user_id = #{userId,jdbcType=INTEGER}
 	</update>

@@ -34,9 +34,9 @@ public class User {
     private Date motifyTime;
 
     /**
-     * 用户状态
+     * 是否启用
      */
-    private String userStatus;
+    private String status;
 
     /**
      * 角色id
@@ -140,22 +140,20 @@ public class User {
     }
 
     /**
-     * 用户状态
-     * @return user_status 用户状态
-     */
-    public String getUserStatus() {
-        return userStatus;
-    }
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
 
-    /**
-     * 用户状态
-     * @param userStatus 用户状态
-     */
-    public void setUserStatus(String userStatus) {
-        this.userStatus = userStatus;
-    }
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    /**
+	/**
      * 角色id
      * @return role_id 角色id
      */

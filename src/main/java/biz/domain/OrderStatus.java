@@ -12,6 +12,11 @@ public class OrderStatus {
     private String orderStatusName;
 
     /**
+     * 状态
+     */
+    private String status;
+
+    /**
      * 订单状态id
      * @return order_status_id 订单状态id
      */
@@ -42,4 +47,19 @@ public class OrderStatus {
     public void setOrderStatusName(String orderStatusName) {
         this.orderStatusName = orderStatusName;
     }
+
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+    
 }

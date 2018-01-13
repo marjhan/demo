@@ -56,7 +56,7 @@ public class Order {
     /**
      * 名单来源id
      */
-    private Integer listSource;
+    private Integer listSourceId;
 
     /**
      * 用户id
@@ -235,18 +235,18 @@ public class Order {
 
     /**
      * 名单来源id
-     * @return listSource 名单来源id
+     * @return listSourceId 名单来源id
      */
-    public Integer getListSource() {
-        return listSource;
+    public Integer getListSourceId() {
+        return listSourceId;
     }
 
     /**
      * 名单来源id
-     * @param listSource 名单来源id
+     * @param listSourceId 名单来源id
      */
-    public void setListSource(Integer listSource) {
-        this.listSource = listSource;
+    public void setListSourceId(Integer listSourceId) {
+        this.listSourceId = listSourceId;
     }
 
     /**

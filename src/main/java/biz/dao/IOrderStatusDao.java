@@ -1,5 +1,7 @@
 package biz.dao;
 
+import java.util.List;
+
 import biz.domain.OrderStatus;
 
 public interface IOrderStatusDao {
@@ -14,4 +16,6 @@ public interface IOrderStatusDao {
     int updateByPrimaryKeySelective(OrderStatus record);
 
     int updateByPrimaryKey(OrderStatus record);
+    
+    List<OrderStatus> queryOrderStatusList();
 }

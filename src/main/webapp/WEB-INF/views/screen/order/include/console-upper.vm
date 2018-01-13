@@ -14,10 +14,10 @@
             </div>
             <ul class="gl-header-menu ms-controller" ms-controller="header">
                 <li>
-                    <a><span ms-attr-title="username">{{username}}</span></a>
+                    <a><span>{{username}}</span></a>
                 </li>
                 <li>
-                    <a id="cas_logout_url" class="login" href="">退出</a>
+                    <a id="cas_logout_url" class="login" ms-click="logout()">退出</a>
                 </li>
 				<!--
                 <li>
@@ -33,12 +33,19 @@
             <div class="sidebar">
             	<ul class="nav nav-sidebar">
                     <li><a><i class="parent-up"></i>订单管理</a></li>
-                    <li class=#if($active=="order")"active"#else""#end><a href="/sts/order/list.html"><i class="child-3-1"></i>订单信息</a></li>
+                    <li class=#if($active=="order")"active"#else""#end><a href="/sts/order/list.html"><i class="child-1-2"></i>订单信息</a></li>
+					#if($!roleId==1)
+                    <li class=#if($active=="addOrder")"active"#else""#end><a href="/sts/order/addOrder.html"><i class="child-3-6"></i>订单录入</a></li>
+					#end
                 </ul>
+				#if($!roleId==1)
                 <ul class="nav nav-sidebar">
                     <li><a><i class="parent-up"></i>系统管理</a></li>
-					<li class=#if($active=="option")"active"#else""#end><a href="/sts/option/user.html"><i class="child-1-6"></i>用户管理</a></li>
-                </ul>
+					<li class=#if($active=="user")"active"#else""#end><a href="/sts/option/user.html"><i class="child-1-5"></i>用户管理</a></li>
+					<li class=#if($active=="chennel")"active"#else""#end><a href="/sts/option/chennel.html"><i class="child-1-1"></i>渠道管理</a></li>
+					<li class=#if($active=="listSource")"active"#else""#end><a href="/sts/option/listSource.html"><i class="child-3-7"></i>名单来源管理</a></li>
+					<li class=#if($active=="orderStatus")"active"#else""#end><a href="/sts/option/orderStatus.html"><i class="child-1-6"></i>订单状态管理</a></li>
+                </ul>#end
 			
 			<script>
 				$(".sidebar .nav-sidebar").each(function(){

@@ -1,6 +1,5 @@
 package biz.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,21 +21,21 @@ import biz.service.IOrderService;
 @Service
 public class OrderServiceImpl implements IOrderService{
 
-	/** 用户信息dao. */
+	/** 订单信息dao. */
 	@Autowired
 	private IOrderDao orderDao;
 
 	@Override
 	public OrderListRes queryOrderList(OrderListReq req) {
 		OrderListRes res = new OrderListRes();
-		List<OrderListDTO> beanList = new ArrayList<OrderListDTO>();
-		int count = 10;
+		int count = orderDao.getOrderListByUserCount(req);
 		req.setTotalItem(count);
 		req.reSetParameters();
+		List<OrderListDTO> beanList = orderDao.queryOrderListByUser(req);
 		res.setBeanList(beanList);
 		res.setPageBean(req.copyPagination());
 		// TODO Auto-generated method stub
-		return null;
+		return res;
 	}
 
 }

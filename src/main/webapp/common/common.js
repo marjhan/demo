@@ -156,9 +156,9 @@ define(["jquery","jquery.cookie","avalon","jquery.blockUI"],function ($){
                 callback:function (r){
                 	if(r!=false){
                 		if(r.realName){
-							nikeName=$.trim(r.userName);          
+							nikeName=$.trim(r.realName);          
                         }else{
-                        	nikeName=$.trim(r.userName);
+                        	nikeName=$.trim(r.realName);
                         }
                 	}
                 	

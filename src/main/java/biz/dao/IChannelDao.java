@@ -1,5 +1,7 @@
 package biz.dao;
 
+import java.util.List;
+
 import biz.domain.Channel;
 
 public interface IChannelDao {
@@ -14,4 +16,6 @@ public interface IChannelDao {
     int updateByPrimaryKeySelective(Channel record);
 
     int updateByPrimaryKey(Channel record);
+    
+    List<Channel> queryChannelList();
 }

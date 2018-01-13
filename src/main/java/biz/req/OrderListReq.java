@@ -26,12 +26,12 @@ public class OrderListReq extends Pagination{
     /**
      * 创建时间
      */
-    private Date createTime;
+    private String startTime;
 
     /**
      * 修改时间
      */
-    private Date motifyTime;
+    private String endTime;
 
     /**
      * 渠道id
@@ -41,7 +41,7 @@ public class OrderListReq extends Pagination{
     /**
      * 名单来源id
      */
-    private Integer listSource;
+    private Integer listSourceId;
 
     /**
      * 用户id
@@ -87,31 +87,31 @@ public class OrderListReq extends Pagination{
 	}
 
 	/**
-	 * @return the createTime
+	 * @return the startTime
 	 */
-	public Date getCreateTime() {
-		return createTime;
+	public String getStartTime() {
+		return startTime;
 	}
 
 	/**
-	 * @param createTime the createTime to set
+	 * @param startTime the startTime to set
 	 */
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
 	}
 
 	/**
-	 * @return the motifyTime
+	 * @return the endTime
 	 */
-	public Date getMotifyTime() {
-		return motifyTime;
+	public String getEndTime() {
+		return endTime;
 	}
 
 	/**
-	 * @param motifyTime the motifyTime to set
+	 * @param endTime the endTime to set
 	 */
-	public void setMotifyTime(Date motifyTime) {
-		this.motifyTime = motifyTime;
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
 	}
 
 	/**
@@ -129,17 +129,17 @@ public class OrderListReq extends Pagination{
 	}
 
 	/**
-	 * @return the listSource
+	 * @return the listSourceId
 	 */
-	public Integer getListSource() {
-		return listSource;
+	public Integer getListSourceId() {
+		return listSourceId;
 	}
 
 	/**
-	 * @param listSource the listSource to set
+	 * @param listSourceId the listSourceId to set
 	 */
-	public void setListSource(Integer listSource) {
-		this.listSource = listSource;
+	public void setListSourceId(Integer listSourceId) {
+		this.listSourceId = listSourceId;
 	}
 
 	/**

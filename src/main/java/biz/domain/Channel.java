@@ -12,6 +12,11 @@ public class Channel {
     private String channelName;
 
     /**
+     * 状态
+     */
+    private String status;
+
+    /**
      * 渠道id
      * @return channel_id 渠道id
      */
@@ -42,4 +47,19 @@ public class Channel {
     public void setChannelName(String channelName) {
         this.channelName = channelName;
     }
+
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+    
 }

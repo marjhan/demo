@@ -35,7 +35,7 @@ require(["domReady!","avalon","jquery","common/common","jquery.cookie","jquery.a
                     $.cookie("_t_","",{path: '/',expires:-1});
                     $.cookie("_n_","",{path: '/',expires:-1});
                     $.cookie("_u_", window.location, { path: '/', expires: 10 });
-                    window.location.href ="/login/login.html";
+                    window.location.href ="/sts/user/login.html";
                 }
             })
         },
@@ -175,7 +175,7 @@ require(["domReady!","avalon","jquery","common/common","jquery.cookie","jquery.a
                 dataType : "json" ,
                 type:"post",
                 callback: function(data){
-                    $("#cas_logout_url").attr('href',data.cas_logout_url);
+//                    $("#cas_logout_url").attr('ms-click','logout()');
                 },
                 failure:function(r){
                     if(r.error_code=='291'){

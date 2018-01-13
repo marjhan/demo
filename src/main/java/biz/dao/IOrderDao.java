@@ -1,6 +1,10 @@
 package biz.dao;
 
+import java.util.List;
+
 import biz.domain.Order;
+import biz.domain.OrderListDTO;
+import biz.req.OrderListReq;
 
 public interface IOrderDao {
     int deleteByPrimaryKey(Integer orderId);
@@ -14,4 +18,8 @@ public interface IOrderDao {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+    
+    List<OrderListDTO> queryOrderListByUser(OrderListReq req);
+    
+    int getOrderListByUserCount(OrderListReq req);
 }

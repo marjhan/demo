@@ -53,7 +53,7 @@ public class OrderListDTO {
     /**
      * 名单来源id
      */
-    private Integer listSource;
+    private Integer listSourceId;
 
     /**
      * 名单来源
@@ -198,17 +198,17 @@ public class OrderListDTO {
 	}
 
 	/**
-	 * @return the listSource
+	 * @return the listSourceId
 	 */
-	public Integer getListSource() {
-		return listSource;
+	public Integer getListSourceId() {
+		return listSourceId;
 	}
 
 	/**
-	 * @param listSource the listSource to set
+	 * @param listSourceId the listSourceId to set
 	 */
-	public void setListSource(Integer listSource) {
-		this.listSource = listSource;
+	public void setListSourceId(Integer listSourceId) {
+		this.listSourceId = listSourceId;
 	}
 
 	/**

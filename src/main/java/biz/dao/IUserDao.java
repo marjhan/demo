@@ -1,5 +1,7 @@
 package biz.dao;
 
+import java.util.List;
+
 import biz.domain.User;
 
 public interface IUserDao {
@@ -17,4 +19,6 @@ public interface IUserDao {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+    
+    List<User> queryUserInfoList();
 }

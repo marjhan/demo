@@ -10,30 +10,42 @@
 	<!-- 服务操作  begin -->
     <span class="span_1" ms-click="test">学生姓名</span><input type="text" class="input_1" id="student_name"  ms-duplex="student_name"/>
     <span class="span_1">基本信息</span><input type="text" class="input_1"	 id="info" ms-duplex="info"/>
-    <span class="span_1">渠道</span>
+    #if($!roleId==1)
+	<span class="span_1">渠道</span>
     <div class="input_2_parent"><input type="text" class="input_2" id="channel" readonly="readonly" ms-duplex="channel" value="请选择渠道" />
         <ul>
         	<li ms-click="setChannel'')">全部</li>
         	#foreach ($channel in $!channelList)
-            <li ms-click="setChannel('$channel.channel_id')">$channel.channel_name</li>
+            <li ms-click="setChannel('$channel.channelId')">$channel.channelName</li>
             #end
         </ul>
     </div>
+	#end
 	<span class="span_1">名单来源</span>
     <div class="input_2_parent"><input type="text" class="input_2" id="list_source" ms-duplex="list_source"  readonly="readonly" value="请选择名单来源" />
         <ul>
         	<li ms-click="setListSource('')">全部</li>
         	#foreach ($listSource in $!listSourceList)
-            <li ms-click="setListSource('$listSource.list_source_id')">$listSource.list_source_name</li>
+            <li ms-click="setListSource('$listSource.listSourceId')">$listSource.listSourceName</li>
             #end
         </ul>
     </div>
+	#if($!roleId==1)
 	<span class="span_1">负责人</span>
-    <div class="input_2_parent"><input type="text" class="input_2" id="list_source" ms-duplex="list_source"  readonly="readonly" value="请选择名单来源" />
+    <div class="input_2_parent"><input type="text" class="input_2" id="user" ms-duplex="user"  readonly="readonly" value="请选择负责人" />
         <ul>
         	<li ms-click="setUser('')">全部</li>
         	#foreach ($user in $!userList)
-            <li ms-click="setUser('$user.user_id')">$user.user_name</li>
+            <li ms-click="setUser('$!user.userId')">$!user.realName</li>
+            #end
+        </ul>
+    </div>#end
+	<span class="span_1">状态</span>
+    <div class="input_2_parent"><input type="text" class="input_2" id="order_status" ms-duplex="order_status"  readonly="readonly" value="请选择状态" />
+        <ul>
+        	<li ms-click="setOrderStatus('')">全部</li>
+        	#foreach ($orderStatus in $!orderStatusList)
+            <li ms-click="setOrderStatus('$!orderStatus.orderStatusId')">$!orderStatus.orderStatusName</li>
             #end
         </ul>
     </div>
@@ -69,39 +81,79 @@
         </ul>
     </div>
 	-->
-    <p style="float:left;margin-top:15px;"><a class="search_button" ms-click="seach()">搜索</a><a class="reset_botton" ms-click="reset()" style="margin-right:0;">重置</a></p>
+	<!--<p style="float:left;margin-top:15px;"><a class="search_button" ms-click="seach()">搜索</a><a class="reset_botton" ms-click="reset()" style="margin-right:0;">重置</a></p>
+-->
+    <p style="margin-top:50px;"><a class="search_button" ms-click="seach()">搜索</a><a class="reset_botton" ms-click="reset()" style="margin-right:0;">重置</a></p>
 	<!-- 服务操作  over -->
 
 	<!-- 列表显示  begin -->
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="order_table">
             <thead>
                 <tr>
-                    <th>学生姓名</th>
-                    <th>基本信息</th>
-                    <th>联系方式</th>
-                    <th>渠道</th>
-					<th>名单来源</th>
-                    <th>负责人</th>
-                    <th>备注</th>
-                    <th>状态</th>
-                    <th>创建时间</th>
-                    <th>修改时间</th>
-                    <th>操作</th>
+                    <th width="80">学生姓名</th>
+					
+                    <th width="300">基本信息</th>
+					
+					#if($!roleId==1)
+						
+						<th width="150">联系方式</th>
+						
+						<th width="80">渠道</th>
+						
+					#end<th width="80">名单来源</th>
+					
+					#if($!roleId==1)
+                    <th width="80">负责人</th>
+					
+                    #end<th>备注</th>
+					
+                    <th width="80">状态</th>
+					
+                    <th width="100">创建时间</th>
+					
+                    <th width="100">修改时间</th>
+					
+                    <th width="80">操作</th>
                 </tr>
             </thead>
             <tbody id="orderInfo">
                 <tr ms-repeat-item="orderList">
-                    <td ms-attr-title="{{item.contacts}}">{{item.studentName}}</td>
-                    <td ms-if="item.info.length>20" ms-attr-title="{{item.info}">{{item.info.substring(0,19)}}</td>
-                    <td ms-attr-title="{{item.contacts}}">{{item.contacts}}</td>
-                    <td ms-attr-title="{{item.channelName}}">{{item.channelName}}</td>
-                    <td ms-attr-title="{{item.listSourceName}}">{{item.listSourceName}}</td>
-                    <td ms-attr-title="{{item.userName}}">{{item.userName}}</td>
-                    <td ms-attr-title="{{item.remake}}">{{item.remake}}</td>
+                    <td ms-attr-title="{{item.contacts}}">
+						{{item.studentName}}
+					</td>					
+                    <td ms-attr-title="{{item.info}}">
+						{{item.info | truncate(12,"...")}}
+					</td>
+					
+					#if($!roleId==1)
+						
+						<td>
+							{{item.contacts | contactsplit(",") | html}}
+						</td>
+						
+						<td ms-attr-title="{{item.channelName}}">
+							{{item.channelName}}
+						</td>	
+						
+					#end
+					<td ms-attr-title="{{item.listSourceName}}">
+                        {{item.listSourceName}}
+					</td>
+					
+					#if($!roleId==1)
+                    <td ms-attr-title="{{item.userName}}">
+						{{item.userName}}
+					</td>
+					
+                    #end<td ms-attr-title="{{item.remake}}">{{item.remake}}</td>
+					
                     <td ms-attr-title="{{item.orderStatusName}}">{{item.orderStatusName}}</td>
-                    <td ms-attr-title="{{item.createTime}}">{{item.createTime}}</td>
-                    <td ms-attr-title="{{item.motifyTime}}">{{item.motifyTime}}</td>
+					
+                    <td ms-attr-title="{{item.createTime}}">{{item.createTime | date("yyyy-MM-dd HH:mm:ss")}}</td>
+					
+                    <td ms-attr-title="{{item.motifyTime}}">{{item.motifyTime | date("yyyy-MM-dd HH:mm:ss")}}</td>
+					
                     <td >
                    		<span> <a ms-href="/">修改</a></span>
                     </td>
@@ -110,7 +162,7 @@
         </table>
     </div>
     <!--分页-->
-    <div id="pageInfo" ms-widget="pager orderPage" style="margin-top: 20px;float: right;" data-duplex-changed="$render"></div>
+    <div id="pageInfo" ms-widget="pager orderPager" style="margin-top: 20px;float: right;" data-duplex-changed="$render"></div>
     <!--分页-->
 	<!-- 列表显示  over -->
 	

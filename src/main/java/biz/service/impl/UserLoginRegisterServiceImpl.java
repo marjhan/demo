@@ -24,7 +24,7 @@ import biz.service.IUserLoginRegisterService;
 * @return  */
 
 @Service
-public class UserLoginRegisterService implements IUserLoginRegisterService{
+public class UserLoginRegisterServiceImpl implements IUserLoginRegisterService{
 
 	/** 用户信息dao. */
 	@Autowired

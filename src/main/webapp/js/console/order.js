@@ -7,6 +7,7 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 
 	var vm = avalon.define({
 		$id : "order",
+		role_id : "",
 		student_name : "",
 		info : "",
 		channel : "请选择渠道",
@@ -15,8 +16,11 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 		list_source_id : "",
 		user : "请选择负责人",
 		user_id : "",
+		order_status : "请选择状态",
+		order_status_id : "",
 		startTime : "",
 		endTime : "",
+		orderList : [],
 		pager : {
 			currentPage : 1,
 			totalItems : 0,
@@ -96,6 +100,8 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 			vm.list_source_id = "";
 			vm.user = "请选择负责人";
 			vm.user_id = "";
+			vm.order_status = "请选择状态";
+			vm.order_status_id = "";
 			$(".time a").removeClass("active");
 			vm.startTime = "";
 			vm.endTime = "";
@@ -114,16 +120,22 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 		// 设定负责人
 		setUser : function(userId) {
 			vm.user_id = userId;
+		},
+		// 设定状态
+		setOrderStatus : function(orderStatusId) {
+			vm.order_status_id = orderStatusId;
 		}
 	})
 	function getOrderList(isShowPageOne) {
 		var param = {
 			pageSize : vm.pager.perPages,
 			currentPage : vm.pager.currentPage,
-			student_name : vm.student_name,
-			channel_id : vm.channel_id,
-			list_source_id : vm.list_source_id,
-			user_id : vm.user_id,
+			studentName : vm.student_name,
+			info : vm.info,
+			channelId : vm.channel_id,
+			listSourceId : vm.list_source_id,
+			userId : vm.user_id,
+			orderStatusId : vm.order_status_id,
 			startTime : vm.startTime,
 			endTime : vm.endTime
 		};
@@ -150,11 +162,11 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 					}
 				}
 				setTimeout(function(){
-					avalon.vmodels.orderPage.totalItems =
+					avalon.vmodels.orderPager.totalItems =
 						data.data.pageBean.totalItem;
 				},10)
 				if(isShowPageOne==1){
-					avalon.vmodels.orderPage.currentPage=1;
+					avalon.vmodels.orderPager.currentPage=1;
 				}
 			},
 			failure : function(r) {
@@ -191,6 +203,16 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 	})
 
 	avalon.scan();
+	
+	avalon.filters.contactsplit = function(str, args){//str为管道符之前计算得到的结果，默认框架会帮你传入，此方法必须返回一个值
+		   /* 具体逻辑 */
+		var mobilephone = str.split(args)[0];
+		var qq = str.split(",")[1];
+		var wechat = str.split(",")[2];
+		var phone = str.split(",")[3];
+		var contact = '手机：'+mobilephone+'</br>'+'QQ：'+qq+'</br>'+'微信：'+wechat+'</br>'+'电话：'+phone;
+		return contact;
+	}
 })
 
 // 显示提示框
