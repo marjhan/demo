@@ -56,25 +56,30 @@ public class OrderServiceImpl implements IOrderService{
 		OrderChangeLog orderChangeLog = new OrderChangeLog();
 		Order oldOrder = orderDao.selectByPrimaryKey(req.getOrderId());
 		if(oldOrder!=null){
-			try {
-				Order order = oldOrder;
-				order.setOrderId(req.getOrderId());
-				order.setOrderStatusId(req.getOrderStatusId());
-				order.setRemake(req.getRemake());
-				
-				orderDao.updateByPrimaryKey(order);
-				
-				orderChangeLog.setOldOrderStatusId(oldOrder.getOrderStatusId());
-				orderChangeLog.setNewOrderStatusId(req.getOrderStatusId());
-				orderChangeLog.setOldRemake(oldOrder.getRemake());
-				orderChangeLog.setNewRemake(req.getRemake());
-				orderChangeLog.setUserId(req.getUserId());
-				orderChangeLogDao.insert(orderChangeLog);
-				
+			Integer oldOrderStatusId = oldOrder.getOrderStatusId();
+			String oldRemark = oldOrder.getRemark();
+			if(oldOrder.getOrderStatusId()!=req.getOrderStatusId() ||!oldOrder.getRemark().equals(req.getRemark())){
+				try {
+					oldOrder.setOrderId(req.getOrderId());
+					oldOrder.setOrderStatusId(req.getOrderStatusId());
+					oldOrder.setRemark(req.getRemark());
+					
+					orderDao.updateByPrimaryKey(oldOrder);
+					
+					orderChangeLog.setOldOrderStatusId(oldOrderStatusId);
+					orderChangeLog.setNewOrderStatusId(req.getOrderStatusId());
+					orderChangeLog.setOldRemark(oldRemark);
+					orderChangeLog.setNewRemark(req.getRemark());
+					orderChangeLog.setUserId(req.getUserId());
+					orderChangeLogDao.insert(orderChangeLog);
+					
+					result = "订单修改成功！";
+				} catch (BusinessException e) {
+					e.printStackTrace();
+					result = "订单修改失败！请重新操作";
+				}
+			}else{
 				result = "订单修改成功！";
-			} catch (BusinessException e) {
-				e.printStackTrace();
-				result = "订单修改失败！请重新操作";
 			}
 		}else{
 			result = "订单不存在，请重新操作";

@@ -15,11 +15,11 @@
     <result column="list_source_id" jdbcType="INTEGER" property="listSourceId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="order_status_id" jdbcType="INTEGER" property="orderStatusId" />
-    <result column="remake" jdbcType="VARCHAR" property="remake" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <sql id="Base_Column_List">
     order_id, student_name, info, create_time, motify_time, mobile_phone, qq, wechat, phone, 
-    channel_id, list_source_id, user_id, order_status_id, remake
+    channel_id, list_source_id, user_id, order_status_id, remark
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -36,12 +36,12 @@
       motify_time, mobile_phone, qq, 
       wechat, phone, channel_id, 
       list_source_id, user_id, order_status_id, 
-      remake)
+      remark)
     values (#{orderId,jdbcType=INTEGER}, #{studentName,jdbcType=VARCHAR}, #{info,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{motifyTime,jdbcType=TIMESTAMP}, #{mobilePhone,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, 
       #{wechat,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{channelId,jdbcType=INTEGER}, 
       #{listSourceId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{orderStatusId,jdbcType=INTEGER}, 
-      #{remake,jdbcType=VARCHAR})
+      #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="biz.domain.Order">
     insert into order_info
@@ -85,8 +85,8 @@
       <if test="orderStatusId != null">
         order_status_id,
       </if>
-      <if test="remake != null">
-        remake,
+      <if test="remark != null">
+        remark,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -129,8 +129,8 @@
       <if test="orderStatusId != null">
         #{orderStatusId,jdbcType=INTEGER},
       </if>
-      <if test="remake != null">
-        #{remake,jdbcType=VARCHAR},
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -173,8 +173,8 @@
       <if test="orderStatusId != null">
         order_status_id = #{orderStatusId,jdbcType=INTEGER},
       </if>
-      <if test="remake != null">
-        remake = #{remake,jdbcType=VARCHAR},
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
       </if>
     </set>
     where order_id = #{orderId,jdbcType=INTEGER}
@@ -193,7 +193,7 @@
       list_source_id = #{listSourceId,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER},
       order_status_id = #{orderStatusId,jdbcType=INTEGER},
-      remake = #{remake,jdbcType=VARCHAR}
+      remark = #{remark,jdbcType=VARCHAR}
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
   <select id="queryOrderListByUser" parameterType="biz.req.OrderListReq" resultType="biz.domain.OrderListDTO">
@@ -212,7 +212,7 @@
 		user_name as userName,
 		order_info.order_status_id as orderStatusId,
 		order_status_name as orderStatusName,
-		remake
+		remark
 		
     from order_info
     left join channel on order_info.channel_id = channel.channel_id

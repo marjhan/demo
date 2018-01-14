@@ -146,7 +146,7 @@
 						{{item.userName}}
 					</td>
 					
-                    #end<td ms-attr-title="{{item.remake}}">{{item.remake}}</td>
+                    #end<td ms-attr-title="{{item.remark}}">{{item.remark}}</td>
 					
                     <td ms-attr-title="{{item.orderStatusName}}">{{item.orderStatusName}}</td>
 					
@@ -155,7 +155,7 @@
                     <td ms-attr-title="{{item.motifyTime}}">{{item.motifyTime | date("yyyy-MM-dd HH:mm:ss")}}</td>
 					
                     <td >
-                   		<span> <a ms-controller="order" id="changeOrder" ms-click="bouncedChangeOrder('ChangeOrder',item.orderStatusId,item.orderStatusName,item.remake)">修改</a></span>
+                   		<span> <a ms-controller="order" id="changeOrder" ms-click="bouncedChangeOrder('ChangeOrder',item.orderId,item.orderStatusId,item.orderStatusName,item.remark)">修改</a></span>
                     </td>
                 </tr>
             </tbody>
@@ -170,5 +170,6 @@
 
 <!--控台框架下半部 begin-->
 #parse("/screen/order/include/console-lower.vm")
+<script src="/js/vendor/rsa.js"></script>
 <!--控台框架下半部 begin-->
         

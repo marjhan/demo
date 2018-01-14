@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import biz.common.exception.BusinessException;
 import biz.dao.IUserDao;
 import biz.domain.User;
+import biz.req.UpdatePwdReq;
 import biz.req.UserInfoGetReq;
 import biz.res.UserInfoGetRes;
 import biz.service.IUserInfoService;
@@ -34,6 +36,19 @@ public class UserInfoServiceImpl implements IUserInfoService{
 	@Override
 	public List<User> queryUserInfoList() {
 		return userDao.queryUserInfoList();
+	}
+
+	@Override
+	public void updateUserInfo(UpdatePwdReq req) {
+		try {
+			User user = new User();
+			user.setPassword(req.getNewPwd());
+			user.setUserId(req.getUserId());
+			userDao.updateByPrimaryKeySelective(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new BusinessException("82", "网络异常");
+		}	
 	}
 
 }

@@ -35,9 +35,10 @@ import biz.entity.ResponseContext;
 import biz.entity.ResponseEntity;
 import biz.req.ErrorTimesReq;
 import biz.req.LoginReq;
-import biz.req.ResetPasswordReq;
+import biz.req.UpdatePwdReq;
 import biz.res.ErrorTimesRes;
 import biz.res.LoginRes;
+import biz.service.IUserInfoService;
 import biz.service.IUserLoginRegisterService;
 import biz.session.provider.SessionProvider;
 /**
@@ -53,6 +54,9 @@ public class UserLoginRegisterAction extends WebsiteBaseAction{
 	/**登录注册接口.*/
 	@Autowired
 	private IUserLoginRegisterService userLoginRegisterService;
+	/**用户接口.*/
+	@Autowired
+	private IUserInfoService userInfoService;
 	@Value("${app.server.host}")
 	private String host;
 	@Value("${app.server.port}")
@@ -195,21 +199,54 @@ public class UserLoginRegisterAction extends WebsiteBaseAction{
 		sessionProvider.setAttribute(request, response, ParamConstants.USER_ID, loginRes);
 		return  ResponseContext.getResponseEntity();
 	}*/
-	
+
+
 	/**
-	 * 找回密码.
-	 * @param req 请求.
-	 * @return 返回.
+	 * 修改密码.
+	 * 
+	 * @param req
+	 *            请求参数.
+	 * @return 参数返回.
 	 */
-	@RequestMapping(value="/resetPassword",method=RequestMethod.POST)
-	public @ResponseBody  ResponseEntity resetPassword(HttpServletRequest request,HttpServletResponse response, @Valid ResetPasswordReq req){
-		/**对密码进行解密.*/
-		req.setNew_password(CommonMethod.getPassword(req.getNew_password(), request, response, sessionProvider));
-		
-		ResponseContext.setValue(userLoginRegisterService.resetPassword(req)); 
-		return ResponseContext.getResponseEntity();
+	@RequestMapping(value = "/updatePwd", method = RequestMethod.POST)
+	public @ResponseBody ResponseEntity updatePwd(HttpServletRequest request, HttpServletResponse response,
+			@Valid UpdatePwdReq req) {
+		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
+		if (loginRes != null) {
+			req.setUserId(loginRes.getUserId());
+		} else {
+			throw new BusinessException(ParamConstants.ERROR_NO_2, "请登录");
+		}
+		// 当前用户和前端提交过来的UserId不一致时，不做处理
+
+		if (req.getNewPwd() != null && !"".equals(req.getNewPwd())) {
+			/** 对密码进行解密. */
+			req.setNewPwd(CommonMethod.getPassword(req.getNewPwd(), request,response,sessionProvider));
+		}
+		if (req.getOldPwd() != null && !"".equals(req.getOldPwd())) {
+			/** 对密码进行解密. */
+			req.setOldPwd(CommonMethod.getPassword(req.getOldPwd(), request,response,sessionProvider));
+		}
+		userInfoService.updateUserInfo(req);
+		ResponseContext.setValue(null);
+		return ResponseContext.getResponsenull();
 	}
 
+	/**
+	 * 修改密码成功后.
+	 * 
+	 * @param req
+	 *            请求参数.
+	 * @return 参数返回.
+	 */
+	@RequestMapping(value = "/updatePwdSuccess")
+	public @ResponseBody ResponseEntity updatePwdSuccess(HttpServletRequest request, HttpServletResponse response) {
+		// 判断是否已经在cas服务端注销成功
+		sessionProvider.removeAttribute(request, response, ParamConstants.USER_ID);
+		request.getSession().invalidate();
+		ResponseContext.setValue(host +":"+port+ "/sts/user/login.html");
+		return ResponseContext.getResponseEntity();
+	}
 
 	/**
      * 获取RSA公钥系数和指数.

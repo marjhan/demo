@@ -1,0 +1,24 @@
+    <title>404</title>
+	<script src="/js/vendor/require/require.js"></script>
+    <script src="/js/app.js"></script>
+	<style type="text/css">
+        .content{width: 1200px;margin: 0 auto;}
+		.content_404{text-align: center;display: inline-block;width: 100%;}
+		.content_404 p {font-size: 18px;}
+		.content_404 p.p1{margin-top: 40px;margin-bottom: 15px;}
+		.content_404 p.p2{margin-top:15px;margin-bottom: 50px;}
+		.content_404 a {color: #2eb5fb;padding-left: 20px;}
+    </style>
+</head>
+<body ms-controller="pageError">
+<!-- 菜单模块 -->
+<div class="content" style="padding-bottom:0px;">
+    <div class="content_404">
+        <img src="/open/images/404.png" width="373" height="229"/>
+        <p class="p1">抱歉，您所访问的页面不存在...</p>
+		<!--
+        <p class="p2">>> <span id="show">5</span> 秒后<a href="/">返回首页</a></p>
+		-->
+    </div>
+</div>
+</body>

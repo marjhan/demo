@@ -83,7 +83,7 @@ public class OrderListDTO {
     /**
      * 备注
      */
-    private String remake;
+    private String remark;
 
 	/**
 	 * @return the orderId
@@ -282,17 +282,17 @@ public class OrderListDTO {
 	}
 
 	/**
-	 * @return the remake
+	 * @return the remark
 	 */
-	public String getRemake() {
-		return remake;
+	public String getRemark() {
+		return remark;
 	}
 
 	/**
-	 * @param remake the remake to set
+	 * @param remark the remark to set
 	 */
-	public void setRemake(String remake) {
-		this.remake = remake;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
     
 }

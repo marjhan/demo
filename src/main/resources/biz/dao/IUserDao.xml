@@ -4,7 +4,7 @@
 	<resultMap id="BaseResultMap" type="biz.domain.User">
 		<id column="user_id" jdbcType="INTEGER" property="userId" />
 		<result column="user_name" jdbcType="VARCHAR" property="userName" />
-		<result column="password" jdbcType="VARCHAR" property="passWord" />
+		<result column="password" jdbcType="VARCHAR" property="password" />
 		<result column="real_name" jdbcType="VARCHAR" property="realName" />
 		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 		<result column="motify_time" jdbcType="TIMESTAMP" property="motifyTime" />

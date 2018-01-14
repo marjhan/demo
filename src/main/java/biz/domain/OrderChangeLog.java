@@ -21,12 +21,12 @@ public class OrderChangeLog {
     /**
      * 修改前备注
      */
-    private String oldRemake;
+    private String oldRemark;
 
     /**
      * 修改后备注
      */
-    private String newRemake;
+    private String newRemark;
 
     /**
      * 创建时间
@@ -92,38 +92,34 @@ public class OrderChangeLog {
     }
 
     /**
-     * 修改前备注
-     * @return old_remake 修改前备注
-     */
-    public String getOldRemake() {
-        return oldRemake;
-    }
+	 * @return the oldRemark
+	 */
+	public String getOldRemark() {
+		return oldRemark;
+	}
 
-    /**
-     * 修改前备注
-     * @param oldRemake 修改前备注
-     */
-    public void setOldRemake(String oldRemake) {
-        this.oldRemake = oldRemake;
-    }
+	/**
+	 * @param oldRemark the oldRemark to set
+	 */
+	public void setOldRemark(String oldRemark) {
+		this.oldRemark = oldRemark;
+	}
 
-    /**
-     * 修改后备注
-     * @return new_remake 修改后备注
-     */
-    public String getNewRemake() {
-        return newRemake;
-    }
+	/**
+	 * @return the newRemark
+	 */
+	public String getNewRemark() {
+		return newRemark;
+	}
 
-    /**
-     * 修改后备注
-     * @param newRemake 修改后备注
-     */
-    public void setNewRemake(String newRemake) {
-        this.newRemake = newRemake;
-    }
+	/**
+	 * @param newRemark the newRemark to set
+	 */
+	public void setNewRemark(String newRemark) {
+		this.newRemark = newRemark;
+	}
 
-    /**
+	/**
      * 创建时间
      * @return create_time 创建时间
      */

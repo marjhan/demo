@@ -139,4 +139,21 @@
 
 	<bean id="exceptionMapping" class="biz.common.exceptions.config.ExceptionMapping"
 		parent="exceptionMappings" />
+		
+    
+	<!-- 视图找不到不会有异常信息 -->
+	<bean id="handlerExceptionResolver" class="biz.common.exception.ExceptionResolver">
+        <property name="messageSource" ref="messageSource"/>
+        <property name="decoratorManager" ref="exceptionDecoratorManager"/>
+		<property name="warnLogCategory" value="INFO" />
+		<property name="defaultStatusCode" value="500" />
+		<property name="defaultErrorView" value="404" />
+		<property name="statusCodes">
+			<props>
+				<prop key="errors/404">404</prop>
+				<prop key="errors/500">500</prop>
+			</props>
+		</property>
+		<property name="order" value="-1"></property>
+	</bean>
 </beans>  

@@ -5,14 +5,14 @@
     <id column="order_change_log_id" jdbcType="INTEGER" property="orderChangeLogId" />
     <result column="old_order_status_id" jdbcType="INTEGER" property="oldOrderStatusId" />
     <result column="new_order_status_id" jdbcType="INTEGER" property="newOrderStatusId" />
-    <result column="old_remake" jdbcType="VARCHAR" property="oldRemake" />
-    <result column="new_remake" jdbcType="VARCHAR" property="newRemake" />
+    <result column="old_remark" jdbcType="VARCHAR" property="oldRemark" />
+    <result column="new_remark" jdbcType="VARCHAR" property="newRemark" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="motify_time" jdbcType="TIMESTAMP" property="motifyTime" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
   </resultMap>
   <sql id="Base_Column_List">
-    order_change_log_id, old_order_status_id, new_order_status_id, old_remake, new_remake, 
+    order_change_log_id, old_order_status_id, new_order_status_id, old_remark, new_remark, 
     create_time, motify_time, user_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -27,10 +27,10 @@
   </delete>
   <insert id="insert" parameterType="biz.domain.OrderChangeLog">
     insert into order_change_log ( old_order_status_id, 
-      new_order_status_id, old_remake, new_remake, user_id
+      new_order_status_id, old_remark, new_remark, user_id
       )
     values (#{oldOrderStatusId,jdbcType=INTEGER}, 
-      #{newOrderStatusId,jdbcType=INTEGER}, #{oldRemake,jdbcType=VARCHAR}, #{newRemake,jdbcType=VARCHAR}, 
+      #{newOrderStatusId,jdbcType=INTEGER}, #{oldRemark,jdbcType=VARCHAR}, #{newRemark,jdbcType=VARCHAR}, 
      #{userId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="biz.domain.OrderChangeLog">
@@ -45,11 +45,11 @@
       <if test="newOrderStatusId != null">
         new_order_status_id,
       </if>
-      <if test="oldRemake != null">
-        old_remake,
+      <if test="oldRemark != null">
+        old_remark,
       </if>
-      <if test="newRemake != null">
-        new_remake,
+      <if test="newRemark != null">
+        new_remark,
       </if>
       <if test="createTime != null">
         create_time,
@@ -71,11 +71,11 @@
       <if test="newOrderStatusId != null">
         #{newOrderStatusId,jdbcType=INTEGER},
       </if>
-      <if test="oldRemake != null">
-        #{oldRemake,jdbcType=VARCHAR},
+      <if test="oldRemark != null">
+        #{oldRemark,jdbcType=VARCHAR},
       </if>
-      <if test="newRemake != null">
-        #{newRemake,jdbcType=VARCHAR},
+      <if test="newRemark != null">
+        #{newRemark,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -97,11 +97,11 @@
       <if test="newOrderStatusId != null">
         new_order_status_id = #{newOrderStatusId,jdbcType=INTEGER},
       </if>
-      <if test="oldRemake != null">
-        old_remake = #{oldRemake,jdbcType=VARCHAR},
+      <if test="oldRemark != null">
+        old_remark = #{oldRemark,jdbcType=VARCHAR},
       </if>
-      <if test="newRemake != null">
-        new_remake = #{newRemake,jdbcType=VARCHAR},
+      <if test="newRemark != null">
+        new_remark = #{newRemark,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -119,8 +119,8 @@
     update order_change_log
     set old_order_status_id = #{oldOrderStatusId,jdbcType=INTEGER},
       new_order_status_id = #{newOrderStatusId,jdbcType=INTEGER},
-      old_remake = #{oldRemake,jdbcType=VARCHAR},
-      new_remake = #{newRemake,jdbcType=VARCHAR},
+      old_remark = #{oldRemark,jdbcType=VARCHAR},
+      new_remark = #{newRemark,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       motify_time = #{motifyTime,jdbcType=TIMESTAMP},
       user_id = #{userId,jdbcType=INTEGER}

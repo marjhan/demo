@@ -17,6 +17,9 @@
                     <a><span>{{username}}</span></a>
                 </li>
                 <li>
+                    <a id="changePassword" ms-controller="common" ms-click="bounced('ChangePassword')">修改密码</a>
+                </li>
+                <li>
                     <a id="cas_logout_url" class="login" ms-click="logout()">退出</a>
                 </li>
 				<!--

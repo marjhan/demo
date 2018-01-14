@@ -4,11 +4,11 @@
     </div>
     </div>
 
-	<!--公共弹框 begin
-	#parse("/screen/components/Popup.vm")-->
+	<!--公共弹框 begin-->
+	#parse("/screen/components/Popup.vm")
 	<!--公共弹框  over-->
 
-    <script src="/js/vendor/bootstrap/bootstrap.min.js"></script>
+    <script src="/js/vendor/bootstrap/bootstrap.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="/js/vendor/bootstrap/ie10-viewport-bug-workaround.js"></script>
 	<script src="/js/vendor/require/require.js"></script>

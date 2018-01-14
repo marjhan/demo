@@ -10,21 +10,20 @@ import biz.dao.IUserDao;
 import biz.domain.Role;
 import biz.domain.User;
 import biz.req.LoginReq;
-import biz.req.ResetPasswordReq;
 import biz.res.LoginRes;
-import biz.res.ResetPasswordRes;
 import biz.service.IUserLoginRegisterService;
 
-/** 
-* @author  xuzc
-* @date 2017年12月28日 下午2:52:00 
-* @version 1.0 
-* @parameter  
-* @since  
-* @return  */
+/**
+ * @author xuzc
+ * @date 2017年12月28日 下午2:52:00
+ * @version 1.0
+ * @parameter
+ * @since
+ * @return
+ */
 
 @Service
-public class UserLoginRegisterServiceImpl implements IUserLoginRegisterService{
+public class UserLoginRegisterServiceImpl implements IUserLoginRegisterService {
 
 	/** 用户信息dao. */
 	@Autowired
@@ -39,13 +38,13 @@ public class UserLoginRegisterServiceImpl implements IUserLoginRegisterService{
 		LoginRes loginRes = new LoginRes();
 		Role role = new Role();
 		User user = userDao.selectByUserName(req.getUserName());
-		if(user==null){
+		if (user == null) {
 			throw new BusinessException("000", "用户名不存在");
-		}else if(user.getPassWord().equals(req.getPassword())){
+		} else if (user.getPassword().equals(req.getPassword())) {
 			role = roleDao.selectByPrimaryKey(user.getRoleId());
-			if(role==null){
-				throw new BusinessException("000", "角色不存在");				
-			}else{
+			if (role == null) {
+				throw new BusinessException("000", "角色不存在");
+			} else {
 				loginRes.setUserId(user.getUserId());
 				loginRes.setUserName(user.getUserName());
 				loginRes.setRealName(user.getRealName());
@@ -53,15 +52,9 @@ public class UserLoginRegisterServiceImpl implements IUserLoginRegisterService{
 				loginRes.setRoleName(role.getRoleName());
 				return loginRes;
 			}
-		}else{
-			throw new BusinessException(FrontConstants.ERROR_CODE_5103007, "密码错误");	
+		} else {
+			throw new BusinessException(FrontConstants.ERROR_CODE_5103007, "密码错误");
 		}
 	}
 
-	@Override
-	public ResetPasswordRes resetPassword(ResetPasswordReq req) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

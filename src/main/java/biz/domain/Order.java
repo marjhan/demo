@@ -71,7 +71,7 @@ public class Order {
     /**
      * 备注
      */
-    private String remake;
+    private String remark;
 
     /**
      * 订单id
@@ -281,19 +281,18 @@ public class Order {
         this.orderStatusId = orderStatusId;
     }
 
-    /**
-     * 备注
-     * @return remake 备注
-     */
-    public String getRemake() {
-        return remake;
-    }
+	/**
+	 * @return the remark
+	 */
+	public String getRemark() {
+		return remark;
+	}
 
-    /**
-     * 备注
-     * @param remake 备注
-     */
-    public void setRemake(String remake) {
-        this.remake = remake;
-    }
+	/**
+	 * @param remark the remark to set
+	 */
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+    
 }

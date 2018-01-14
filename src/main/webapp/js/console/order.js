@@ -21,10 +21,150 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 		change_order_status : "请选择状态",
 		change_order_status_id : "",
 		change_order_id	: "",
-		change_order_remake	: "",
+		change_order_remark	: "",
 		startTime : "",
 		endTime : "",
 		orderList : [],
+		//修改密码
+		key:"",
+		old_password:$('#old_password').val(),//原密码
+		new_password:$('#new_password').val(),//新密码
+		new_password_1:$('#new_password_1').val(),//新密码确认
+        /**
+         * 加密字符串
+         * @param str
+         * @returns {*}
+         */
+        encoding:function (str){
+            if(RSAUtils && vm.key != ""){
+                return RSAUtils.encryptedString(vm.key,str);
+            }else{
+                return str;
+            }
+        },
+		/*原密码校验：1.不能为空；2.长度在6-14之间；*/
+	    u1:function(){
+	    	if(vm.old_password == '' || vm.old_password == null || vm.old_password == undefined){
+	    		$('#u1').html('不能为空');
+	    		$('#u1').show();
+	    		return false;
+	    	}else{
+	    		if(vm.old_password.length>=6&&vm.old_password.length<=14){
+	    			$('#u1').hide();
+	    			return true;
+	    		}else{
+	    			$('#u1').show();
+        			$("#u1").html("请输入长度为6~14位字符");
+        			return false;
+	    		}
+	    	}
+	    },
+	    /*新密码校验：1.不能为空; 2.密码强度校验：数字，字母，特殊符号。满足其一权重加一; 3.新旧密码不能一致;*/	    
+	    u2:function(){
+	    	if(vm.new_password !=''){
+	    		if(vm.new_password == vm.old_password){
+	    			$('#v1,#v2,#v3').removeClass('active');
+	    			$("#u2").html("新旧密码不能一致！");
+	    			$('#u2').show();
+	    			return false;
+	    		}else{
+	    			if(vm.new_password.length>=6&&vm.new_password.length<=14){// /^[\w]{6,14}$/ 验证字母，数字，下划线
+		    			$('#v1,#v2,#v3').removeClass('active');
+		    			var a = 0;
+		    			if(vm.new_password.match(/[0-9]/g)){
+		    				a++;
+		    			}
+		    			if(vm.new_password.match(/[a-zA-Z]/g)){
+		    				a++;
+		    			}
+		    			if(vm.new_password.match(/.[^a-zA-Z0-9]/g)){
+		    				a++;
+		    			}
+		    			if(a=="1"){
+		    				$('#v1').addClass('active');
+		    				$("#u2").html("密码过于简单");
+			    			$('#u2').show();
+			    			return false;
+		    			}
+		    			if(a=="2"){
+		    				$('#v1,#v2').addClass('active');
+			    			$('#u2').hide();
+			    			return true;
+		    			}
+		    			if(a=="3"){
+		    				$('#v1,#v2,#v3').addClass('active');
+			    			$('#u2').hide();
+			    			return true;
+		    			}
+		    		}else{
+		    			$("#u2").html("请输入长度为6~14位字符");
+		    			$('#u2').show();
+		    			return false;
+		    		}
+	    		}
+	    	}else{
+	    		$('#v1,#v2,#v3').removeClass('active');
+	    		$('#u2').html('不能为空');
+	    		$('#u2').show();
+	    		return false;
+	    	}
+	    },
+	    //新密码确认校验
+	    u3:function(){
+	    	if(vm.new_password_1 != ''){
+	    		if( vm.new_password == vm.new_password_1){
+		    		$('#u3').hide();
+		    		return true;
+		    	}else{
+		    		$('#u3').html('密码不一致');
+		    		$('#u3').show();
+		    		return false;
+		    	}
+	    	}else{
+	    		$('#u3').html('不能为空');
+	    		$('#u3').show();
+	    		return false;
+	    	}
+	    },
+	    //修改密码
+	    changePassword:function(){
+	    	if(vm.u1() && vm.u2() && vm.u3()){
+	    		var old_password = vm.encoding(vm.old_password);
+	    		var new_password = vm.encoding(vm.new_password);
+	    		var param = {
+	    				//hsid:vm.hsid,
+	    				oldPwd:old_password,
+	    				newPwd:new_password
+	    		}
+	    		$.ajax({
+	    			url : "/sts/user/updatePwd.json" ,
+                    dataType : "json" ,
+                    type:"post",
+                    async:false,
+                    data:param,
+                    success: function(data){
+                    	if(data.data==null){
+                    		showTips("修改成功！");
+                    		vm.close('ChangePassword');
+                    		setTimeout(function(){
+                    			$.ajax({
+                        			url:"/sts/user/updatePwdSuccess.json",
+                        			dataType:"json",
+                        			type:"post",
+                        			async:false,
+                        			success:function(data){
+                        				location.replace(location.href)
+                        			}
+                        		})
+                    		},1000)
+                    	}
+                    },
+                    failure:function(r){
+                    	showTips("原密码输入错误");
+		            }
+	    		})
+	    	}
+	    },
 		pager : {
 			currentPage : 1,
 			totalItems : 0,
@@ -42,12 +182,18 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 			vm.environmentVal = envType;
 		},
 		//修改订单弹窗弹框
-		bouncedChangeOrder:function(id,change_order_id,order_status_name,change_order_remake){
+		bouncedChangeOrder:function(id,change_order_id,change_order_status_id,change_order_status_name,change_order_remark){
 	    	vm.change_order_id = change_order_id;
-	    	vm.change_order_status = order_status_name;
-	    	vm.change_order_remake = change_order_remake;
+	    	vm.change_order_status_id = change_order_status_id;
+	    	vm.change_order_status = change_order_status_name;
+	    	vm.change_order_remark = change_order_remark;
 	    	$('#'+id).show();
 	    	$('#fade').show();
+	    },
+	    //关闭弹框
+	    close:function(id){
+	    	$('#'+id).hide();
+	    	$('#fade').hide();
 	    },
 		selectDate : function(type) {
 			var myDate = new Date();
@@ -149,7 +295,7 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 		var param = {
 			orderStatusId : vm.change_order_status_id,
 			orderId : vm.change_order_id,
-			remake : vm.change_order_remake
+			remark : vm.change_order_remark
 		};
 		$.ajax({
 			url : "changeOrder.json",
@@ -157,12 +303,14 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 			data : param,
 			type : "post",
 			async : true,
-			success : function(data) {
-				showTips(r.result);
-				close('ChangeOrder');
+			success : function(r) {
+				showTips(r.data.result);
+		    	vm.close('ChangeOrder');
+				vm.pager.currentPage = 1;
+		    	getOrderList(1);
 			},
 			failure : function(r) {
-				showTips(r.result);
+				showTips(r.data.result);
 			}
 		});
 	}
@@ -214,8 +362,24 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 			}
 		});
 	}
+    /**
+     * 获取rsa密码
+     * @param callback
+     */
+    function getRSA(){
+        if(RSAUtils){
+            $.ajax({
+                url:"/sts/user/getModulusExponent.json",
+                type:"GET",
+                success:function (result){
+                    vm.key = RSAUtils.getKeyPair(result.data.exponent, '', result.data.modulus);
+                }
+            })
+        }
+    };
 
 	$(function() {
+        getRSA();
 		getOrderList();
 	})
 
@@ -256,10 +420,9 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 })
 
 // 显示提示框
-function showTips(message, time) {
-	time = time == undefined ? 1300 : time;
-	$
-			.blockUI({
+	function showTips(message, time) {
+		time = time == undefined ? 1300 : time;
+			$.blockUI({
 				message : '<div class="con-pop"><div class="inner"><div class="details"><p style="text-align: center">'
 						+ message + '</p></div></div></div>',
 				timeout : time,
@@ -276,4 +439,5 @@ function showTips(message, time) {
 					textAlign : "left"
 				}
 			});
+	
 }

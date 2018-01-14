@@ -61,7 +61,7 @@
         <div class="ui-item" style="margin-top:70px">
             <label class="ui-label">备注</label>
             <div class="ui-content">
-                <textarea style="width:600px;height:300px" ms-duplex-test="change_order_remake" id="change_order_remake" ></textarea>
+                <textarea style="width:600px;height:300px" ms-duplex-test="change_order_remark" id="change_order_remark" ></textarea>
             </div>
         </div>
         <div class="ui-item" style="margin-left: 100px;">
