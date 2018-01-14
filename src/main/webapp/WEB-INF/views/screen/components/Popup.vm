@@ -44,24 +44,27 @@
 <!--弹框2：修改订单-->
 <div id="ChangeOrder" class="ChangeOrder">
     <div class="popup">
+		<input type="hidden"  id="change_order_id" ms-duplex="change_order_id"/>
         <a ms-controller="common" class="close" ms-click="close('ChangeOrder')"></a>
-        <h2>修改绑定手机号</h2>
-        <div class="ui-item">
-            <label class="ui-label">新手机</label>
+        <h2>修改订单信息</h2>
+        <div class="ui-item" style="z-index: 99;">
+            <label class="ui-label">修改订单状态</label>
+			<div class="input_2_parent">
+				<input type="text" class="input_2" id="change_order_status" ms-duplex="change_order_status"  readonly="readonly" />
+				<ul>
+					#foreach ($orderStatus in $!orderStatusList)
+						<li ms-click="setChangeOrderStatus('$!orderStatus.orderStatusId')">$!orderStatus.orderStatusName</li>
+					#end
+				</ul>
+			</div>
+        </div>
+        <div class="ui-item" style="margin-top:70px">
+            <label class="ui-label">备注</label>
             <div class="ui-content">
-                <input type="text" id="tel" class="ui-input" ms-blur="u4()" ms-duplex="tel">
-                <span class="validation" id="u4" style="width:390px;"></span>
+                <textarea style="width:600px;height:300px" ms-duplex-test="change_order_remake" id="change_order_remake" ></textarea>
             </div>
         </div>
-        <div class="ui-item">
-            <label class="ui-label">校验码</label>
-            <div class="ui-content">
-                <input type="text" class="ui-input ui-verifyCode" maxlength="8" id="verifyCode" ms-blur="u5()" ms-duplex="verifyCode">
-                <a class="btn-VerifyCode" id="getChecked" ms-on-click="getChecked()">获取校验码</a>
-                <span class="validation" id="u5" style="min-width:200px;margin-left:120px;">请输入字母或数字</span>
-            </div>
-        </div>
-        <div class="ui-item">
+        <div class="ui-item" style="margin-left: 100px;">
             <a class="ui-btn" ms-click="changeOrder()">确定</a>
         </div>
     </div>

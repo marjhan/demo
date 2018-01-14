@@ -18,6 +18,10 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 		user_id : "",
 		order_status : "请选择状态",
 		order_status_id : "",
+		change_order_status : "请选择状态",
+		change_order_status_id : "",
+		change_order_id	: "",
+		change_order_remake	: "",
 		startTime : "",
 		endTime : "",
 		orderList : [],
@@ -37,6 +41,14 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 		changeEnv : function(envType) {
 			vm.environmentVal = envType;
 		},
+		//修改订单弹窗弹框
+		bouncedChangeOrder:function(id,change_order_id,order_status_name,change_order_remake){
+	    	vm.change_order_id = change_order_id;
+	    	vm.change_order_status = order_status_name;
+	    	vm.change_order_remake = change_order_remake;
+	    	$('#'+id).show();
+	    	$('#fade').show();
+	    },
 		selectDate : function(type) {
 			var myDate = new Date();
 			var year = myDate.getFullYear(), // 今年
@@ -91,6 +103,9 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 			vm.pager.currentPage = 1;
 			getOrderList(1);
 		},
+		changeOrder : function() {
+			changeOrder();
+		},
 		reset : function() {
 			vm.student_name = "";
 			vm.info = "";
@@ -124,8 +139,33 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 		// 设定状态
 		setOrderStatus : function(orderStatusId) {
 			vm.order_status_id = orderStatusId;
+		},
+		// 设定状态
+		setChangeOrderStatus : function(chaneOrderStatusId) {
+			vm.change_order_status_id = chaneOrderStatusId;
 		}
 	})
+	function changeOrder() {
+		var param = {
+			orderStatusId : vm.change_order_status_id,
+			orderId : vm.change_order_id,
+			remake : vm.change_order_remake
+		};
+		$.ajax({
+			url : "changeOrder.json",
+			dataType : "json",
+			data : param,
+			type : "post",
+			async : true,
+			success : function(data) {
+				showTips(r.result);
+				close('ChangeOrder');
+			},
+			failure : function(r) {
+				showTips(r.result);
+			}
+		});
+	}
 	function getOrderList(isShowPageOne) {
 		var param = {
 			pageSize : vm.pager.perPages,

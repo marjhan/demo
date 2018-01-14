@@ -1,6 +1,8 @@
 package biz.service;
 
+import biz.req.ChangeOrderReq;
 import biz.req.OrderListReq;
+import biz.res.ChangeOrderRes;
 import biz.res.OrderListRes;
 
 /** 
@@ -13,5 +15,7 @@ import biz.res.OrderListRes;
 public interface IOrderService {
 	
 	public OrderListRes queryOrderList(OrderListReq req);
+	
+	public ChangeOrderRes changeOrder(ChangeOrderReq req);
 	
 }

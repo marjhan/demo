@@ -19,7 +19,9 @@ import biz.domain.OrderStatus;
 import biz.domain.User;
 import biz.entity.ResponseContext;
 import biz.entity.ResponseEntity;
+import biz.req.ChangeOrderReq;
 import biz.req.OrderListReq;
+import biz.res.ChangeOrderRes;
 import biz.res.LoginRes;
 import biz.res.OrderListRes;
 import biz.service.IChannelService;
@@ -80,20 +82,19 @@ public class OrderAction extends WebsiteBaseAction{
 		List<User> userList= userInfoService.queryUserInfoList();
 		List<Channel> channelList= channelService.queryChannelList();
 		List<ListSource> listSourceList= listSourceService.queryListSourceList();
-		List<OrderStatus> orderStatuList= orderStatusService.queryOrderStatusList();
+		List<OrderStatus> orderStatusList= orderStatusService.queryOrderStatusList();
 		model.addAttribute("roleId", roleId);	
 		model.addAttribute("userList", userList);	
 		model.addAttribute("channelList", channelList);
 		model.addAttribute("listSourceList", listSourceList);
-		model.addAttribute("orderStatuList", orderStatuList);
+		model.addAttribute("orderStatusList", orderStatusList);
 		return "order/order";
 	}
 	
 	/**
 	 * 获取订单列表.
 	 * 
-	 * @param index
-	 * @param type
+	 * @param req
 	 * @return
 	 */
 	@RequestMapping(value = "/myOrderList")
@@ -105,6 +106,24 @@ public class OrderAction extends WebsiteBaseAction{
 		if(loginRes.getRoleId()!=1)
 			req.setUserId(loginRes.getUserId());
 		OrderListRes res = orderService.queryOrderList(req);
+		ResponseContext.setValue(res);			
+		return  ResponseContext.getResponseEntity();
+	}
+	
+	/**
+	 * 获取修改订单.
+	 * 
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value = "/changeOrder")
+	public @ResponseBody ResponseEntity changeOrder(HttpServletRequest request, ChangeOrderReq req) {
+		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
+		if (null == loginRes) {
+			throw new BusinessException("", "请登录！");
+		}
+		req.setUserId(loginRes.getUserId());
+		ChangeOrderRes res = orderService.changeOrder(req);
 		ResponseContext.setValue(res);			
 		return  ResponseContext.getResponseEntity();
 	}

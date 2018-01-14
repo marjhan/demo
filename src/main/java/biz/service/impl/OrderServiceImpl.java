@@ -4,10 +4,17 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import biz.common.exception.BusinessException;
+import biz.dao.IOrderChangeLogDao;
 import biz.dao.IOrderDao;
+import biz.domain.Order;
+import biz.domain.OrderChangeLog;
 import biz.domain.OrderListDTO;
+import biz.req.ChangeOrderReq;
 import biz.req.OrderListReq;
+import biz.res.ChangeOrderRes;
 import biz.res.OrderListRes;
 import biz.service.IOrderService;
 
@@ -25,6 +32,10 @@ public class OrderServiceImpl implements IOrderService{
 	@Autowired
 	private IOrderDao orderDao;
 
+	/** 订单修改日志dao. */
+	@Autowired
+	private IOrderChangeLogDao orderChangeLogDao;
+
 	@Override
 	public OrderListRes queryOrderList(OrderListReq req) {
 		OrderListRes res = new OrderListRes();
@@ -34,7 +45,41 @@ public class OrderServiceImpl implements IOrderService{
 		List<OrderListDTO> beanList = orderDao.queryOrderListByUser(req);
 		res.setBeanList(beanList);
 		res.setPageBean(req.copyPagination());
-		// TODO Auto-generated method stub
+		return res;
+	}
+
+	@Override
+	@Transactional
+	public ChangeOrderRes changeOrder(ChangeOrderReq req) {
+		ChangeOrderRes res = new ChangeOrderRes();
+		String result = "";
+		OrderChangeLog orderChangeLog = new OrderChangeLog();
+		Order oldOrder = orderDao.selectByPrimaryKey(req.getOrderId());
+		if(oldOrder!=null){
+			try {
+				Order order = oldOrder;
+				order.setOrderId(req.getOrderId());
+				order.setOrderStatusId(req.getOrderStatusId());
+				order.setRemake(req.getRemake());
+				
+				orderDao.updateByPrimaryKey(order);
+				
+				orderChangeLog.setOldOrderStatusId(oldOrder.getOrderStatusId());
+				orderChangeLog.setNewOrderStatusId(req.getOrderStatusId());
+				orderChangeLog.setOldRemake(oldOrder.getRemake());
+				orderChangeLog.setNewRemake(req.getRemake());
+				orderChangeLog.setUserId(req.getUserId());
+				orderChangeLogDao.insert(orderChangeLog);
+				
+				result = "订单修改成功！";
+			} catch (BusinessException e) {
+				e.printStackTrace();
+				result = "订单修改失败！请重新操作";
+			}
+		}else{
+			result = "订单不存在，请重新操作";
+		}
+		res.setResult(result);
 		return res;
 	}
 

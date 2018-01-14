@@ -155,7 +155,7 @@
                     <td ms-attr-title="{{item.motifyTime}}">{{item.motifyTime | date("yyyy-MM-dd HH:mm:ss")}}</td>
 					
                     <td >
-                   		<span> <a ms-href="/">修改</a></span>
+                   		<span> <a ms-controller="order" id="changeOrder" ms-click="bouncedChangeOrder('ChangeOrder',item.orderStatusId,item.orderStatusName,item.remake)">修改</a></span>
                     </td>
                 </tr>
             </tbody>
