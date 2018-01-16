@@ -21,7 +21,7 @@
         <div class="ui-item">
             <label class="ui-label"><i class="star"></i>基本信息</label>
             <div class="ui-content">
-                <textarea  ms-dupluex-test="info" id="info" class="ui-input" ms-blur="validatorInfo(this)" placeholder="不超过300个字符" ></textarea>
+                <textarea style="height:70px" ms-dupluex-test="info" id="info" class="ui-input" ms-blur="validatorInfo(this)" placeholder="不超过300个字符" ></textarea>
             </div>
         </div> 
         <div class="ui-item">
@@ -91,7 +91,7 @@
         <div class="ui-item">
             <label class="ui-label"><i class="star"></i>备注</label>
             <div class="ui-content">
-                <textarea  ms-dupluex-test="remark" id="remark" class="ui-input" ms-blur="validatorRemark(this)" placeholder="不超过2000个字符"></textarea>
+                <textarea style="height:100px" ms-dupluex-test="remark" id="remark" class="ui-input" ms-blur="validatorRemark(this)" placeholder="不超过2000个字符"></textarea>
             </div>
         </div>     
        <div class="btn-submit-box">

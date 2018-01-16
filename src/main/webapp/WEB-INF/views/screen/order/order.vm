@@ -14,7 +14,7 @@
 	<span class="span_1">渠道</span>
     <div class="input_2_parent"><input type="text" class="input_2" id="channel" readonly="readonly" ms-duplex="channel" value="请选择渠道" />
         <ul>
-        	<li ms-click="setChannel'')">全部</li>
+        	<li ms-click="setChannel('')">全部</li>
         	#foreach ($channel in $!channelList)
             <li ms-click="setChannel('$channel.channelId')">$channel.channelName</li>
             #end

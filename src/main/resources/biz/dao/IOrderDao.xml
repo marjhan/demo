@@ -222,10 +222,10 @@
     <where>
 		1=1
     	<if test="studentName != null and studentName != ''">
-       		and order_info.student_name like %#{studentName,jdbcType=VARCHAR}%
+       		and order_info.student_name like concat('%',#{studentName,jdbcType=VARCHAR},'%')
     	</if>
     	<if test="info != null and info != ''">
-       		and order_info.info like %#{info,jdbcType=VARCHAR}%
+       		and order_info.info like concat('%',#{info,jdbcType=VARCHAR},'%')
     	</if>
     	<if test="channelId != null and channelId != 0">
        		and order_info.channel_id = #{channelId,jdbcType=INTEGER}
@@ -258,10 +258,10 @@
     <where>
 		1=1
     	<if test="studentName != null and studentName != ''">
-       		and order_info.student_name like %#{studentName,jdbcType=VARCHAR}%
+       		and order_info.student_name like concat('%',#{studentName,jdbcType=VARCHAR},'%')
     	</if>
     	<if test="info != null and info != ''">
-       		and order_info.info like %#{info,jdbcType=VARCHAR}%
+       		and order_info.info like concat('%',#{info,jdbcType=VARCHAR},'%')
     	</if>
     	<if test="channelId != null and channelId != 0">
        		and order_info.channel_id = #{channelId,jdbcType=INTEGER}

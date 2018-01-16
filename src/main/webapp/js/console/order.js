@@ -401,10 +401,18 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 	})
 
 	$(function() {
-		$('#channel,#list_source').focus(function() {
+		$('#channel,#list_source','#user','order_status').focus(function() {
 			$(this).blur(); // 设置文本框取消获得焦点
 		});
 	})
+	 //回车事件
+    document.onkeydown = function (event) {
+        var e = event || window.event;
+        if (e && e.keyCode == 13) { //回车键的键值为13
+    		getOrderList();
+//    		vm.reset();
+        }
+    }; 
 
 	avalon.scan();
 	
