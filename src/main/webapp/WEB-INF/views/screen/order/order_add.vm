@@ -1,0 +1,109 @@
+#set($title="新增订单")
+#set($js_name="order_add")
+#set($active="order_add")
+<!--控台框架上半部 begin-->
+#parse("/screen/order/include/console-upper.vm")
+<!--控台框架上半部 over-->
+
+<!--添加生产应用内容区 begin****************************************************************************************-->
+
+<div class="prd_add">
+	<h3 class="title">
+		请填写订单基本信息
+	</h3>
+	<div class="prd_add_content">
+        <div class="ui-item">
+            <label class="ui-label"><i class="star"></i>学生姓名</label>
+            <div class="ui-content">
+                <input type="text" ms-dupluex="student_name" id="student_name" class="ui-input" ms-blur="validatorName(this)" placeholder="不超过20个字符，只允许英文大小写和汉字">
+            </div>
+        </div>   
+        <div class="ui-item">
+            <label class="ui-label"><i class="star"></i>基本信息</label>
+            <div class="ui-content">
+                <textarea  ms-dupluex-test="info" id="info" class="ui-input" ms-blur="validatorInfo(this)" placeholder="不超过300个字符" ></textarea>
+            </div>
+        </div> 
+        <div class="ui-item">
+            <label class="ui-label"><i class="star"></i>手机</label>
+            <div class="ui-content">
+                <input type="text" ms-dupluex="mobile_phone" id="mobile_phone" class="ui-input" ms-blur="validatorMobilePhone(this)" placeholder="请填写正确的手机号">
+            </div>
+        </div> 
+        <div class="ui-item">
+            <label class="ui-label"><i></i>QQ</label>
+            <div class="ui-content">
+                <input type="text" ms-dupluex="qq" id="qq" class="ui-input" ms-blur="validatorQQ(this)" placeholder="请填写正确的QQ">
+            </div>
+        </div> 
+        <div class="ui-item">
+            <label class="ui-label"><i></i>微信</label>
+            <div class="ui-content">
+                <input type="text" ms-dupluex="wechat" id="wechat" class="ui-input" ms-blur="validatorWechat(this)" placeholder="请填写正确的微信号">
+            </div>
+        </div>   
+        <div class="ui-item">
+            <label class="ui-label"><i></i>电话</label>
+            <div class="ui-content">
+                <input type="text" ms-dupluex="phone" id="phone" class="ui-input" ms-blur="validatorPhone(this)" placeholder="请填写正确的电话">
+            </div>
+        </div>    
+        <div class="ui-item">
+            <label class="ui-label"><i class="star"></i>渠道</label>
+			<div class="input_3_parent"><input type="text" class="input_3" id="channel" readonly="readonly" ms-duplex="channel" value="请选择渠道" />
+				<ul>
+					#foreach ($channel in $!channelList)
+						<li ms-click="setChannel('$channel.channelId')">$channel.channelName</li>
+					#end
+				</ul>
+			</div>
+       </div>   
+        <div class="ui-item">
+            <label class="ui-label"><i class="star"></i>名单来源</label>
+			<div class="input_3_parent"><input type="text" class="input_3" id="list_source" ms-duplex="list_source"  readonly="readonly" value="请选择名单来源" />
+				<ul>
+					#foreach ($listSource in $!listSourceList)
+						<li ms-click="setListSource('$listSource.listSourceId')">$listSource.listSourceName</li>
+					#end
+				</ul>
+			</div>
+       </div>     
+        <div class="ui-item">
+            <label class="ui-label"><i class="star"></i>负责人</label>
+			<div class="input_3_parent"><input type="text" class="input_3" id="user" ms-duplex="user"  readonly="readonly" value="请选择负责人" />
+				<ul>
+					#foreach ($user in $!userList)
+						<li ms-click="setUser('$!user.userId')">$!user.realName</li>
+					#end
+				</ul>
+			</div>
+       </div>     
+        <div class="ui-item">
+            <label class="ui-label"><i class="star"></i>状态</label>
+			<div class="input_3_parent"><input type="text" class="input_3" id="order_status" ms-duplex="order_status"  readonly="readonly" value="请选择状态" />
+				<ul>
+					#foreach ($orderStatus in $!orderStatusList)
+						<li ms-click="setOrderStatus('$!orderStatus.orderStatusId')">$!orderStatus.orderStatusName</li>
+					#end
+				</ul>
+			</div>
+       </div>   
+        <div class="ui-item">
+            <label class="ui-label"><i class="star"></i>备注</label>
+            <div class="ui-content">
+                <textarea  ms-dupluex-test="remark" id="remark" class="ui-input" ms-blur="validatorRemark(this)" placeholder="不超过2000个字符"></textarea>
+            </div>
+        </div>     
+       <div class="btn-submit-box">
+             <a class="ui-btn"  ms-click="doCreate()">保存</a>
+        </div>         
+	</div>
+</div>
+	
+	
+<!--添加生产应用内容区 over****************************************************************************************-->
+
+<!--控台框架下半部 begin-->
+#parse("/screen/order/include/console-lower.vm")
+<!--控台框架下半部 begin-->
+        

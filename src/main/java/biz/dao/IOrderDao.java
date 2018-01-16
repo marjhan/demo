@@ -4,6 +4,7 @@ import java.util.List;
 
 import biz.domain.Order;
 import biz.domain.OrderListDTO;
+import biz.req.CheckMobilePhoneReq;
 import biz.req.OrderListReq;
 
 public interface IOrderDao {
@@ -22,4 +23,6 @@ public interface IOrderDao {
     List<OrderListDTO> queryOrderListByUser(OrderListReq req);
     
     int getOrderListByUserCount(OrderListReq req);
+    
+    boolean getOrderByMobilePhone(CheckMobilePhoneReq req);
 }

@@ -1,6 +1,8 @@
 package biz.service;
 
+import biz.domain.Order;
 import biz.req.ChangeOrderReq;
+import biz.req.CheckMobilePhoneReq;
 import biz.req.OrderListReq;
 import biz.res.ChangeOrderRes;
 import biz.res.OrderListRes;
@@ -17,5 +19,9 @@ public interface IOrderService {
 	public OrderListRes queryOrderList(OrderListReq req);
 	
 	public ChangeOrderRes changeOrder(ChangeOrderReq req);
+	
+	public boolean checkMobilePhone(CheckMobilePhoneReq req);
+	
+	public int addOrder(Order order);
 	
 }

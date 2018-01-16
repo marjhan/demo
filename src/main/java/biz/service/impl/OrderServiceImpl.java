@@ -13,6 +13,7 @@ import biz.domain.Order;
 import biz.domain.OrderChangeLog;
 import biz.domain.OrderListDTO;
 import biz.req.ChangeOrderReq;
+import biz.req.CheckMobilePhoneReq;
 import biz.req.OrderListReq;
 import biz.res.ChangeOrderRes;
 import biz.res.OrderListRes;
@@ -86,6 +87,16 @@ public class OrderServiceImpl implements IOrderService{
 		}
 		res.setResult(result);
 		return res;
+	}
+
+	@Override
+	public boolean checkMobilePhone(CheckMobilePhoneReq req) {
+		return orderDao.getOrderByMobilePhone(req);
+	}
+
+	@Override
+	public int addOrder(Order order) {
+		return orderDao.insertSelective(order);
 	}
 
 }

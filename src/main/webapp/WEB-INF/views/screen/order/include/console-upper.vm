@@ -38,7 +38,7 @@
                     <li><a><i class="parent-up"></i>订单管理</a></li>
                     <li class=#if($active=="order")"active"#else""#end><a href="/sts/order/list.html"><i class="child-1-2"></i>订单信息</a></li>
 					#if($!roleId==1)
-                    <li class=#if($active=="addOrder")"active"#else""#end><a href="/sts/order/addOrder.html"><i class="child-3-6"></i>订单录入</a></li>
+                    <li class=#if($active=="order_add")"active"#else""#end><a href="/sts/order/order_new.html"><i class="child-3-6"></i>订单录入</a></li>
 					#end
                 </ul>
 				#if($!roleId==1)

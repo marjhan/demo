@@ -280,4 +280,15 @@
 		</if>
     </where>
   </select>
+  <select id="getOrderByMobilePhone" parameterType="biz.req.CheckMobilePhoneReq" resultType="boolean">
+    select 
+    count(order_id)
+    from order_info
+    <where>
+		1=1 
+    	<if test="mobilePhone != null and mobilePhone != ''">
+    		and mobile_phone = #{mobilePhone,jdbcType=VARCHAR}
+    	</if>
+    </where>
+  </select>
 </mapper>
