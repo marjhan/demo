@@ -1,0 +1,61 @@
+#set($title="用户管理")
+#set($js_name="user")
+#set($active="user")
+<!--控台框架上半部 begin-->
+#parse("/screen/console/include/console-upper.vm")
+<!--控台框架上半部 over-->
+<style>
+	.oni-pager{float:right;}
+</style>
+
+<!--生产应用内容区 begin****************************************************************************************-->
+	<!-- 应用总条目数 -->
+	<input id="userlistsizetext"  type="hidden" value="$!UserList.size()" />
+
+	<!-- 列表显示  begin -->
+	<a ms-click="addUser()" class="add_btn">添加应用</a>
+    <div class="table-responsive">
+        <table id="userlistTable" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>用户名</th>
+                    <th>真实姓名</th>
+                    <th>创建时间</th>
+                    <th>状态</th>
+					<th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+               #foreach ($user in $!UserList)
+				#if($velocityCount>5)
+					#set($hideclass="hidetd")
+				#end
+				<tr class="$!hideclass">
+					<td>$!user.userName</td>
+					<td style="text-align:left;">
+						<div style="position:relative;">
+							<p>	
+								<span>$!user.realName</span>
+							</p>
+						</div>
+					</td>
+					<td style="padding-left:10px;">$!date.format('yyyy-MM-dd HH:mm:ss',$!user.createDatetime)</td>
+					<td>$!user.userStatusName</td>
+					<td>
+						<p>
+							<a ms-controller="common" ms-click="delApp('$!user.id')">禁用</a>
+						</p>
+					</td>
+				</tr>
+				#end
+            </tbody>
+        </table>
+        <!--分页-->
+        <div class="pagercss" ms-widget="pager"></div>  
+    </div>
+<!--生产应用内容区 over****************************************************************************************-->
+
+<!--控台框架下半部 begin-->
+#parse("/screen/console/include/console-lower.vm")
+<!--控台框架下半部 begin-->
+        

@@ -2,7 +2,7 @@
 #set($js_name="order")
 #set($active="order")
 <!--控台框架上半部 begin-->
-#parse("/screen/order/include/console-upper.vm")
+#parse("/screen/console/include/console-upper.vm")
 <!--控台框架上半部 over-->
 <link href="/cssmin/style.css?" rel="stylesheet" />
 <!--我的服务内容区 begin****************************************************************************************-->
@@ -169,7 +169,7 @@
 <!--我的服务内容区 over****************************************************************************************-->
 
 <!--控台框架下半部 begin-->
-#parse("/screen/order/include/console-lower.vm")
+#parse("/screen/console/include/console-lower.vm")
 <script src="/js/vendor/rsa.js"></script>
 <!--控台框架下半部 begin-->
         

@@ -2,7 +2,7 @@
 #set($js_name="order_add")
 #set($active="order_add")
 <!--控台框架上半部 begin-->
-#parse("/screen/order/include/console-upper.vm")
+#parse("/screen/console/include/console-upper.vm")
 <!--控台框架上半部 over-->
 
 <!--添加生产应用内容区 begin****************************************************************************************-->
@@ -104,6 +104,6 @@
 <!--添加生产应用内容区 over****************************************************************************************-->
 
 <!--控台框架下半部 begin-->
-#parse("/screen/order/include/console-lower.vm")
+#parse("/screen/console/include/console-lower.vm")
 <!--控台框架下半部 begin-->
         
