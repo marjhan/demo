@@ -233,6 +233,9 @@
     	<if test="listSourceId != null and listSourceId != 0">
        		and order_info.list_source_id = #{listSourceId,jdbcType=INTEGER}
     	</if>
+    	<if test="orderStatusId != null and orderStatusId != 0">
+       		and order_info.order_status_id = #{orderStatusId,jdbcType=INTEGER}
+    	</if>
     	<if test="userId != null and userId != 0">
        		and order_info.user_id = #{userId,jdbcType=INTEGER}
     	</if>
@@ -268,6 +271,9 @@
     	</if>
     	<if test="listSourceId != null and listSourceId != 0">
        		and order_info.list_source_id = #{listSourceId,jdbcType=INTEGER}
+    	</if>
+    	<if test="orderStatusId != null and orderStatusId != 0">
+       		and order_info.order_status_id = #{orderStatusId,jdbcType=INTEGER}
     	</if>
     	<if test="userId != null and userId != 0">
        		and order_info.user_id = #{userId,jdbcType=INTEGER}

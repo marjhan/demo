@@ -1,0 +1,68 @@
+#set($title="订单状态管理")
+#set($js_name="orderStatus")
+#set($active="orderStatus")
+<!--控台框架上半部 begin-->
+#parse("/screen/console/include/console-upper.vm")
+<!--控台框架上半部 over-->
+<style>
+	.oni-pager{float:right;}
+</style>
+<link href="/cssmin/style.css?" rel="stylesheet" />
+
+<!--渠道内容区 begin****************************************************************************************-->
+	<input id="orderstatuslistsizetext"  type="hidden" value="$!orderStatusList.size()" />
+	<!-- 列表显示  begin -->
+	<div class="prd_add_content">
+		<div class="ui-item">
+            <label class="ui-label"><i class="star"></i>订单状态</label>
+            <div class="ui-content">
+                <input type="text" ms-dupluex="order_status_name" id="order_status_name" class="ui-input" ms-blur="validatorOrderStatusName(this)" placeholder="不超过45个字符，只允许中文">
+            </div>
+        </div>   
+       <div class="btn-submit-box">
+			<a ms-click="addOrderStatus()" class="add_btn">添加订单状态</a>
+        </div>    
+	</div>
+    <div class="table-responsive">
+        <table id="orderstatuslistTable" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>订单状态</th>
+                    <th>状态</th>
+					<th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+               #foreach ($orderStatus in $!orderStatusList)
+				#if($velocityCount>5)
+					#set($hideclass="hidetd")
+				#end
+				<tr class="$!hideclass">
+					<td>$!orderStatus.orderStatusName</td>
+					#if($orderStatus.status==1)
+					<td>启用</td>
+					#else
+					<td>禁用</td>
+					#end
+					<td>
+						<p>
+							#if($orderStatus.status==1)
+							<a ms-controller="orderStatus" ms-click="updateOrderStatusStatus('$!orderStatus.orderStatusId',0)">禁用</a>
+							#else
+							<a ms-controller="orderStatus" ms-click="updateOrderStatusStatus('$!orderStatus.orderStatusId',1)">启用</a>
+							#end
+						</p>
+					</td>
+				</tr>
+				#end
+            </tbody>
+        </table>
+        <!--分页-->
+        <div class="pagercss" ms-widget="pager"></div>  
+    </div>
+<!--生产应用内容区 over****************************************************************************************-->
+
+<!--控台框架下半部 begin-->
+#parse("/screen/console/include/console-lower.vm")
+<!--控台框架下半部 begin-->
+        

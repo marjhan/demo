@@ -7,13 +7,29 @@
 <style>
 	.oni-pager{float:right;}
 </style>
+<link href="/cssmin/style.css?" rel="stylesheet" />
 
 <!--生产应用内容区 begin****************************************************************************************-->
 	<!-- 应用总条目数 -->
-	<input id="userlistsizetext"  type="hidden" value="$!UserList.size()" />
-
+	<input id="userlistsizetext"  type="hidden" value="$!userList.size()" />
 	<!-- 列表显示  begin -->
-	<a ms-click="addUser()" class="add_btn">添加应用</a>
+	<div class="prd_add_content">
+		<div class="ui-item">
+            <label class="ui-label"><i class="star"></i>用户名</label>
+            <div class="ui-content">
+                <input type="text" ms-dupluex="user_name" id="user_name" class="ui-input" ms-blur="validatorUserName(this)" placeholder="不超过20个字符，只允许英文大小写和数字">
+            </div>
+        </div>   
+		<div class="ui-item">
+            <label class="ui-label"><i class="star"></i>真实姓名</label>
+            <div class="ui-content">
+                <input type="text" ms-dupluex="real_name" id="real_name" class="ui-input" ms-blur="validatorRealName(this)" placeholder="不超过20个字符，只允许英文大小写和汉字">
+            </div>
+        </div>   
+       <div class="btn-submit-box">
+			<a ms-click="addUser()" class="add_btn">添加用户</a>
+        </div>    
+	</div>
     <div class="table-responsive">
         <table id="userlistTable" class="table table-striped">
             <thead>
@@ -26,7 +42,7 @@
                 </tr>
             </thead>
             <tbody>
-               #foreach ($user in $!UserList)
+               #foreach ($user in $!userList)
 				#if($velocityCount>5)
 					#set($hideclass="hidetd")
 				#end
@@ -39,11 +55,19 @@
 							</p>
 						</div>
 					</td>
-					<td style="padding-left:10px;">$!date.format('yyyy-MM-dd HH:mm:ss',$!user.createDatetime)</td>
-					<td>$!user.userStatusName</td>
+					<td style="padding-left:10px;">$!date.format('yyyy-MM-dd HH:mm:ss',$!user.createTime)</td>		
+					#if($user.status==1)
+					<td>启用</td>
+					#else
+					<td>禁用</td>
+					#end
 					<td>
 						<p>
-							<a ms-controller="common" ms-click="delApp('$!user.id')">禁用</a>
+							#if($user.status==1)
+							<a ms-controller="user" ms-click="updateUserStatus('$!user.userId',0)">禁用</a>
+							#else
+							<a ms-controller="user" ms-click="updateUserStatus('$!user.userId',1)">启用</a>
+							#end
 						</p>
 					</td>
 				</tr>

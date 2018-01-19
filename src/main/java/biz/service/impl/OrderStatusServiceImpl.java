@@ -28,4 +28,19 @@ public class OrderStatusServiceImpl implements IOrderStatusService{
 		return orderStatusDao.queryOrderStatusList();
 	}
 
+	@Override
+	public List<OrderStatus> queryAllOrderStatusList() {
+		return orderStatusDao.queryAllOrderStatusList();
+	}
+
+	@Override
+	public int addOrderStatus(OrderStatus orderStatus) {
+		return orderStatusDao.insertSelective(orderStatus);
+	}
+
+	@Override
+	public int updateOrderStatusStatus(OrderStatus orderStatus) {
+		return orderStatusDao.updateByPrimaryKeySelective(orderStatus);
+	}
+
 }

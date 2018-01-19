@@ -18,4 +18,6 @@ public interface IChannelDao {
     int updateByPrimaryKey(Channel record);
     
     List<Channel> queryChannelList();
+    
+    List<Channel> queryAllChannelList();
 }

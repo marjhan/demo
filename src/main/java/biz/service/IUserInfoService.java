@@ -14,5 +14,11 @@ public interface IUserInfoService {
 	public void updateUserInfo(UpdatePwdReq updatePwdReq);
 	
 	public List<User> queryUserInfoList();
+	
+	public List<User> queryAllUserInfoList();
+	
+	public int addUser(User user);
+	
+	public int updateUserStatus(User user);
 
 }

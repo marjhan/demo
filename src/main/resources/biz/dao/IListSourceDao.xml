@@ -22,6 +22,11 @@
 		from list_source
 		where status = 1
 	</select>
+	<select id="queryAllListSourceList" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from list_source
+	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from list_source
 		where list_source_id = #{listSourceId,jdbcType=INTEGER}

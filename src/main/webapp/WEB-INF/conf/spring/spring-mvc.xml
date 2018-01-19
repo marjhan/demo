@@ -74,6 +74,9 @@
 		</property>
 		<property name="prefix" value="/screen/" />
 		<property name="suffix" value=".vm" />
+		<property name="toolboxConfigLocation" value="/WEB-INF/conf/vm-toolbox.xml" />
+		<property name="dateToolAttribute" value="date" />
+		<property name="numberToolAttribute" value="number" />
 	</bean>
 
 	<!-- 会话管拦截器 -->

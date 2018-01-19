@@ -28,4 +28,19 @@ public class ChannelServiceImpl implements IChannelService{
 		return channelDao.queryChannelList();
 	}
 
+	@Override
+	public List<Channel> queryAllChannelList() {
+		return channelDao.queryAllChannelList();
+	}
+
+	@Override
+	public int addChannel(Channel channel) {
+		return channelDao.insertSelective(channel);
+	}
+
+	@Override
+	public int updateChannelStatus(Channel channel) {
+		return channelDao.updateByPrimaryKeySelective(channel);
+	}
+
 }

@@ -18,4 +18,6 @@ public interface IListSourceDao {
     int updateByPrimaryKey(ListSource record);
     
     List<ListSource> queryListSourceList();
+    
+    List<ListSource> queryAllListSourceList();
 }

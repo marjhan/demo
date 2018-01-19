@@ -18,4 +18,6 @@ public interface IOrderStatusDao {
     int updateByPrimaryKey(OrderStatus record);
     
     List<OrderStatus> queryOrderStatusList();
+    
+    List<OrderStatus> queryAllOrderStatusList();
 }

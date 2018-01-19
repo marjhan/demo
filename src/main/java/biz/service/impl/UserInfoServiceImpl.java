@@ -39,6 +39,11 @@ public class UserInfoServiceImpl implements IUserInfoService{
 	}
 
 	@Override
+	public List<User> queryAllUserInfoList() {
+		return userDao.queryAllUserInfoList();
+	}
+
+	@Override
 	public void updateUserInfo(UpdatePwdReq req) {
 		try {
 			User user = new User();
@@ -49,6 +54,19 @@ public class UserInfoServiceImpl implements IUserInfoService{
 			e.printStackTrace();
 			throw new BusinessException("82", "网络异常");
 		}	
+	}
+
+	@Override
+	public int addUser(User user) {
+		user.setPassword("000000");
+		user.setStatus("1");
+		user.setRoleId(2);
+		return userDao.insertSelective(user);
+	}
+
+	@Override
+	public int updateUserStatus(User user) {
+		return userDao.updateByPrimaryKeySelective(user);
 	}
 
 }

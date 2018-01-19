@@ -5,17 +5,16 @@ require(["domReady!","avalon","jquery","common/common","pager","jquery.cookie","
 	
 	var zclip=null;
 	var model=avalon.define({
-		$id:"user",
-		user_name:"",
-		real_name:"",
+		$id:"orderStatus",
+		order_status_name:"",
 		pager:{
 			currentPage: 1,
 			perPages:5,
-			totalItems: $("#userlistsizetext").val(),
+			totalItems: $("#orderstatuslistsizetext").val(),
 			showJumper: true,
 			onJump: function(e, data) {
 				model.pager.currentPage = data.currentPage;//设置当前页码
-				var lastshowtr=$("#userlistTable").find("tbody").find("tr:visible");//找到原先显示的列表
+				var lastshowtr=$("#orderstatuslistTable").find("tbody").find("tr:visible");//找到原先显示的列表
 				lastshowtr.each(function(){
 					var copytd=$(this).find("td:eq(5)");//找到“Key & Secret”列
 					copytd.find("div").find("p").find("div").remove();//将列中通过zclip.js添加的flash删除
@@ -23,7 +22,7 @@ require(["domReady!","avalon","jquery","common/common","pager","jquery.cookie","
 				lastshowtr.hide();	//隐藏原先显示的列表
 				var first=(model.pager.currentPage-1)*model.pager.perPages;//设置当前页码应该显示的第一条数据的下标
 				var end=(first+model.pager.perPages)>model.pager.totalItems?model.pager.totalItems:(first+5);//设置当前页码应该显示的最后一条数据的下标
-				$("#userlistTable").find("tbody").find("tr").each(function(i){
+				$("#orderstatuslistTable").find("tbody").find("tr").each(function(i){
 					var tr=$(this);
 					if(i>=first && i<end){//将属于当前页码的数据显示
 						tr.show();
@@ -32,60 +31,39 @@ require(["domReady!","avalon","jquery","common/common","pager","jquery.cookie","
 				//refreshClip();//设置当前列可复制
 			}
 		},
-		/*验证用户名*/
-		validatorUserName:function(el){
+		/*验证订单状态名*/
+		validatorOrderStatusName:function(el){
 			
-			var reg=/^[A-Za-z0-9]+$/;//用户名正则
+			var reg=/^[\u4E00-\u9FA5]+$/;//订单状态正则
 			var result=false;
 			$(el).siblings("div").remove();
 			$(el).parent().children("div .sl-error").remove();
 			var $txt=$.trim($(el).val());
 			if($txt==""){
-				$(el).parent().append("<div class='sl-error'><i class='error'></i>用户名不能为空</div>");
-			}else if($txt.length>20){
-				$(el).parent().append("<div class='sl-error'><i class='error'></i>用户名不能为超过20个字符</div>");
+				$(el).parent().append("<div class='sl-error'><i class='error'></i>订单状态不能为空</div>");
+			}else if($txt.length>45){
+				$(el).parent().append("<div class='sl-error'><i class='error'></i>订单状态不能为超过45个字符</div>");
 			}else if(!reg.test($txt)){
-				$(el).parent().append("<div class='sl-error'><i class='error'></i>用户名只能由字母以及数字组成</div>");
-			}else{
-				result=true;
-			}
-			return result;
-		},
-		/*验证真实姓名*/
-		validatorRealName:function(el){
-			
-			var reg=/^[\u4E00-\u9FA5A-Za-z]+$/;//姓名正则
-			var result=false;
-			$(el).siblings("div").remove();
-			$(el).parent().children("div .sl-error").remove();
-			var $txt=$.trim($(el).val());
-			if($txt==""){
-				$(el).parent().append("<div class='sl-error'><i class='error'></i>真实姓名不能为空</div>");
-			}else if($txt.length>20){
-				$(el).parent().append("<div class='sl-error'><i class='error'></i>真实姓名不能为超过20个字符</div>");
-			}else if(!reg.test($txt)){
-				$(el).parent().append("<div class='sl-error'><i class='error'></i>真实姓名只能有由字母以及汉字组成</div>");
+				$(el).parent().append("<div class='sl-error'><i class='error'></i>订单状态只能由中文组成</div>");
 			}else{
 				result=true;
 			}
 			return result;
 		},
 		$skipArray:["pager"],
-		addUser:function(){
-			var val1=model.validatorUserName("#user_name");
-			var val2=model.validatorRealName("#real_name");
-        	if(val1 && val2){
+		addOrderStatus:function(){
+			var val1=model.validatorOrderStatusName("#order_status_name");
+        	if(val1){
         		common.ajax({
-        			url : "option/addUser.json" ,
+        			url : "option/addOrderStatus.json" ,
         	        dataType : 'text/html' ,
         	        type:"post",
         	        async:false,
         	        data:{
-        	        	userName:$("#user_name").val(),
-        	        	realName:$("#real_name").val(),
+        	        orderStatusName:$("#order_status_name").val(),
         	        },
         	        callback: function(data){
-            			common.tips("用户新增成功");
+            			common.tips("订单状态新增成功");
 						setTimeout(function(){
 	        				location.replace(location.href);
 						},1500)
@@ -96,18 +74,18 @@ require(["domReady!","avalon","jquery","common/common","pager","jquery.cookie","
         		});
         	}
 		},
-		updateUserStatus:function(user_id,status){
+		updateOrderStatusStatus:function(orderStatusl_id,status){
         	common.ajax({
-        		url : "option/updateUserStatus.json" ,
+        		url : "option/updateOrderStatusStatus.json" ,
         	    dataType : 'text/html' ,
         	    type:"post",
         	    async:false,
         	    data:{
-        	        userId:user_id,
+        	        orderStatusId:order_status_id,
         	        status:status,
         	    },
         	    callback: function(data){
-        	    	common.tips("用户状态修改成功");
+        	    	common.tips("状态修改成功");
         	    	setTimeout(function(){
         	    		location.replace(location.href);
 						},1500)

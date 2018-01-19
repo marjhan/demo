@@ -8,11 +8,17 @@ import biz.domain.ListSource;
 * @author  xuzc
 * @date 2018年1月14日 上午12:37:59 
 * @version 1.0 
-* @parameter  
+* @parameter  	
 * @since  
 * @return  */
 public interface IListSourceService {
 	
 	List<ListSource> queryListSourceList();
+	
+	List<ListSource> queryAllListSourceList();
+	
+	int addListSource(ListSource listSource);
+	
+	int updateListSourceStatus(ListSource listSource);
 
 }

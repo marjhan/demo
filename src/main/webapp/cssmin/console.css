@@ -641,14 +641,15 @@ body {
 /* 生产应用 页面 样式 begin ****************************************************************************************************************************************** */
 .add_btn {
 	display: block;
-	width: 130px;
+	width: 150px;
 	height: 40px;
 	padding-left: 20px;
+	margin-left: 170px;
 	line-height: 40px;
 	border-radius: 3px;
 	font-size: 16px;
 	color: #fff;
-	background: url(/images/add_btn.png) 93px 10px no-repeat #0ae;
+	background: url(/images/add_btn.png) 123px 10px no-repeat #0ae;
 }
 
 .emptyBox {

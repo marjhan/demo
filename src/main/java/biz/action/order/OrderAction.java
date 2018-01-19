@@ -80,16 +80,21 @@ public class OrderAction extends WebsiteBaseAction{
 		if (null == loginRes) {
 			throw new BusinessException("", "请登录！");
 		}
-		Integer roleId = loginRes.getRoleId();
-		List<User> userList= userInfoService.queryUserInfoList();
-		List<Channel> channelList= channelService.queryChannelList();
-		List<ListSource> listSourceList= listSourceService.queryListSourceList();
-		List<OrderStatus> orderStatusList= orderStatusService.queryOrderStatusList();
-		model.addAttribute("roleId", roleId);	
-		model.addAttribute("userList", userList);	
-		model.addAttribute("channelList", channelList);
-		model.addAttribute("listSourceList", listSourceList);
-		model.addAttribute("orderStatusList", orderStatusList);
+		try {
+			Integer roleId = loginRes.getRoleId();
+			List<User> userList= userInfoService.queryUserInfoList();
+			List<Channel> channelList= channelService.queryChannelList();
+			List<ListSource> listSourceList= listSourceService.queryListSourceList();
+			List<OrderStatus> orderStatusList= orderStatusService.queryOrderStatusList();
+			model.addAttribute("roleId", roleId);	
+			model.addAttribute("userList", userList);	
+			model.addAttribute("channelList", channelList);
+			model.addAttribute("listSourceList", listSourceList);
+			model.addAttribute("orderStatusList", orderStatusList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new BusinessException("", "网络异常！");
+		}
 		return "order/order";
 	}
 	

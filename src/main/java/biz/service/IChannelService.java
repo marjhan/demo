@@ -14,5 +14,11 @@ import biz.domain.Channel;
 public interface IChannelService {
 	
 	List<Channel> queryChannelList();
+	
+	List<Channel> queryAllChannelList();
+	
+	int addChannel(Channel channel);
+	
+	int updateChannelStatus(Channel channel);
 
 }

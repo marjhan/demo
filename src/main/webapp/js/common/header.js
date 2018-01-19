@@ -166,10 +166,10 @@ require(["domReady!","avalon","jquery","common/common","jquery.cookie","jquery.a
 	})
 	
 	function isLogin(){
-        var user_id = common.isLogin();
-        if(user_id!=""){
+        var username = common.isLogin();
+        if(username!=""){
         	header.toggleLogin(true);
-            header.username=user_id;
+            header.username=username;
             common.ajax({
                 url : "user/islogin.json" ,
                 dataType : "json" ,

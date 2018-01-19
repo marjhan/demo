@@ -28,4 +28,19 @@ public class ListSourceServiceImpl implements IListSourceService{
 		return listSourceDao.queryListSourceList();
 	}
 
+	@Override
+	public List<ListSource> queryAllListSourceList() {
+		return listSourceDao.queryAllListSourceList();
+	}
+
+	@Override
+	public int addListSource(ListSource listSource) {
+		return listSourceDao.insertSelective(listSource);
+	}
+
+	@Override
+	public int updateListSourceStatus(ListSource listSource) {
+		return listSourceDao.updateByPrimaryKeySelective(listSource);
+	}
+
 }
