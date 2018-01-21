@@ -111,7 +111,9 @@ public class OptionAction extends WebsiteBaseAction{
 			throw new BusinessException("", "请登录！");
 		}else if(loginRes.getRoleId()!=1){
 			throw new BusinessException("", "不是管理员！");
-		}	
+		}else if(user.getUserId()==1){
+			throw new BusinessException("", "不能操作管理员账号！");
+		}
 		try {
 			int result = userInfoService.updateUserStatus(user);
 			ResponseContext.setValue(result);
