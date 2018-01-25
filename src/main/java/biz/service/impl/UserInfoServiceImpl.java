@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import biz.common.exception.BusinessException;
+import biz.common.util.FrontConstants;
+import biz.common.util.MD5;
 import biz.dao.IUserDao;
 import biz.domain.User;
 import biz.req.UpdatePwdReq;
@@ -58,10 +60,14 @@ public class UserInfoServiceImpl implements IUserInfoService{
 
 	@Override
 	public int addUser(User user) {
-		user.setPassword("000000");
-		user.setStatus("1");
-		user.setRoleId(2);
-		return userDao.insertSelective(user);
+		try {
+			user.setPassword(MD5.getResult("000000"));
+			user.setStatus("1");
+			user.setRoleId(2);
+			return userDao.insertSelective(user);
+		} catch (Exception e) {
+			throw new BusinessException(FrontConstants.ERROR_CODE_5103007, "添加用户失败");
+		}
 	}
 
 	@Override

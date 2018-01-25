@@ -30,12 +30,13 @@
 		select
 		<include refid="Base_Column_List" />
 		<include refid="Base_From" /> 
-		where status = 1
+		where status = 1 and role_id !=0
 	</select>
 	<select id="queryAllUserInfoList"  resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		<include refid="Base_From" /> 
+		where role_id !=0
 	</select>
 	<select id="selectByUserName" parameterType="java.lang.String"
 		resultMap="BaseResultMap">

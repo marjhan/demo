@@ -10,7 +10,7 @@
         <div class="container-fluid">
             <div class="header-left">
                 <a class="logo" href="/sts/order/list.html"></a>
-                <a class="gl-header-manage fs-16" href="/sts/home/index.html">管理中心</a>
+                <a class="gl-header-manage fs-16" href="/sts/order/list.html">管理中心</a>
             </div>
             <ul class="gl-header-menu ms-controller" ms-controller="header">
                 <li>

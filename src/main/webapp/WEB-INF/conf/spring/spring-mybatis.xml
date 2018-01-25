@@ -50,8 +50,8 @@
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/sts_db" />
-		<property name="username" value="admin" />
-		<property name="password" value="admin" />
+		<property name="username" value="root" />
+		<property name="password" value="Zn576088!" />
 		<!-- 初始化连接大小 -->
 		<property name="initialSize" value="0"></property>
 		<!-- 连接池最大数量 -->

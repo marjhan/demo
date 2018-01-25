@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import biz.common.exception.BusinessException;
 import biz.common.util.FrontConstants;
+import biz.common.util.MD5;
 import biz.dao.IRoleDao;
 import biz.dao.IUserDao;
 import biz.domain.Role;
@@ -35,24 +36,29 @@ public class UserLoginRegisterServiceImpl implements IUserLoginRegisterService {
 
 	@Override
 	public LoginRes login(LoginReq req) {
-		LoginRes loginRes = new LoginRes();
-		Role role = new Role();
-		User user = userDao.selectByUserName(req.getUserName());
-		if (user == null) {
-			throw new BusinessException("000", "用户名不存在");
-		} else if (user.getPassword().equals(req.getPassword())) {
-			role = roleDao.selectByPrimaryKey(user.getRoleId());
-			if (role == null) {
-				throw new BusinessException("000", "角色不存在");
+		try {
+			String password = req.getPassword();
+			LoginRes loginRes = new LoginRes();
+			Role role = new Role();
+			User user = userDao.selectByUserName(req.getUserName());
+			if (user == null) {
+				throw new BusinessException("000", "用户名不存在");
+			} else if (user.getPassword().equals(MD5.getResult(password))) {
+				role = roleDao.selectByPrimaryKey(user.getRoleId());
+				if (role == null) {
+					throw new BusinessException("000", "角色不存在");
+				} else {
+					loginRes.setUserId(user.getUserId());
+					loginRes.setUserName(user.getUserName());
+					loginRes.setRealName(user.getRealName());
+					loginRes.setRoleId(role.getRoleId());
+					loginRes.setRoleName(role.getRoleName());
+					return loginRes;
+				}
 			} else {
-				loginRes.setUserId(user.getUserId());
-				loginRes.setUserName(user.getUserName());
-				loginRes.setRealName(user.getRealName());
-				loginRes.setRoleId(role.getRoleId());
-				loginRes.setRoleName(role.getRoleName());
-				return loginRes;
+				throw new BusinessException(FrontConstants.ERROR_CODE_5103007, "密码错误");
 			}
-		} else {
+		} catch (Exception e) {
 			throw new BusinessException(FrontConstants.ERROR_CODE_5103007, "密码错误");
 		}
 	}
