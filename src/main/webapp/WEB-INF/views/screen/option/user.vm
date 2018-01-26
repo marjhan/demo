@@ -83,5 +83,6 @@
 
 <!--控台框架下半部 begin-->
 #parse("/screen/console/include/console-lower.vm")
+<script src="/js/vendor/rsa.js"></script>
 <!--控台框架下半部 begin-->
         
