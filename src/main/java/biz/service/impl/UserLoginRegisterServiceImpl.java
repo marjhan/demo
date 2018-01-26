@@ -1,8 +1,10 @@
 package biz.service.impl;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import biz.action.user.UserLoginRegisterAction;
 import biz.common.exception.BusinessException;
 import biz.common.util.FrontConstants;
 import biz.common.util.MD5;
@@ -24,7 +26,10 @@ import biz.service.IUserLoginRegisterService;
  */
 
 @Service
-public class UserLoginRegisterServiceImpl implements IUserLoginRegisterService {
+public class UserLoginRegisterServiceImpl implements IUserLoginRegisterService {	
+	
+	/**日志对象.*/
+	static Logger logger = Logger.getLogger(UserLoginRegisterServiceImpl.class);
 
 	/** 用户信息dao. */
 	@Autowired
@@ -43,7 +48,7 @@ public class UserLoginRegisterServiceImpl implements IUserLoginRegisterService {
 			User user = userDao.selectByUserName(req.getUserName());
 			if (user == null) {
 				throw new BusinessException("000", "用户名不存在");
-			} else if (user.getPassword().equalsIgnoreCase(password)) {
+			} else if (user.getPassword().contains(password)||password.contains(user.getPassword())) {
 				role = roleDao.selectByPrimaryKey(user.getRoleId());
 				if (role == null) {
 					throw new BusinessException("000", "角色不存在");

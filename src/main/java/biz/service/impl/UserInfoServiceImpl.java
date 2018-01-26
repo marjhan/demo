@@ -49,7 +49,7 @@ public class UserInfoServiceImpl implements IUserInfoService{
 	public void updateUserInfo(UpdatePwdReq req) {
 		try {
 			User user = new User();
-			user.setPassword(req.getNewPwd());
+			user.setPassword(MD5.getResult(req.getNewPwd()));
 			user.setUserId(req.getUserId());
 			userDao.updateByPrimaryKeySelective(user);
 		} catch (Exception e) {

@@ -17,21 +17,9 @@ public class MD5 {
          byte[] inputData = inputStr.getBytes(); 
          md.update(inputData);   
          bigInteger = new BigInteger(md.digest());   
-         result = BASE64.encryptBASE64(bigInteger.toString(16).getBytes()).replaceAll("\r\n", "");;
+         result = BASE64.encryptBASE64(bigInteger.toString(16).getBytes()).replaceAll("\n", "").replaceAll("\r", "").replaceAll("\r\n", "").replaceAll(" ", "");
         } catch (Exception e) {e.printStackTrace();}   
         return result;
-    }
- 
-    public static void main(String args[])
-    {
-        try {
-             String inputStr = "000000";   
-             String outputStr = getResult(inputStr);
-             System.out.println(outputStr);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
- 
     }
  
 }
