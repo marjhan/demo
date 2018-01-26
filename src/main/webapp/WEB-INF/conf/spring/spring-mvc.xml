@@ -11,11 +11,6 @@
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
 	<context:component-scan base-package="biz" />
-	<!-- <context:component-scan base-package="com.hundsun.openplat"> <context:include-filter 
-		type="annotation" expression="org.springframework.stereotype.Controller"></context:include-filter> 
-		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController"></context:include-filter> 
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"></context:include-filter> 
-		</context:component-scan> -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">

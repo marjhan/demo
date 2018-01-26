@@ -110,7 +110,7 @@ public class OrderAction extends WebsiteBaseAction{
 		if (null == loginRes) {
 			throw new BusinessException("", "请登录！");
 		}
-		if(loginRes.getRoleId()!=1)
+		if(loginRes.getRoleId()>1)
 			req.setUserId(loginRes.getUserId());
 		OrderListRes res = orderService.queryOrderList(req);
 		ResponseContext.setValue(res);			
@@ -146,7 +146,7 @@ public class OrderAction extends WebsiteBaseAction{
 		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
 		if (null == loginRes) {
 			throw new BusinessException("", "请登录！");
-		}else if(loginRes.getRoleId()!=1){
+		}else if(loginRes.getRoleId()>1){
 			throw new BusinessException("", "不是管理员！");
 		}					
 		Integer roleId = loginRes.getRoleId();
@@ -173,7 +173,7 @@ public class OrderAction extends WebsiteBaseAction{
 		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
 		if (null == loginRes) {
 			throw new BusinessException("", "请登录！");
-		}else if(loginRes.getRoleId()!=1){
+		}else if(loginRes.getRoleId()>1){
 			throw new BusinessException("", "不是管理员！");
 		}			
 		try {
@@ -195,7 +195,7 @@ public class OrderAction extends WebsiteBaseAction{
 		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
 		if (null == loginRes) {
 			throw new BusinessException("", "请登录！");
-		}else if(loginRes.getRoleId()!=1){
+		}else if(loginRes.getRoleId()>1){
 			throw new BusinessException("", "不是管理员！");
 		}			
 		try {

@@ -10,7 +10,7 @@
 	<!-- 服务操作  begin -->
     <span class="span_1" ms-click="test">学生姓名</span><input type="text" class="input_1" id="student_name"  ms-duplex="student_name"/>
     <span class="span_1">基本信息</span><input type="text" class="input_1"	 id="info" ms-duplex="info"/>
-    #if($!roleId==1)
+    #if($!roleId!=2)
 	<span class="span_1">渠道</span>
     <div class="input_2_parent"><input type="text" class="input_2" id="channel" readonly="readonly" ms-duplex="channel" value="请选择渠道" />
         <ul>
@@ -30,7 +30,7 @@
             #end
         </ul>
     </div>
-	#if($!roleId==1)
+	#if($!roleId!=2)
 	<span class="span_1">负责人</span>
     <div class="input_2_parent"><input type="text" class="input_2" id="user" ms-duplex="user"  readonly="readonly" value="请选择负责人" />
         <ul>
@@ -95,7 +95,7 @@
 					
                     <th width="300">基本信息</th>
 					
-					#if($!roleId==1)
+					#if($!roleId!=2)
 						
 						<th width="150">联系方式</th>
 						
@@ -103,7 +103,7 @@
 						
 					#end<th width="80">名单来源</th>
 					
-					#if($!roleId==1)
+					#if($!roleId!=2)
                     <th width="80">负责人</th>
 					
                     #end<th>备注</th>
@@ -126,7 +126,7 @@
 						{{item.info | truncate(12,"...")}}
 					</td>
 					
-					#if($!roleId==1)
+					#if($!roleId!=2)
 						
 						<td>
 							{{item.contacts | contactsplit(",") | html}}
@@ -141,7 +141,7 @@
                         {{item.listSourceName}}
 					</td>
 					
-					#if($!roleId==1)
+					#if($!roleId!=2)
                     <td ms-attr-title="{{item.userName}}">
 						{{item.userName}}
 					</td>

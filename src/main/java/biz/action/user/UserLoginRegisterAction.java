@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.apache.taglibs.standard.lang.jstl.test.beans.PublicInterface2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -154,51 +155,6 @@ public class UserLoginRegisterAction extends WebsiteBaseAction{
 		SetUserInfoToPage(request);
 		return  ResponseContext.getResponseEntity();
 	}
-	
-	/**
-	 * 登录.
-	 * @param req 请求.
-	 * @return 返回.
-	 */
-	/*@RequestMapping(value="/toLogin",method=RequestMethod.POST)
-	public @ResponseBody ResponseEntity login(HttpServletRequest request,HttpServletResponse response,@Valid LoginReq req){
-		ErrorTimesRes errorTimesRes = (ErrorTimesRes)sessionProvider.getAttribute(request, FrontConstants.ERROR_KEY+req.getUser_name().trim());
-		if (errorTimesRes == null) {
-			errorTimesRes = new ErrorTimesRes();
-		}
-		*//**对密码进行解密.*//*
-		req.setPassword(CommonMethod.getPassword(req.getPassword(), request, response, sessionProvider));
-		
-	    String ip=(String)request.getSession().getAttribute("ip");
-	    req.setIp(ip);
-	    try {
-	    	LoginRes loginRes = userLoginRegisterService.login(req);
-	    	sessionProvider.setAttribute(request, response, ParamConstants.USER_ID, loginRes);
-	    	ResponseContext.setValue(loginRes);
-		} catch (BusinessException e) {
-			Logger.getLogger(UserLoginRegisterAction.class).info("login" + e);
-			String errorCode = e.getError_code();
-			if(FrontConstants.ERROR_CODE_5103007.equals(errorCode)) {
-				errorTimesRes.setError_times(errorTimesRes.getError_times() + 1);
-				sessionProvider.setAttribute(request, response, FrontConstants.ERROR_KEY+req.getUser_name().trim(), errorTimesRes);
-			}
-			throw new BusinessException(e.getError_code(), e.getError_info());
-		}
-		//登录成功清除密码错误信息
-		sessionProvider.removeAttribute(request, response, FrontConstants.ERROR_KEY+req.getUser_name().trim());
-	    return  ResponseContext.getResponseEntity();
-	}
- 	public @ResponseBody ResponseEntity loginback(HttpServletRequest request,HttpServletResponse response,@Valid LoginReq req){
-		*//**对密码进行解密.*//*
-		req.setPassword(CommonMethod.getPassword(req.getPassword(), request, response, sessionProvider));
-		
-	    String ip=(String)request.getSession().getAttribute("ip");
-	    req.setIp(ip);
-	    LoginRes loginRes = userLoginRegisterService.login(req);
-		ResponseContext.setValue(loginRes);
-		sessionProvider.setAttribute(request, response, ParamConstants.USER_ID, loginRes);
-		return  ResponseContext.getResponseEntity();
-	}*/
 
 
 	/**
@@ -374,7 +330,7 @@ public class UserLoginRegisterAction extends WebsiteBaseAction{
 	public Map<String,Object> toSure(LoginRes loginRes, String user_id){		
 		HashMap<String, Object> returnMap = new HashMap<String, Object>();
 		if(loginRes != null && user_id != null){
-			if(user_id.equals(loginRes.getUserId())){
+			if(user_id.equalsIgnoreCase(loginRes.getUserId().toString())){
 				returnMap.put("isLogin", true);
 			}else{
 				throw new BusinessException(ParamConstants.ERROR_NO_2, "非法登录!");

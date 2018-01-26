@@ -37,13 +37,13 @@ public class UserLoginRegisterServiceImpl implements IUserLoginRegisterService {
 	@Override
 	public LoginRes login(LoginReq req) {
 		try {
-			String password = req.getPassword();
+			String password = MD5.getResult(req.getPassword());
 			LoginRes loginRes = new LoginRes();
 			Role role = new Role();
 			User user = userDao.selectByUserName(req.getUserName());
 			if (user == null) {
 				throw new BusinessException("000", "用户名不存在");
-			} else if (user.getPassword().equals(MD5.getResult(password))) {
+			} else if (user.getPassword().equalsIgnoreCase(password)) {
 				role = roleDao.selectByPrimaryKey(user.getRoleId());
 				if (role == null) {
 					throw new BusinessException("000", "角色不存在");

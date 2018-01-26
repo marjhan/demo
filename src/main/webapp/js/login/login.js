@@ -141,7 +141,7 @@ require(["domReady!","avalon","jquery","common/common","jquery.cookie","validati
                     callback : function( data){
                         removeError("username");
                         if(!data.errorCode){
-                        	if(data.userId){
+                        	if(data.userId!=null){
                         		$.cookie("_a_", data.userId, { path: '/', expires: 10 });
                         		$.cookie("_n_", model.strFilter(data.userName), { path: '/', expires: 10 });
                         		$.cookie("_un_", data.userName, { path: '/', expires: 10 });
@@ -175,11 +175,7 @@ require(["domReady!","avalon","jquery","common/common","jquery.cookie","validati
             }
         },
         $goPage:function(data){
-            if($.cookie("_u_")&&($.cookie("_u_").indexOf("openplat")>-1||$.cookie("_u_").indexOf("cms")>-1)){
-                window.location.href =$.cookie("_u_");
-            }else{
-                window.location.href ="/sts/order/list.html";
-            }
+            window.location.href ="/sts/order/list.html";
         },
         strFilter:function(str){
             var str1 = str.substring(0,3);

@@ -33,6 +33,7 @@ import biz.session.provider.SessionProvider;
 @Controller
 @RequestMapping("/sts/option")
 public class OptionAction extends WebsiteBaseAction{
+	
 	/**session提供.*/
 	@Autowired
 	private SessionProvider sessionProvider;
@@ -64,7 +65,7 @@ public class OptionAction extends WebsiteBaseAction{
 		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
 		if (null == loginRes) {
 			throw new BusinessException("", "请登录！");
-		}else if(loginRes.getRoleId()!=1){
+		}else if(loginRes.getRoleId()>1){
 			throw new BusinessException("", "不是管理员！");
 		}
 		Integer roleId = loginRes.getRoleId();
@@ -85,7 +86,7 @@ public class OptionAction extends WebsiteBaseAction{
 		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
 		if (null == loginRes) {
 			throw new BusinessException("", "请登录！");
-		}else if(loginRes.getRoleId()!=1){
+		}else if(loginRes.getRoleId()>1){
 			throw new BusinessException("", "不是管理员！");
 		}	
 		try {
@@ -109,9 +110,9 @@ public class OptionAction extends WebsiteBaseAction{
 		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
 		if (null == loginRes) {
 			throw new BusinessException("", "请登录！");
-		}else if(loginRes.getRoleId()!=1){
+		}else if(loginRes.getRoleId()>1){
 			throw new BusinessException("", "不是管理员！");
-		}else if(user.getUserId()==1){
+		}else if(user.getUserId()==1&&loginRes.getRoleId()>0){
 			throw new BusinessException("", "不能操作管理员账号！");
 		}
 		try {
@@ -135,7 +136,7 @@ public class OptionAction extends WebsiteBaseAction{
 		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
 		if (null == loginRes) {
 			throw new BusinessException("", "请登录！");
-		}else if(loginRes.getRoleId()!=1){
+		}else if(loginRes.getRoleId()>1){
 			throw new BusinessException("", "不是管理员！");
 		}
 		Integer roleId = loginRes.getRoleId();
@@ -156,7 +157,7 @@ public class OptionAction extends WebsiteBaseAction{
 		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
 		if (null == loginRes) {
 			throw new BusinessException("", "请登录！");
-		}else if(loginRes.getRoleId()!=1){
+		}else if(loginRes.getRoleId()>1){
 			throw new BusinessException("", "不是管理员！");
 		}	
 		try {
@@ -180,7 +181,7 @@ public class OptionAction extends WebsiteBaseAction{
 		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
 		if (null == loginRes) {
 			throw new BusinessException("", "请登录！");
-		}else if(loginRes.getRoleId()!=1){
+		}else if(loginRes.getRoleId()>1){
 			throw new BusinessException("", "不是管理员！");
 		}	
 		try {
@@ -204,7 +205,7 @@ public class OptionAction extends WebsiteBaseAction{
 		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
 		if (null == loginRes) {
 			throw new BusinessException("", "请登录！");
-		}else if(loginRes.getRoleId()!=1){
+		}else if(loginRes.getRoleId()>1){
 			throw new BusinessException("", "不是管理员！");
 		}
 		Integer roleId = loginRes.getRoleId();
@@ -225,7 +226,7 @@ public class OptionAction extends WebsiteBaseAction{
 		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
 		if (null == loginRes) {
 			throw new BusinessException("", "请登录！");
-		}else if(loginRes.getRoleId()!=1){
+		}else if(loginRes.getRoleId()>1){
 			throw new BusinessException("", "不是管理员！");
 		}	
 		try {
@@ -249,7 +250,7 @@ public class OptionAction extends WebsiteBaseAction{
 		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
 		if (null == loginRes) {
 			throw new BusinessException("", "请登录！");
-		}else if(loginRes.getRoleId()!=1){
+		}else if(loginRes.getRoleId()>1){
 			throw new BusinessException("", "不是管理员！");
 		}	
 		try {
@@ -273,7 +274,7 @@ public class OptionAction extends WebsiteBaseAction{
 		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
 		if (null == loginRes) {
 			throw new BusinessException("", "请登录！");
-		}else if(loginRes.getRoleId()!=1){
+		}else if(loginRes.getRoleId()>1){
 			throw new BusinessException("", "不是管理员！");
 		}
 		Integer roleId = loginRes.getRoleId();
@@ -294,7 +295,7 @@ public class OptionAction extends WebsiteBaseAction{
 		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
 		if (null == loginRes) {
 			throw new BusinessException("", "请登录！");
-		}else if(loginRes.getRoleId()!=1){
+		}else if(loginRes.getRoleId()>1){
 			throw new BusinessException("", "不是管理员！");
 		}	
 		try {
@@ -318,7 +319,7 @@ public class OptionAction extends WebsiteBaseAction{
 		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
 		if (null == loginRes) {
 			throw new BusinessException("", "请登录！");
-		}else if(loginRes.getRoleId()!=1){
+		}else if(loginRes.getRoleId()>1){
 			throw new BusinessException("", "不是管理员！");
 		}	
 		try {

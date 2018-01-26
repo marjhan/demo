@@ -63,7 +63,7 @@
 					#end
 					<td>
 						<p>
-							#if($user.roleId==1)
+							#if($user.roleId!=2)
 							<p> --- </p>	
 							#elseif($user.status==1)
 							<a ms-controller="user" ms-click="updateUserStatus('$!user.userId',0)">禁用</a>
