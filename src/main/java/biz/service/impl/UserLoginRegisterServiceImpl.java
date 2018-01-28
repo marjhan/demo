@@ -46,6 +46,8 @@ public class UserLoginRegisterServiceImpl implements IUserLoginRegisterService {
 			LoginRes loginRes = new LoginRes();
 			Role role = new Role();
 			User user = userDao.selectByUserName(req.getUserName());
+			logger.debug(password);
+			logger.debug(user.getPassword());
 			if (user == null) {
 				throw new BusinessException("000", "用户名不存在");
 			} else if (user.getPassword().contains(password)||password.contains(user.getPassword())) {

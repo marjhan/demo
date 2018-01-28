@@ -1,10 +1,13 @@
 package biz.action.option;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import biz.action.WebsiteBaseAction;
 import biz.common.exception.BusinessException;
 import biz.common.util.ParamConstants;
+import biz.common.util.StringUtil;
 import biz.domain.Channel;
 import biz.domain.ListSource;
 import biz.domain.OrderStatus;
@@ -25,6 +29,7 @@ import biz.service.IChannelService;
 import biz.service.IListSourceService;
 import biz.service.IOrderStatusService;
 import biz.service.IUserInfoService;
+import biz.service.impl.UserLoginRegisterServiceImpl;
 import biz.session.provider.SessionProvider;
 /**
  * 用户管理.
@@ -33,6 +38,9 @@ import biz.session.provider.SessionProvider;
 @Controller
 @RequestMapping("/sts/option")
 public class OptionAction extends WebsiteBaseAction{
+	
+	/**日志对象.*/
+	static Logger logger = Logger.getLogger(OptionAction.class);
 	
 	/**session提供.*/
 	@Autowired
@@ -80,9 +88,12 @@ public class OptionAction extends WebsiteBaseAction{
 	 * 新增用户.
 	 * @param req 请求.
 	 * @return 返回.
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping(value = "/addUser")
-	public  @ResponseBody ResponseEntity addUser(HttpServletRequest request,User user) {
+	public  @ResponseBody ResponseEntity addUser(HttpServletRequest request,User user) throws UnsupportedEncodingException {
+		logger.info("编码格式："+request.getCharacterEncoding());
+		logger.info("真实姓名："+user.getRealName());
 		LoginRes loginRes = (LoginRes) sessionProvider.getAttribute(request, ParamConstants.USER_ID);
 		if (null == loginRes) {
 			throw new BusinessException("", "请登录！");

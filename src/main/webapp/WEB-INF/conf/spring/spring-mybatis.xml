@@ -49,7 +49,7 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/sts_db" />
+		<property name="url" value="jdbc:mysql://localhost:3306/sts_db?useUnicode=true&amp;characterEncoding=UTF-8" />
 		<property name="username" value="root" />
 		<property name="password" value="Zn576088!" />
 		<!-- 初始化连接大小 -->
