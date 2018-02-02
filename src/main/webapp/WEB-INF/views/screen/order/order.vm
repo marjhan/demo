@@ -123,7 +123,7 @@
 						{{item.studentName}}
 					</td>					
                     <td ms-attr-title="{{item.info}}">
-						{{item.info | truncate(12,"...")}}
+						{{item.info | truncate(40,"...")}}
 					</td>
 					
 					#if($!roleId!=2)
