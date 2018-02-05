@@ -374,7 +374,7 @@ body {
 	width: 124px;
 	height: 28px;
 	border: 1px solid #bbb;
-	margin-right: 30px;
+	margin-right: 20px;
 	float: left;
 	padding-right: 18px;
 	background: #eee url(/images/console/input-2.png) no-repeat 104px center;
@@ -396,7 +396,8 @@ body {
 	border-top: none;
 	border-bottom: none;
 	background: #fff;
-	display: none
+	display: none;
+	z-index: 9999;
 }
 
 .input_2_parent ul li {
