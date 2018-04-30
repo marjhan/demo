@@ -78,6 +78,7 @@ public class OptionAction extends WebsiteBaseAction{
 		}
 		Integer roleId = loginRes.getRoleId();
 		List<User> userList= userInfoService.queryAllUserInfoList();
+//		List<Role> roleList= 
 		model.addAttribute("roleId", roleId);	
 		model.addAttribute("userList", userList);	
 		return "option/user";

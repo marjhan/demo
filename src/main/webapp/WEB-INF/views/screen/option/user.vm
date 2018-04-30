@@ -25,7 +25,17 @@
             <div class="ui-content">
                 <input type="text" ms-dupluex="real_name" id="real_name" class="ui-input" ms-blur="validatorRealName(this)" placeholder="不超过20个字符，只允许英文大小写和汉字">
             </div>
-        </div>   
+        </div>      
+        <div class="ui-item">
+            <label class="ui-label"><i class="star"></i>角色</label>
+			<div class="input_3_parent"><input type="text" class="input_3" id="role" readonly="readonly" ms-duplex="role" value="请选择角色" />
+				<ul>
+					#foreach ($role in $!rol1List)
+						<li ms-click="setRole('$role.roleId')">$role.roleName</li>
+					#end
+				</ul>
+			</div>
+       </div>   
        <div class="btn-submit-box">
 			<a ms-click="addUser()" class="add_btn">添加用户</a>
         </div>    

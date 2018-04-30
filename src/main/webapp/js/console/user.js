@@ -8,6 +8,7 @@ require(["domReady!","avalon","jquery","common/common","pager","jquery.cookie","
 		$id:"user",
 		user_name:"",
 		real_name:"",
+		role_id:$("#role").val(),//渠道
 		// 修改密码
 		key:"",
 		old_password:$('#old_password').val(),// 原密码
@@ -174,6 +175,13 @@ require(["domReady!","avalon","jquery","common/common","pager","jquery.cookie","
 	    		})
 	    	}
 	    },
+		reset : function() {
+			model.role = "请选择角色";
+		},
+		// 设定角色
+		setRole : function(roleId) {
+			model.role_id = roleId;
+		},
 	    //关闭弹框
 	    close:function(id){
 	    	$('#'+id).hide();
