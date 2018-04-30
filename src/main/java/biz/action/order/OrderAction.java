@@ -83,12 +83,14 @@ public class OrderAction extends WebsiteBaseAction{
 		try {
 			Integer roleId = loginRes.getRoleId();
 			List<User> userList= userInfoService.queryUserInfoList();
-			List<Channel> channelList= channelService.queryChannelList();
+//			List<Channel> channelList= channelService.queryChannelList();
+			List<User> salesList = userInfoService.querySalesList();
 			List<ListSource> listSourceList= listSourceService.queryListSourceList();
 			List<OrderStatus> orderStatusList= orderStatusService.queryOrderStatusList();
 			model.addAttribute("roleId", roleId);	
 			model.addAttribute("userList", userList);	
-			model.addAttribute("channelList", channelList);
+			model.addAttribute("salesList", salesList);	
+//			model.addAttribute("channelList", channelList);
 			model.addAttribute("listSourceList", listSourceList);
 			model.addAttribute("orderStatusList", orderStatusList);
 		} catch (Exception e) {
@@ -110,8 +112,11 @@ public class OrderAction extends WebsiteBaseAction{
 		if (null == loginRes) {
 			throw new BusinessException("", "请登录！");
 		}
-		if(loginRes.getRoleId()>1)
+		if(loginRes.getRoleId()==2){
 			req.setUserId(loginRes.getUserId());
+		}else if(loginRes.getRoleId()==3){
+			req.setChannelId(loginRes.getUserId());
+		}
 		OrderListRes res = orderService.queryOrderList(req);
 		ResponseContext.setValue(res);			
 		return  ResponseContext.getResponseEntity();
@@ -151,12 +156,14 @@ public class OrderAction extends WebsiteBaseAction{
 		}					
 		Integer roleId = loginRes.getRoleId();
 		List<User> userList= userInfoService.queryUserInfoList();
-		List<Channel> channelList= channelService.queryChannelList();
+		List<User> salesList= userInfoService.querySalesList();
+//		List<Channel> channelList= channelService.queryChannelList();
 		List<ListSource> listSourceList= listSourceService.queryListSourceList();
 		List<OrderStatus> orderStatusList= orderStatusService.queryOrderStatusList();
 		model.addAttribute("roleId", roleId);	
-		model.addAttribute("userList", userList);	
-		model.addAttribute("channelList", channelList);
+		model.addAttribute("userList", userList);
+		model.addAttribute("salesList", salesList);		
+//		model.addAttribute("channelList", channelList);
 		model.addAttribute("listSourceList", listSourceList);
 		model.addAttribute("orderStatusList", orderStatusList);
 		return  "order/order_add";

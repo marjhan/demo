@@ -20,6 +20,8 @@ public interface IUserDao {
 
     int updateByPrimaryKey(User record);
     
+    List<User> querySalesList();
+    
     List<User> queryUserInfoList();
     
     List<User> queryAllUserInfoList();

@@ -1,5 +1,7 @@
 package biz.dao;
 
+import java.util.List;
+
 import biz.domain.Role;
 
 public interface IRoleDao {
@@ -14,4 +16,6 @@ public interface IRoleDao {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+    
+    List<Role> queryRoleList();
 }

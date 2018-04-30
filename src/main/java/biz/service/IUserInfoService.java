@@ -13,6 +13,8 @@ public interface IUserInfoService {
 	
 	public void updateUserInfo(UpdatePwdReq updatePwdReq);
 	
+	public List<User> querySalesList();
+	
 	public List<User> queryUserInfoList();
 	
 	public List<User> queryAllUserInfoList();

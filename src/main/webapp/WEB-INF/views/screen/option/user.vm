@@ -30,7 +30,7 @@
             <label class="ui-label"><i class="star"></i>角色</label>
 			<div class="input_3_parent"><input type="text" class="input_3" id="role" readonly="readonly" ms-duplex="role" value="请选择角色" />
 				<ul>
-					#foreach ($role in $!rol1List)
+					#foreach ($role in $!roleList)
 						<li ms-click="setRole('$role.roleId')">$role.roleName</li>
 					#end
 				</ul>
@@ -46,6 +46,7 @@
                 <tr>
                     <th>用户名</th>
                     <th>真实姓名</th>
+                    <th>角色</th>
                     <th>创建时间</th>
                     <th>状态</th>
 					<th>操作</th>
@@ -64,7 +65,14 @@
 								<span>$!user.realName</span>
 							</p>
 						</div>
-					</td>
+					</td>		
+					#if($user.roleId==1)
+					<td>管理员</td>
+					#elseif($user.roleId==2)
+					<td>销售</td>
+					#elseif($user.roleId==3)
+					<td>渠道</td>
+					#end
 					<td style="padding-left:10px;">$!date.format('yyyy-MM-dd HH:mm:ss',$!user.createTime)</td>		
 					#if($user.status==1)
 					<td>启用</td>
@@ -73,7 +81,7 @@
 					#end
 					<td>
 						<p>
-							#if($user.roleId!=2)
+							#if($user.roleId<2)
 							<p> --- </p>	
 							#elseif($user.status==1)
 							<a ms-controller="user" ms-click="updateUserStatus('$!user.userId',0)">禁用</a>

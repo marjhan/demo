@@ -8,7 +8,8 @@ require(["domReady!","avalon","jquery","common/common","pager","jquery.cookie","
 		$id:"user",
 		user_name:"",
 		real_name:"",
-		role_id:$("#role").val(),//渠道
+		role:$("#role").val(),//角色
+		role_id:"",//角色id
 		// 修改密码
 		key:"",
 		old_password:$('#old_password').val(),// 原密码
@@ -177,6 +178,7 @@ require(["domReady!","avalon","jquery","common/common","pager","jquery.cookie","
 	    },
 		reset : function() {
 			model.role = "请选择角色";
+			model.role_id = "";
 		},
 		// 设定角色
 		setRole : function(roleId) {
@@ -229,7 +231,8 @@ require(["domReady!","avalon","jquery","common/common","pager","jquery.cookie","
 		addUser:function(){
 			var val1=model.validatorUserName("#user_name");
 			var val2=model.validatorRealName("#real_name");
-        	if(val1 && val2){
+			var val3=(model.role_id!=""&&model.role_id!="0")?true:false;
+        	if(val1 && val2 && val3){
         		common.ajax({
         			url : "option/addUser.json" ,
         	        dataType : 'text/html' ,
@@ -238,6 +241,7 @@ require(["domReady!","avalon","jquery","common/common","pager","jquery.cookie","
         	        data:{
         	        	userName:$("#user_name").val(),
         	        	realName:$("#real_name").val(),
+        	        	roleId:model.role_id,
         	        },
         	        callback: function(data){
             			common.tips("用户新增成功");
@@ -274,6 +278,23 @@ require(["domReady!","avalon","jquery","common/common","pager","jquery.cookie","
 		},	
 	});
 
+	$(".input_3_parent").each(function() {
+		$(this).on("click", function() {
+			$(this).find("ul").toggle();
+		})
+
+		$(this).find("li").each(function() {
+			$(this).on("click", function() {
+				$(this).addClass("active").siblings().removeClass("active");
+				var text = $(this).text();
+				$(this).parent().siblings(".input_3").val(text);
+			})
+		})
+		$(this).mouseleave(function() {
+			$(this).find("ul").hide();
+		});
+	});
+	
     /**
 	 * 获取rsa密码
 	 * 

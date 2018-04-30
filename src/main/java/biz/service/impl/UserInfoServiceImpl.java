@@ -36,6 +36,11 @@ public class UserInfoServiceImpl implements IUserInfoService{
 	}
 
 	@Override
+	public List<User> querySalesList() {
+		return userDao.querySalesList();
+	}
+
+	@Override
 	public List<User> queryUserInfoList() {
 		return userDao.queryUserInfoList();
 	}
@@ -63,7 +68,6 @@ public class UserInfoServiceImpl implements IUserInfoService{
 		try {
 			user.setPassword(MD5.getResult("000000"));
 			user.setStatus("1");
-			user.setRoleId(2);
 			return userDao.insertSelective(user);
 		} catch (Exception e) {
 			throw new BusinessException(FrontConstants.ERROR_CODE_5103007, "添加用户失败");

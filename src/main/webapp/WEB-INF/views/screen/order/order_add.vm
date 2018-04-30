@@ -52,8 +52,8 @@
             <label class="ui-label"><i class="star"></i>渠道</label>
 			<div class="input_3_parent"><input type="text" class="input_3" id="channel" readonly="readonly" ms-duplex="channel" value="请选择渠道" />
 				<ul>
-					#foreach ($channel in $!channelList)
-						<li ms-click="setChannel('$channel.channelId')">$channel.channelName</li>
+					#foreach ($user in $!userList)
+						<li ms-click="setChannel('$user.userId')">$user.realName</li>
 					#end
 				</ul>
 			</div>
@@ -72,8 +72,8 @@
             <label class="ui-label"><i class="star"></i>负责人</label>
 			<div class="input_3_parent"><input type="text" class="input_3" id="user" ms-duplex="user"  readonly="readonly" value="请选择负责人" />
 				<ul>
-					#foreach ($user in $!userList)
-						<li ms-click="setUser('$!user.userId')">$!user.realName</li>
+					#foreach ($sales in $!salesList)
+						<li ms-click="setUser('$!sales.userId')">$!sales.realName</li>
 					#end
 				</ul>
 			</div>

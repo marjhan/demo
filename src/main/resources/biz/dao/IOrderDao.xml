@@ -205,19 +205,21 @@
 		DATE_FORMAT(order_info.motify_time,'%Y-%m-%d %H:%i:%s') as motifyTime,
 		CONCAT(mobile_phone,",",qq,",",wechat,",",phone) as contacts,
 		order_info.channel_id as channelId,
-		channel_name as channelName,
+		<!--  channel_name as channelName,-->
+		ub.real_name as channelName,
 		order_info.list_source_id as listSourceId,
 		list_source_name as listSourceName,
 		order_info.user_id as userId,
-		real_name as userName,
+		ua.real_name as userName,
 		order_info.order_status_id as orderStatusId,
 		order_status_name as orderStatusName,
 		remark
 		
     from order_info
-    left join channel on order_info.channel_id = channel.channel_id
+    <!-- left join channel on order_info.channel_id = channel.channel_id -->
     left join list_source on order_info.list_source_id = list_source.list_source_id
-    left join user on order_info.user_id = user.user_id
+    left join user ua on order_info.user_id = ua.user_id
+    left join user ub on order_info.channel_id = ub.user_id
     left join order_status on order_info.order_status_id = order_status.order_status_id 
     <where>
 		1=1
@@ -254,9 +256,11 @@
 	select count(order_id)
 		
     from order_info
-    left join channel on order_info.channel_id = channel.channel_id
+    <!--  left join channel on order_info.channel_id = channel.channel_id-->
     left join list_source on order_info.list_source_id = list_source.list_source_id
-    left join user on order_info.user_id = user.user_id
+     <!--  left join user on order_info.user_id = user.user_id-->
+    left join user ua on order_info.user_id = ua.user_id
+    left join user ub on order_info.channel_id = ub.user_id
     left join order_status on order_info.order_status_id = order_status.order_status_id 
     <where>
 		1=1

@@ -10,13 +10,13 @@
 	<!-- 服务操作  begin -->
     <span class="span_1" ms-click="test">学生姓名</span><input type="text" class="input_1" id="student_name"  ms-duplex="student_name"/>
     <span class="span_1">基本信息</span><input type="text" class="input_1"	 id="info" ms-duplex="info"/>
-    #if($!roleId!=2)
+    #if($!roleId<2)
 	<span class="span_1">渠道</span>
     <div class="input_2_parent"><input type="text" class="input_2" id="channel" readonly="readonly" ms-duplex="channel" value="请选择渠道" />
         <ul>
         	<li ms-click="setChannel('')">全部</li>
-        	#foreach ($channel in $!channelList)
-            <li ms-click="setChannel('$channel.channelId')">$channel.channelName</li>
+        	#foreach ($user in $!userList)
+            <li ms-click="setChannel('$user.userId')">$user.realName</li>
             #end
         </ul>
     </div>
@@ -30,13 +30,13 @@
             #end
         </ul>
     </div>
-	#if($!roleId!=2)
+	#if($!roleId<=2)
 	<span class="span_1">负责人</span>
     <div class="input_2_parent"><input type="text" class="input_2" id="user" ms-duplex="user"  readonly="readonly" value="请选择负责人" />
         <ul>
         	<li ms-click="setUser('')">全部</li>
-        	#foreach ($user in $!userList)
-            <li ms-click="setUser('$!user.userId')">$!user.realName</li>
+        	#foreach ($sales in $!salesList)
+            <li ms-click="setUser('$!sales.userId')">$!sales.realName</li>
             #end
         </ul>
     </div>#end
@@ -95,7 +95,7 @@
 					
                     <th width="300">基本信息</th>
 					
-					#if($!roleId!=2)
+					#if($!roleId<2)
 						
 						<th width="150">联系方式</th>
 						
@@ -103,7 +103,7 @@
 						
 					#end<th width="80">名单来源</th>
 					
-					#if($!roleId!=2)
+					#if($!roleId<2)
                     <th width="80">负责人</th>
 					
                     #end<th>备注</th>
@@ -114,7 +114,11 @@
 					
                     <th width="100">修改时间</th>
 					
+					#if($!roleId<3)
+						
                     <th width="80">操作</th>
+					
+					#end
                 </tr>
             </thead>
             <tbody id="orderInfo">
@@ -126,7 +130,7 @@
 						{{item.info | truncate(40,"...")}}
 					</td>
 					
-					#if($!roleId!=2)
+					#if($!roleId<2)
 						
 						<td>
 							{{item.contacts | contactsplit(",") | html}}
@@ -141,7 +145,7 @@
                         {{item.listSourceName}}
 					</td>
 					
-					#if($!roleId!=2)
+					#if($!roleId<2)
                     <td ms-attr-title="{{item.userName}}">
 						{{item.userName}}
 					</td>
@@ -153,10 +157,11 @@
                     <td ms-attr-title="{{item.createTime}}">{{item.createTime | date("yyyy-MM-dd HH:mm:ss")}}</td>
 					
                     <td ms-attr-title="{{item.motifyTime}}">{{item.motifyTime | date("yyyy-MM-dd HH:mm:ss")}}</td>
-					
+					#if($!roleId<3)
                     <td >
                    		<span> <a ms-controller="order" id="changeOrder" ms-click="bouncedChangeOrder('ChangeOrder',item.orderId,item.orderStatusId,item.orderStatusName,item.remark)">修改</a></span>
                     </td>
+					#end
                 </tr>
             </tbody>
         </table>

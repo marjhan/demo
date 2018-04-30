@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import biz.action.WebsiteBaseAction;
 import biz.common.exception.BusinessException;
 import biz.common.util.ParamConstants;
-import biz.common.util.StringUtil;
 import biz.domain.Channel;
 import biz.domain.ListSource;
 import biz.domain.OrderStatus;
+import biz.domain.Role;
 import biz.domain.User;
 import biz.entity.ResponseContext;
 import biz.entity.ResponseEntity;
@@ -28,8 +27,8 @@ import biz.res.LoginRes;
 import biz.service.IChannelService;
 import biz.service.IListSourceService;
 import biz.service.IOrderStatusService;
+import biz.service.IRoleService;
 import biz.service.IUserInfoService;
-import biz.service.impl.UserLoginRegisterServiceImpl;
 import biz.session.provider.SessionProvider;
 /**
  * 用户管理.
@@ -49,6 +48,10 @@ public class OptionAction extends WebsiteBaseAction{
 	/**用户接口.*/
 	@Autowired
 	private  IUserInfoService userInfoService;
+	
+	/**角色接口.*/
+	@Autowired
+	private  IRoleService roleService;
 	
 	/**渠道接口.*/
 	@Autowired
@@ -78,9 +81,10 @@ public class OptionAction extends WebsiteBaseAction{
 		}
 		Integer roleId = loginRes.getRoleId();
 		List<User> userList= userInfoService.queryAllUserInfoList();
-//		List<Role> roleList= 
+		List<Role> roleList= roleService.queryRoleList();
 		model.addAttribute("roleId", roleId);	
-		model.addAttribute("userList", userList);	
+		model.addAttribute("userList", userList);		
+		model.addAttribute("roleList", roleList);
 		return "option/user";
 	}
 	
