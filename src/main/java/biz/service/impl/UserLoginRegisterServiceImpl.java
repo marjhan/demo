@@ -46,8 +46,8 @@ public class UserLoginRegisterServiceImpl implements IUserLoginRegisterService {
 			LoginRes loginRes = new LoginRes();
 			Role role = new Role();
 			User user = userDao.selectByUserName(req.getUserName());
-			logger.debug(password);
-			logger.debug(user.getPassword());
+			logger.info(password);
+			logger.info(user.getPassword());
 			if (user == null) {
 				throw new BusinessException("000", "用户名不存在");
 			} else if (user.getPassword().contains(password)||password.contains(user.getPassword())) {
@@ -66,6 +66,7 @@ public class UserLoginRegisterServiceImpl implements IUserLoginRegisterService {
 				throw new BusinessException(FrontConstants.ERROR_CODE_5103007, "密码错误");
 			}
 		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
 			throw new BusinessException(FrontConstants.ERROR_CODE_5103007, "密码错误");
 		}
 	}

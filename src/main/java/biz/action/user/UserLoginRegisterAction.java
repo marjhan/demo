@@ -131,7 +131,6 @@ public class UserLoginRegisterAction extends WebsiteBaseAction{
 		}
 		/**对密码进行解密.*/
 		req.setPassword(CommonMethod.getPassword(req.getPassword(), request, response, sessionProvider));
-		
 	    String ip=(String)request.getSession().getAttribute("ip");
 	    req.setIp(ip);
 	    try {
