@@ -1,5 +1,6 @@
 package biz.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,7 @@ public class OrderServiceImpl implements IOrderService{
 					oldOrder.setOrderId(req.getOrderId());
 					oldOrder.setOrderStatusId(req.getOrderStatusId());
 					oldOrder.setRemark(req.getRemark());
+					oldOrder.setMotifyTime(new Date());
 					
 					orderDao.updateByPrimaryKey(oldOrder);
 					
