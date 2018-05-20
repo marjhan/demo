@@ -60,7 +60,7 @@ public class OrderServiceImpl implements IOrderService{
 		if(oldOrder!=null){
 			Integer oldOrderStatusId = oldOrder.getOrderStatusId();
 			String oldRemark = oldOrder.getRemark();
-			if(oldOrder.getOrderStatusId()!=req.getOrderStatusId() ||!oldOrder.getRemark().equalsIgnoreCase(req.getRemark())){
+			if(!oldOrder.getOrderStatusId().equals(req.getOrderStatusId()) ||!oldOrder.getRemark().equalsIgnoreCase(req.getRemark())){
 				try {
 					oldOrder.setOrderId(req.getOrderId());
 					oldOrder.setOrderStatusId(req.getOrderStatusId());
