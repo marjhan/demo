@@ -55,34 +55,34 @@ public class OrderServiceImpl implements IOrderService{
 	public ChangeOrderRes changeOrder(ChangeOrderReq req) {
 		ChangeOrderRes res = new ChangeOrderRes();
 		String result = "";
-		OrderChangeLog orderChangeLog = new OrderChangeLog();
 		Order oldOrder = orderDao.selectByPrimaryKey(req.getOrderId());
 		if(oldOrder!=null){
 			Integer oldOrderStatusId = oldOrder.getOrderStatusId();
 			String oldRemark = oldOrder.getRemark();
-			if(!oldOrder.getOrderStatusId().equals(req.getOrderStatusId()) ||!oldOrder.getRemark().equalsIgnoreCase(req.getRemark())){
-				try {
-					oldOrder.setOrderId(req.getOrderId());
-					oldOrder.setOrderStatusId(req.getOrderStatusId());
-					oldOrder.setRemark(req.getRemark());
-					oldOrder.setMotifyTime(new Date());
+			try {
+				oldOrder.setStudentName(req.getStudentName());
+				oldOrder.setInfo(req.getInfo());
+				oldOrder.setChannelId(req.getChannelId());
+				oldOrder.setListSourceId(req.getListSourceId());
+				oldOrder.setOrderStatusId(req.getOrderStatusId());
+				oldOrder.setUserId(req.getUserId());
+				oldOrder.setRemark(req.getRemark());
+				oldOrder.setMotifyTime(new Date());
 					
-					orderDao.updateByPrimaryKey(oldOrder);
-					
+				orderDao.updateByPrimaryKey(oldOrder);
+				if(!oldOrder.getOrderStatusId().equals(req.getOrderStatusId()) ||!oldOrder.getRemark().equalsIgnoreCase(req.getRemark())){
+					OrderChangeLog orderChangeLog = new OrderChangeLog();
 					orderChangeLog.setOldOrderStatusId(oldOrderStatusId);
 					orderChangeLog.setNewOrderStatusId(req.getOrderStatusId());
 					orderChangeLog.setOldRemark(oldRemark);
 					orderChangeLog.setNewRemark(req.getRemark());
 					orderChangeLog.setUserId(req.getUserId());
 					orderChangeLogDao.insert(orderChangeLog);
-					
-					result = "订单修改成功！";
-				} catch (BusinessException e) {
-					e.printStackTrace();
-					result = "订单修改失败！请重新操作";
 				}
-			}else{
 				result = "订单修改成功！";
+			} catch (BusinessException e) {
+				e.printStackTrace();
+				result = "订单修改失败！请重新操作";
 			}
 		}else{
 			result = "订单不存在，请重新操作";

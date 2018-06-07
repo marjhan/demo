@@ -18,6 +18,14 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 		user_id : "",
 		order_status : "请选择状态",
 		order_status_id : "",
+		change_student_name : "",
+		change_info : "",
+		change_channel : "请选择渠道",
+		change_channel_id : "",
+		change_list_source : "请选择名单来源",
+		change_list_source_id : "",
+		change_user : "请选择负责人",
+		change_user_id : "",
 		change_order_status : "请选择状态",
 		change_order_status_id : "",
 		change_order_id	: "",
@@ -182,8 +190,17 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 			vm.environmentVal = envType;
 		},
 		//修改订单弹窗弹框
-		bouncedChangeOrder:function(id,change_order_id,change_order_status_id,change_order_status_name,change_order_remark){
+		bouncedChangeOrder:function(id,change_order_id,change_student_name,change_info,change_channel,change_channel_id,change_list_source,
+				change_list_source_id,change_user,change_user_id,change_order_status_id,change_order_status_name,change_order_remark){
 	    	vm.change_order_id = change_order_id;
+	    	vm.change_student_name = change_student_name;
+	    	vm.change_info = change_info;
+	    	vm.change_channel = change_channel;
+	    	vm.change_channel_id = change_channel_id;
+	    	vm.change_list_source = change_list_source;
+	    	vm.change_list_source_id = change_list_source_id;
+	    	vm.change_user = change_user;
+	    	vm.change_user_id = change_user_id;
 	    	vm.change_order_status_id = change_order_status_id;
 	    	vm.change_order_status = change_order_status_name;
 	    	vm.change_order_remark = change_order_remark;
@@ -286,33 +303,113 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 		setOrderStatus : function(orderStatusId) {
 			vm.order_status_id = orderStatusId;
 		},
+		// 设定渠道
+		setChangeChannel : function(chaneChannelId) {
+			vm.change_channel_id = chaneChannelId;
+		},
+		// 设定名单来源
+		setChangeListSource : function(changeListSourceId) {
+			vm.change_list_source_id = changeListSourceId;
+		},
 		// 设定状态
 		setChangeOrderStatus : function(chaneOrderStatusId) {
 			vm.change_order_status_id = chaneOrderStatusId;
+		},
+		// 设定负责人
+		setChangeUser : function(chaneUserId) {
+			vm.change_user_id = chaneUserId;
+		},
+		/*验证学生姓名*/
+		validatorName:function(el){
+			
+			var reg=/^[\u4E00-\u9FA5A-Za-z]+$/;//姓名正则
+			var result=false;
+			$(el).siblings("div").remove();
+			$(el).parent().children("div .sl-error").remove();
+			var $txt=$.trim($(el).val());
+			if($txt==""){
+				$(el).parent().append("<div class='sl-error'><i class='error'></i>学生姓名不能为空</div>");
+			}else if($txt.length>20){
+				$(el).parent().append("<div class='sl-error'><i class='error'></i>学生姓名不能为超过20个字符</div>");
+			}else if(!reg.test($txt)){
+				$(el).parent().append("<div class='sl-error'><i class='error'></i>学生姓名只能有由字母以及汉字组成</div>");
+			}else{
+				result=true;
+			}
+			return result;
+		},
+		/*验证基本信息*/
+		validatorInfo:function(el){
+			
+			var result=false;
+			$(el).siblings("div").remove();
+			$(el).parent().children("div .sl-error").remove();
+			var $txt=$.trim($(el).val());
+			if($txt==""){
+				$(el).parent().append("<div class='sl-error'><i class='error'></i>基本信息不能为空</div>");
+			}else if($txt.length>300){
+				$(el).parent().append("<div class='sl-error'><i class='error'></i>基本信息不能为超过300个字符</div>");
+			}else{
+				result=true;
+			}
+			
+			return result;
+		},
+		/*验证备注*/
+		validatorRemark:function(el){
+			
+			var result=false;
+			$(el).siblings("div").remove();
+			$(el).parent().children("div .sl-error").remove();
+			var $txt=$.trim($(el).val());
+			if($txt==""){
+				$(el).parent().append("<div class='sl-error'><i class='error'></i>备注不能为空</div>");
+			}else if($txt.length>2000){
+				$(el).parent().append("<div class='sl-error'><i class='error'></i>备注不能为超过2000个字符</div>");
+			}else{
+				result=true;
+			}
+			
+			return result;
 		}
 	})
 	function changeOrder() {
-		var param = {
-			orderStatusId : vm.change_order_status_id,
-			orderId : vm.change_order_id,
-			remark : vm.change_order_remark
-		};
-		$.ajax({
-			url : "changeOrder.json",
-			dataType : "json",
-			data : param,
-			type : "post",
-			async : true,
-			success : function(r) {
-				showTips(r.data.result);
-		    	vm.close('ChangeOrder');
-				vm.pager.currentPage = 1;
-		    	getOrderList(1);
-			},
-			failure : function(r) {
-				showTips(r.data.result);
-			}
-		});
+		var val1=vm.validatorName("#change_student_name");
+		var val2=vm.validatorInfo("#change_info");
+		var val3=(vm.change_channel_id!=""&&vm.change_channel_id!="0")?true:false;
+		var val4=(vm.change_list_source_id!=""&&vm.change_list_source_id!="0")?true:false;
+		var val5=(vm.change_user_id!=""&&vm.change_user_id!="0")?true:false;
+		var val6=(vm.change_order_status_id!=""&&vm.change_order_status_id!="0")?true:false;
+		var val7=vm.validatorRemark("#change_order_remark");
+    	if(val1 && val2&& val3&& val4&& val5&& val6&& val7){
+    		var param = {
+    				studentName:vm.change_student_name,
+    				info:vm.change_info,
+    				channelId:vm.change_channel_id,
+    				listSourceId:vm.change_list_source_id,
+    				userId:vm.change_user_id,
+    				orderId : vm.change_order_id,
+    				orderStatusId : vm.change_order_status_id,
+    				remark : vm.change_order_remark
+    		};
+    		$.ajax({
+    			url : "changeOrder.json",
+    			dataType : "json",
+    			data : param,
+    			type : "post",
+    			async : true,
+    			success : function(r) {
+    				showTips(r.data.result);
+    				vm.close('ChangeOrder');
+    				vm.close('ChangeOrder2');
+    				vm.pager.currentPage = 1;
+    				getOrderList(1);
+    			},
+    			failure : function(r) {
+    				showTips(r.data.result);
+    			}
+    		});
+    	}
 	}
 	function getOrderList(isShowPageOne) {
 		var param = {

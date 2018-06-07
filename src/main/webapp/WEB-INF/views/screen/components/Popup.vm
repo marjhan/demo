@@ -69,7 +69,79 @@
         </div>
     </div>
 </div>
-<!--弹框2：修改绑定手机号-->
+<!--弹框2：修改订单-->
+
+<!--弹框3：修改订单-->
+<div id="ChangeOrder2" class="ChangeOrder2">
+    <div class="popup">
+		<input type="hidden"  id="change_order_id2" ms-duplex="change_order_id"/>
+        <a ms-controller="common" class="close" ms-click="close('ChangeOrder2')"></a>
+        <h2>修改订单信息</h2>    
+		<div class="ui-item">
+            <label class="ui-label">修改学生姓名</label>
+            <div class="ui-content">
+                <input type="text" ms-duplex-test="change_student_name" id="change_student_name" class="ui-input"/>
+            </div>
+        </div>   
+        <div class="ui-item">
+            <label class="ui-label">修改基本信息</label>
+            <div class="ui-content">
+                <textarea style="width:600px;height:70px" ms-duplex-test="change_info" id="change_info"></textarea>
+            </div>
+        </div>   
+        <div class="ui-item">
+            <label class="ui-label">修改渠道</label>
+			<div class="input_2_parent"><input type="text" class="input_2" id="change_channel" readonly="readonly" ms-duplex="change_channel"/>
+				<ul>
+					#foreach ($user in $!userList)
+						<li ms-click="setChangeChannel('$user.userId')">$user.realName</li>
+					#end
+				</ul>
+			</div>
+       </div>   
+        <div class="ui-item">
+            <label class="ui-label">修改名单来源</label>
+			<div class="input_2_parent"><input type="text" class="input_2" id="change_list_source" ms-duplex="change_list_source"  readonly="readonly"/>
+				<ul>
+					#foreach ($listSource in $!listSourceList)
+						<li ms-click="setChangeListSource('$listSource.listSourceId')">$listSource.listSourceName</li>
+					#end
+				</ul>
+			</div>
+       </div>     
+        <div class="ui-item">
+            <label class="ui-label">修改负责人</label>
+			<div class="input_2_parent"><input type="text" class="input_2" id="change_user" ms-duplex="change_user"  readonly="readonly" />
+				<ul>
+					#foreach ($sales in $!salesList)
+						<li ms-click="setChangeUser('$!sales.userId')">$!sales.realName</li>
+					#end
+				</ul>
+			</div>
+       </div>      
+        <div class="ui-item" style="z-index: 99;">
+            <label class="ui-label">修改订单状态</label>
+			<div class="input_2_parent">
+				<input type="text" class="input_2" id="change_order_status2" ms-duplex="change_order_status"  readonly="readonly" />
+				<ul>
+					#foreach ($orderStatus in $!orderStatusList)
+						<li ms-click="setChangeOrderStatus('$!orderStatus.orderStatusId')">$!orderStatus.orderStatusName</li>
+					#end
+				</ul>
+			</div>
+        </div>
+        <div class="ui-item" style="margin-top:70px">
+            <label class="ui-label">备注</label>
+            <div class="ui-content">
+                <textarea style="width:600px;height:300px" ms-duplex-test="change_order_remark" id="change_order_remark2" ></textarea>
+            </div>
+        </div>
+        <div class="ui-item" style="margin-left: 100px;">
+            <a class="ui-btn" ms-click="changeOrder()">确定</a>
+        </div>
+    </div>
+</div>
+<!--弹框3：修改订单-->
 <!-- 安全中心页面   over***********************************************************************-->
 
 

@@ -7,6 +7,26 @@ package biz.req;
 * @since  
 * @return  */
 public class ChangeOrderReq {
+	
+	/**
+     * 学生姓名
+     */
+    private String studentName;
+
+    /**
+     * 基本信息
+     */
+    private String info; 
+
+    /**
+     * 渠道id
+     */
+    private Integer channelId;
+
+    /**
+     * 名单来源id
+     */
+    private Integer listSourceId;
 
     /**
      * 用户id
@@ -83,5 +103,62 @@ public class ChangeOrderReq {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+
+	/**
+	 * @return the studentName
+	 */
+	public String getStudentName() {
+		return studentName;
+	}
+
+	/**
+	 * @param studentName the studentName to set
+	 */
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+
+	/**
+	 * @return the info
+	 */
+	public String getInfo() {
+		return info;
+	}
+
+	/**
+	 * @param info the info to set
+	 */
+	public void setInfo(String info) {
+		this.info = info;
+	}
+
+	/**
+	 * @return the channelId
+	 */
+	public Integer getChannelId() {
+		return channelId;
+	}
+
+	/**
+	 * @param channelId the channelId to set
+	 */
+	public void setChannelId(Integer channelId) {
+		this.channelId = channelId;
+	}
+
+	/**
+	 * @return the listSourceId
+	 */
+	public Integer getListSourceId() {
+		return listSourceId;
+	}
+
+	/**
+	 * @param listSourceId the listSourceId to set
+	 */
+	public void setListSourceId(Integer listSourceId) {
+		this.listSourceId = listSourceId;
+	}
+
 	
 }

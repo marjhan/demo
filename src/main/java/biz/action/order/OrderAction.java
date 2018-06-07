@@ -134,7 +134,6 @@ public class OrderAction extends WebsiteBaseAction{
 		if (null == loginRes) {
 			throw new BusinessException("", "请登录！");
 		}
-		req.setUserId(loginRes.getUserId());
 		ChangeOrderRes res = orderService.changeOrder(req);
 		ResponseContext.setValue(res);			
 		return  ResponseContext.getResponseEntity();

@@ -123,7 +123,7 @@
             </thead>
             <tbody id="orderInfo">
                 <tr ms-repeat-item="orderList">
-                    <td ms-attr-title="{{item.contacts}}">
+                    <td ms-attr-title="{{item.studentName}}">
 						{{item.studentName}}
 					</td>					
                     <td ms-attr-title="{{item.info}}">
@@ -157,9 +157,13 @@
                     <td ms-attr-title="{{item.createTime}}">{{item.createTime | date("yyyy-MM-dd HH:mm:ss")}}</td>
 					
                     <td ms-attr-title="{{item.motifyTime}}">{{item.motifyTime | date("yyyy-MM-dd HH:mm:ss")}}</td>
-					#if($!roleId<3)
+					#if($!roleId<3 and $!roleId>1)
                     <td >
-                   		<span> <a ms-controller="order" id="changeOrder" ms-click="bouncedChangeOrder('ChangeOrder',item.orderId,item.orderStatusId,item.orderStatusName,item.remark)">修改</a></span>
+                   		<span> <a ms-controller="order" id="changeOrder" ms-click="bouncedChangeOrder('ChangeOrder',item.orderId,item.studentName,item.info,item.channelName,item.channelId,item.listSourceName,item.listSourceId,item.userName,item.userId,item.orderStatusId,item.orderStatusName,item.remark)">修改</a></span>
+                    </td>
+					#elseif($!roleId<=1)
+                    <td >
+                   		<span> <a ms-controller="order" id="changeOrder2" ms-click="bouncedChangeOrder('ChangeOrder2',item.orderId,item.studentName,item.info,item.channelName,item.channelId,item.listSourceName,item.listSourceId,item.userName,item.userId,item.orderStatusId,item.orderStatusName,item.remark)">修改</a></span>
                     </td>
 					#end
                 </tr>

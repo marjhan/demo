@@ -15,7 +15,7 @@
         <div class="ui-item">
             <label class="ui-label"><i class="star"></i>学生姓名</label>
             <div class="ui-content">
-                <input type="text" ms-dupluex="student_name" id="student_name" class="ui-input" ms-blur="validatorName(this)" placeholder="不超过20个字符，只允许英文大小写和汉字">
+                <input type="text" ms-dupluex="student_name" id="student_name" class="ui-input" ms-blur="validatorName(this)" placeholder="不超过20个字符，只允许英文大小写和汉字"/>
             </div>
         </div>   
         <div class="ui-item">
@@ -27,25 +27,25 @@
         <div class="ui-item">
             <label class="ui-label"><i class="star"></i>手机</label>
             <div class="ui-content">
-                <input type="text" ms-dupluex="mobile_phone" id="mobile_phone" class="ui-input" ms-blur="validatorMobilePhone(this)" placeholder="请填写正确的手机号">
+                <input type="text" ms-dupluex="mobile_phone" id="mobile_phone" class="ui-input" ms-blur="validatorMobilePhone(this)" placeholder="请填写正确的手机号"/>
             </div>
         </div> 
         <div class="ui-item">
             <label class="ui-label"><i></i>QQ</label>
             <div class="ui-content">
-                <input type="text" ms-dupluex="qq" id="qq" class="ui-input" ms-blur="validatorQQ(this)" placeholder="请填写正确的QQ">
+                <input type="text" ms-dupluex="qq" id="qq" class="ui-input" ms-blur="validatorQQ(this)" placeholder="请填写正确的QQ"/>
             </div>
         </div> 
         <div class="ui-item">
             <label class="ui-label"><i></i>微信</label>
             <div class="ui-content">
-                <input type="text" ms-dupluex="wechat" id="wechat" class="ui-input" ms-blur="validatorWechat(this)" placeholder="请填写正确的微信号">
+                <input type="text" ms-dupluex="wechat" id="wechat" class="ui-input" ms-blur="validatorWechat(this)" placeholder="请填写正确的微信号"/>
             </div>
         </div>   
         <div class="ui-item">
             <label class="ui-label"><i></i>电话</label>
             <div class="ui-content">
-                <input type="text" ms-dupluex="phone" id="phone" class="ui-input" ms-blur="validatorPhone(this)" placeholder="请填写正确的电话">
+                <input type="text" ms-dupluex="phone" id="phone" class="ui-input" ms-blur="validatorPhone(this)" placeholder="请填写正确的电话"/>
             </div>
         </div>    
         <div class="ui-item">
