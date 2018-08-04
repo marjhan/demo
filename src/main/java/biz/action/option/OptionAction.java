@@ -68,7 +68,7 @@ public class OptionAction extends WebsiteBaseAction{
 	
 	/**
 	 * 用户管理页面.
-	 * @param req 请求.
+	 * @param request 请求.
 	 * @return 返回.
 	 */
 	@RequestMapping(value = "/user")
@@ -91,7 +91,7 @@ public class OptionAction extends WebsiteBaseAction{
 	
 	/**
 	 * 新增用户.
-	 * @param req 请求.
+	 * @param request 请求.
 	 * @return 返回.
 	 * @throws UnsupportedEncodingException 
 	 */
@@ -118,7 +118,7 @@ public class OptionAction extends WebsiteBaseAction{
 	
 	/**
 	 * 修改用户状态.
-	 * @param req 请求.
+	 * @param request 请求.
 	 * @return 返回.
 	 */
 	@RequestMapping(value = "/updateUserStatus")
@@ -144,7 +144,7 @@ public class OptionAction extends WebsiteBaseAction{
 	
 	/**
 	 * 渠道管理页面.
-	 * @param req 请求.
+	 * @param request 请求.
 	 * @return 返回.
 	 */
 	@RequestMapping(value = "/channel")
@@ -165,7 +165,7 @@ public class OptionAction extends WebsiteBaseAction{
 	
 	/**
 	 * 新增渠道.
-	 * @param req 请求.
+	 * @param request 请求.
 	 * @return 返回.
 	 */
 	@RequestMapping(value = "/addChannel")
@@ -189,7 +189,7 @@ public class OptionAction extends WebsiteBaseAction{
 	
 	/**
 	 * 修改渠道状态.
-	 * @param req 请求.
+	 * @param request 请求.
 	 * @return 返回.
 	 */
 	@RequestMapping(value = "/updateChannelStatus")
@@ -213,7 +213,7 @@ public class OptionAction extends WebsiteBaseAction{
 	
 	/**
 	 * 名单来源管理页面.
-	 * @param req 请求.
+	 * @param request 请求.
 	 * @return 返回.
 	 */
 	@RequestMapping(value = "/listSource")
@@ -234,7 +234,7 @@ public class OptionAction extends WebsiteBaseAction{
 	
 	/**
 	 * 新增名单来源.
-	 * @param req 请求.
+	 * @param request 请求.
 	 * @return 返回.
 	 */
 	@RequestMapping(value = "/addListSource")
@@ -258,7 +258,7 @@ public class OptionAction extends WebsiteBaseAction{
 	
 	/**
 	 * 修改名单来源状态.
-	 * @param req 请求.
+	 * @param request 请求.
 	 * @return 返回.
 	 */
 	@RequestMapping(value = "/updateListSourceStatus")
@@ -282,7 +282,7 @@ public class OptionAction extends WebsiteBaseAction{
 	
 	/**
 	 * 订单状态管理页面.
-	 * @param req 请求.
+	 * @param request 请求.
 	 * @return 返回.
 	 */
 	@RequestMapping(value = "/orderStatus")
@@ -303,7 +303,7 @@ public class OptionAction extends WebsiteBaseAction{
 	
 	/**
 	 * 新增订单状态.
-	 * @param req 请求.
+	 * @param request 请求.
 	 * @return 返回.
 	 */
 	@RequestMapping(value = "/addOrderStatus")
@@ -327,7 +327,7 @@ public class OptionAction extends WebsiteBaseAction{
 	
 	/**
 	 * 修改订单状态的状态.
-	 * @param req 请求.
+	 * @param request 请求.
 	 * @return 返回.
 	 */
 	@RequestMapping(value = "/updateOrderStatus")
