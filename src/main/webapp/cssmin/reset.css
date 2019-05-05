@@ -854,7 +854,7 @@ body {
 .jg_area .ui-jg li.hover {
 	color: #60ace8;
 	border: 1px solid #60ace8;
-	background: url("/images/api/jb.png") bottom right no-repeat;
+	background: url("../images/api/jb.png") bottom right no-repeat;
 }
 
 .jg_area .ui-jg li .hui {

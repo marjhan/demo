@@ -41,7 +41,7 @@ import biz.session.provider.SessionProvider;
 * @since  
 * @return  */
 @Controller
-@RequestMapping("/sts/order")
+@RequestMapping("/skyjoy/order")
 public class OrderAction extends WebsiteBaseAction{
 	/**session提供.*/
 	@Autowired

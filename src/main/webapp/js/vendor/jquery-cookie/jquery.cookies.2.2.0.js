@@ -12,7 +12,7 @@ jaaulde.utils.cookies = ( function()
 {
 	var resolveOptions, assembleOptionsString, parseCookies, constructor, defaultOptions = {
 		expiresAt: null,
-		path: '/',
+		path: '/skyjoy',
 		domain:  null,
 		secure: false
 	};

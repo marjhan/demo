@@ -1,5 +1,5 @@
 require.config({
-	baseUrl: "/",
+	baseUrl: "/skyjoy",
 	paths: {
 		jquery: "js/vendor/jquery/jquery",
 		jquery1: "js/console/datacheck/jquery-1.9.1.min",

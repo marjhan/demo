@@ -35,7 +35,7 @@ import biz.session.provider.SessionProvider;
  * @author xuzc
  */
 @Controller
-@RequestMapping("/sts/option")
+@RequestMapping("/skyjoy/option")
 public class OptionAction extends WebsiteBaseAction{
 	
 	/**日志对象.*/

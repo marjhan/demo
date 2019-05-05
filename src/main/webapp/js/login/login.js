@@ -46,7 +46,7 @@ require(["domReady!","avalon","jquery","common/common","jquery.cookie","validati
         },
         changeValidateCode:function(obj){
             var timeNow = new Date().getTime();
-            $("#imageCode").attr("src","/sts/imageCode/getImageCode.json?time="+timeNow);
+            $("#imageCode").attr("src","/skyjoy/imageCode/getImageCode.json?time="+timeNow);
         },
         validation:{
             onInit: function(v) {
@@ -142,14 +142,14 @@ require(["domReady!","avalon","jquery","common/common","jquery.cookie","validati
                         removeError("username");
                         if(!data.errorCode){
                         	if(data.userId!=null){
-                        		$.cookie("_a_", data.userId, { path: '/', expires: 10 });
-                        		$.cookie("_n_", model.strFilter(data.userName), { path: '/', expires: 10 });
-                        		$.cookie("_un_", data.userName, { path: '/', expires: 10 });
+                        		$.cookie("_a_", data.userId, { path: '/skyjoy', expires: 10 });
+                        		$.cookie("_n_", model.strFilter(data.userName), { path: '/skyjoy', expires: 10 });
+                        		$.cookie("_un_", data.userName, { path: '/skyjoy', expires: 10 });
                         		model.$goPage(data);
                         	}else{
-                        		$.cookie("_a_","",{path: '/',expires:-1});
-                        		$.cookie("_n_","",{path: '/',expires:-1});
-                        		$.cookie("_t_","",{path: '/',expires:-1});
+                        		$.cookie("_a_","",{path: '/skyjoy',expires:-1});
+                        		$.cookie("_n_","",{path: '/skyjoy',expires:-1});
+                        		$.cookie("_t_","",{path: '/skyjoy',expires:-1});
                         	}
                         }else if(data.errorCode=="5103007"){
                             showError(null,null,r.errorInfo);
@@ -175,7 +175,7 @@ require(["domReady!","avalon","jquery","common/common","jquery.cookie","validati
             }
         },
         $goPage:function(data){
-            window.location.href ="/sts/order/list.html";
+            window.location.href ="/skyjoy/order/list.html";
         },
         strFilter:function(str){
             var str1 = str.substring(0,3);

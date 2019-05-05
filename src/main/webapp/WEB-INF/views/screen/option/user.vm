@@ -7,7 +7,7 @@
 <style>
 	.oni-pager{float:right;}
 </style>
-<link href="/cssmin/style.css?" rel="stylesheet" />
+<link href="../cssmin/style.css?" rel="stylesheet" />
 
 <!--生产应用内容区 begin****************************************************************************************-->
 	<!-- 应用总条目数 -->
@@ -101,6 +101,6 @@
 
 <!--控台框架下半部 begin-->
 #parse("/screen/console/include/console-lower.vm")
-<script src="/js/vendor/rsa.js"></script>
+<script src="../js/vendor/rsa.js"></script>
 <!--控台框架下半部 begin-->
         

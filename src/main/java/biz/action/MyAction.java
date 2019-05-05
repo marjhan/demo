@@ -23,7 +23,7 @@ import biz.session.provider.SessionProvider;
 * @since  
 * @return  */
 @Controller
-@RequestMapping("")
+@RequestMapping("/skyjoy")
 public class MyAction extends WebsiteBaseAction{
 	
 	/**session提供.*/

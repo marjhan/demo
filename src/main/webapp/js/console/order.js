@@ -145,7 +145,7 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
 	    				newPwd:new_password
 	    		}
 	    		$.ajax({
-	    			url : "/sts/user/updatePwd.json" ,
+	    			url : "/skyjoy/user/updatePwd.json" ,
                     dataType : "json" ,
                     type:"post",
                     async:false,
@@ -156,7 +156,7 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
                     		vm.close('ChangePassword');
                     		setTimeout(function(){
                     			$.ajax({
-                        			url:"/sts/user/updatePwdSuccess.json",
+                        			url:"/skyjoy/user/updatePwdSuccess.json",
                         			dataType:"json",
                         			type:"post",
                         			async:false,
@@ -466,7 +466,7 @@ require([ "domReady!", "avalon", "jquery", "header", "common/common",
     function getRSA(){
         if(RSAUtils){
             $.ajax({
-                url:"/sts/user/getModulusExponent.json",
+                url:"/skyjoy/user/getModulusExponent.json",
                 type:"GET",
                 success:function (result){
                     vm.key = RSAUtils.getKeyPair(result.data.exponent, '', result.data.modulus);

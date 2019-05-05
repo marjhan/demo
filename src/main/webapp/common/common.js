@@ -6,7 +6,7 @@ define(["jquery","jquery.cookie","avalon","jquery.blockUI"],function ($){
     var app_key = function(){
         $.ajax({
             type:"get",
-            url:"/common/appkey.json?random=" + Math.random(),
+            url:"../common/appkey.json?random=" + Math.random(),
             dataType:"json",
             async : false,
             data : {},
@@ -27,7 +27,7 @@ define(["jquery","jquery.cookie","avalon","jquery.blockUI"],function ($){
         alertNode :$('<div class="con-pop"><div class="inner"><div class="title">提示<a class="close-btn"></a></div> <div class="details"><p></p></div></div></div>'),
         confirmNode:$('<div class="popUp-layer" style="display:block; "><span class="close" title="关闭" id="popClose">关闭</span><div class="popUp-layer-wrap"><div class="popUp-layer-content popUp-layer-contentticket"><p id="popContent"></p><div class="sub-btn"><a class="ui-btn btn-blue btn-radius" id="btn1"></a><a class="ui-btn btn-white btn-radius" id="btn2"></a></div></div></div></div>'),
         confirmNode_shop:$('<div class="popUp-layer" style="display:block;"><span class="close" title="关闭" id="popClose">关闭</span><div class="popUp-layer-wrap"><div class="popUp-layer-content"><p id="popContent"></p><div class="sub-btn"><a class="ui-btn btn-white btn-radius" id="btn1"></a><a class="ui-btn btn-red btn-radius" id="btn2"></a></div></div></div></div>'),
-        baseUrl:/*"/test/"*/"/sts/",/*/front/itn/website/*/
+        baseUrl:/*"/test/"*/"/skyjoy/",/*/front/itn/website/*/
         /*邮箱地址配置*/
         hash:{
             'vip.qq.com':'http://mail.qq.com',
@@ -550,9 +550,9 @@ define(["jquery","jquery.cookie","avalon","jquery.blockUI"],function ($){
                     }
                     if(userId==""||userId == null){
                         if(window.location.href.indexOf("login")==-1){
-                            $.cookie("_u_", window.location, { path: '/', expires: 10 });
+                            $.cookie("_u_", window.location, { path: '/skyjoy', expires: 10 });
                         }else{
-                            $.cookie("_u_", "", { path: '/', expires: -1 });
+                            $.cookie("_u_", "", { path: '/skyjoy', expires: -1 });
                         }
                         window.location.href="/html/login_api/login.html";
                     }
@@ -734,10 +734,10 @@ define(["jquery","jquery.cookie","avalon","jquery.blockUI"],function ($){
     function _callException(result){
         defaults.alertNode.find("p").text(result.error_info);
         if(result.error_no == "291"){
-            $.cookie("_u_", window.location, { path: '/', expires: 10 });
-            $.cookie("_a_","",{path: '/',expires:-1});
-            $.cookie("_n_","",{path: '/',expires:-1});
-            $.cookie("_t_","",{path: '/',expires:-1});
+            $.cookie("_u_", window.location, { path: '/skyjoy', expires: 10 });
+            $.cookie("_a_","",{path: '/skyjoy',expires:-1});
+            $.cookie("_n_","",{path: '/skyjoy',expires:-1});
+            $.cookie("_t_","",{path: '/skyjoy',expires:-1});
             window.location.href="/login/login.html";
         }else{
             _showAlert({message:defaults.alertNode});

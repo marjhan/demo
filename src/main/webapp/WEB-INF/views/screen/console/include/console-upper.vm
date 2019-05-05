@@ -9,8 +9,8 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="header-left">
-                <a class="logo" href="/sts/order/list.html"></a>
-                <a class="gl-header-manage fs-16" href="/sts/order/list.html">管理中心</a>
+                <a class="logo" href="/skyjoy/order/list.html"></a>
+                <a class="gl-header-manage fs-16" href="/skyjoy/order/list.html">管理中心</a>
             </div>
             <ul class="gl-header-menu ms-controller" ms-controller="header">
                 <li>
@@ -36,18 +36,18 @@
             <div class="sidebar">
             	<ul class="nav nav-sidebar">
                     <li><a><i class="parent-up"></i>订单管理</a></li>
-                    <li class=#if($active=="order")"active"#else""#end><a href="/sts/order/list.html"><i class="child-1-2"></i>订单信息</a></li>
+                    <li class=#if($active=="order")"active"#else""#end><a href="/skyjoy/order/list.html"><i class="child-1-2"></i>订单信息</a></li>
 					#if($!roleId<2)
-                    <li class=#if($active=="order_add")"active"#else""#end><a href="/sts/order/order_new.html"><i class="child-3-6"></i>订单录入</a></li>
+                    <li class=#if($active=="order_add")"active"#else""#end><a href="/skyjoy/order/order_new.html"><i class="child-3-6"></i>订单录入</a></li>
 					#end
                 </ul>
 				#if($!roleId<2)
                 <ul class="nav nav-sidebar">
                     <li><a><i class="parent-up"></i>系统管理</a></li>
-					<li class=#if($active=="user")"active"#else""#end><a href="/sts/option/user.html"><i class="child-1-5"></i>用户管理</a></li>
-					<!-- <li class=#if($active=="channel")"active"#else""#end><a href="/sts/option/channel.html"><i class="child-1-1"></i>渠道管理</a></li> -->
-					<li class=#if($active=="listSource")"active"#else""#end><a href="/sts/option/listSource.html"><i class="child-3-7"></i>名单来源管理</a></li>
-					<li class=#if($active=="orderStatus")"active"#else""#end><a href="/sts/option/orderStatus.html"><i class="child-1-6"></i>订单状态管理</a></li>
+					<li class=#if($active=="user")"active"#else""#end><a href="/skyjoy/option/user.html"><i class="child-1-5"></i>用户管理</a></li>
+					<!-- <li class=#if($active=="channel")"active"#else""#end><a href="/skyjoy/option/channel.html"><i class="child-1-1"></i>渠道管理</a></li> -->
+					<li class=#if($active=="listSource")"active"#else""#end><a href="/skyjoy/option/listSource.html"><i class="child-3-7"></i>名单来源管理</a></li>
+					<li class=#if($active=="orderStatus")"active"#else""#end><a href="/skyjoy/option/orderStatus.html"><i class="child-1-6"></i>订单状态管理</a></li>
                 </ul>#end
 			
 			<script>

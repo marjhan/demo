@@ -94,8 +94,8 @@
 			</property> </bean> -->
 
 		<mvc:interceptor>
-			<mvc:mapping path="/sts/**/*.json" />
-			<mvc:mapping path="/sts/**/*.html" />
+			<mvc:mapping path="/skyjoy/**/*.json" />
+			<mvc:mapping path="/skyjoy/**/*.html" />
 			<ref bean="sessionInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

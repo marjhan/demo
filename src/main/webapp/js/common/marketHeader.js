@@ -13,7 +13,7 @@ require(["domReady!","avalon","jquery","common/common","jquery.cookie","jquery.a
         service_content:"",
         login:false,
         tologin:function(){
-            $.cookie("_u_", window.location, { path: '/', expires: 10 });
+            $.cookie("_u_", window.location, { path: '/skyjoy', expires: 10 });
             var userBehavior = window.location.href;
             common.ajax({
                 url:"user/setUserBehavior.json",
@@ -48,9 +48,9 @@ require(["domReady!","avalon","jquery","common/common","jquery.cookie","jquery.a
                 data:"",
                 callback:function(r){
                 	header.toggleLogin(false);
-                    $.cookie("_t_","",{path: '/',expires:-1});
-                    $.cookie("_n_","",{path: '/',expires:-1});
-                    $.cookie("_u_", window.location, { path: '/', expires: 10 });
+                    $.cookie("_t_","",{path: '/skyjoy',expires:-1});
+                    $.cookie("_n_","",{path: '/skyjoy',expires:-1});
+                    $.cookie("_u_", window.location, { path: '/skyjoy', expires: 10 });
                     window.location.href ="/login/login.html";
                 }
             })
@@ -94,7 +94,7 @@ require(["domReady!","avalon","jquery","common/common","jquery.cookie","jquery.a
                 },
                 failure:function(data){
                     if(data.error_code == '404291'){
-                        $.cookie("_u_",window.location, { path: '/', expires: 10 });
+                        $.cookie("_u_",window.location, { path: '/skyjoy', expires: 10 });
                         window.location.href="/login/login.html";
                     }else{
                         common.alertNodePop(data.error_info);
@@ -138,7 +138,7 @@ require(["domReady!","avalon","jquery","common/common","jquery.cookie","jquery.a
                 },
                 failure:function(r){
                     if(r.error_code=='291'){
-                        $.cookie("_u_",window.location, { path: '/', expires: 10 });
+                        $.cookie("_u_",window.location, { path: '/skyjoy', expires: 10 });
                         window.location.href="/login/login.html";
                     }else{
                         common.alertNodePop(r.error_info);

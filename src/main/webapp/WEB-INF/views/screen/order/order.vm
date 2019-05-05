@@ -4,7 +4,7 @@
 <!--控台框架上半部 begin-->
 #parse("/screen/console/include/console-upper.vm")
 <!--控台框架上半部 over-->
-<link href="/cssmin/style.css?" rel="stylesheet" />
+<link href="../cssmin/style.css?" rel="stylesheet" />
 <!--我的服务内容区 begin****************************************************************************************-->
 
 	<!-- 服务操作  begin -->
@@ -179,6 +179,6 @@
 
 <!--控台框架下半部 begin-->
 #parse("/screen/console/include/console-lower.vm")
-<script src="/js/vendor/rsa.js"></script>
+<script src="../js/vendor/rsa.js"></script>
 <!--控台框架下半部 begin-->
         

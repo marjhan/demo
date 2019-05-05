@@ -10,9 +10,9 @@
     <title>登录</title>
 
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="/css/common/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/common/bootstrapValidator.min.css">
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/common/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/common/bootstrapValidator.min.css">
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
     <!-- Custom styles for this template -->
 
     <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
@@ -23,7 +23,7 @@
     <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-	<link href="/cssmin/sts.css" rel="stylesheet" />
+	<link href="../cssmin/skyjoy.css" rel="stylesheet" />
     <style>
         .contain-explain{
             display: none;
@@ -81,9 +81,9 @@
 <!-- /container -->
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="/js/vendor/require/require.js"></script>
-<script src="/js/app.js"></script>
-<script src="/js/login/login.js"></script>
-<script src="/js/vendor/rsa.js"></script>
+<script src="../js/vendor/require/require.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/login/login.js"></script>
+<script src="../js/vendor/rsa.js"></script>
 </body>
 </html>

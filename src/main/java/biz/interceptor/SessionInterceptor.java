@@ -102,7 +102,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 				if(isAjaxRequest(request)){
 					throw new BusinessException(ParamConstants.INTERCEPTOR_NO_LOGIN, "请登录！");	
 				}else{
-					String redirect = request.getContextPath() + "/sts/user/login.html";
+					String redirect = "http://"+request.getServerName() + "/skyjoy/user/login.html";
 					response.sendRedirect(redirect);
 					return false;
 				}
