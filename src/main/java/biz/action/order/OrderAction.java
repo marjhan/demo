@@ -70,8 +70,6 @@ public class OrderAction extends WebsiteBaseAction{
 	/**
 	 * 订单列表.
 	 * 
-	 * @param index
-	 * @param type
 	 * @return
 	 */
 	@RequestMapping(value = "/list")
@@ -142,7 +140,6 @@ public class OrderAction extends WebsiteBaseAction{
 	/**
 	 * 新增订单页面.
 	 * 
-	 * @param req
 	 * @return
 	 */
 	@RequestMapping(value = "/order_new")
@@ -193,7 +190,6 @@ public class OrderAction extends WebsiteBaseAction{
 	/**
 	 * 新增订单.
 	 * 
-	 * @param req
 	 * @return
 	 */
 	@RequestMapping(value = "/addOrder")

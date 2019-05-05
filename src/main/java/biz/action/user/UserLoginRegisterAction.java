@@ -6,8 +6,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,8 +21,8 @@ import javax.validation.Valid;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.apache.log4j.Logger;
-import org.apache.taglibs.standard.lang.jstl.test.beans.PublicInterface2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -72,6 +78,8 @@ public class UserLoginRegisterAction extends WebsiteBaseAction {
     private String port;
     static private Map<String, RequestStatisticsInfo> map = new HashMap<String, RequestStatisticsInfo>();
 
+    private static final ScheduledExecutorService scheduledExecutorService = new ScheduledThreadPoolExecutor(5, new BasicThreadFactory.Builder().namingPattern("userlogin-cleanmap-scheduled-pool-%d").daemon(true).build());
+
     /**
      * 日志对象.
      */
@@ -93,9 +101,12 @@ public class UserLoginRegisterAction extends WebsiteBaseAction {
         if (date.before(new Date())) {
             date = addDay(date, 1);
         }
-        Timer timer = new Timer();
+
         //安排指定的任务在指定的时间开始进行重复的固定延迟执行。
-        timer.schedule(new ClearThread(), date, PERIOD_DAY);
+        scheduledExecutorService.scheduleAtFixedRate(()->{
+                map.clear();
+                logger.info("清空校验码map内容！");
+        }, 0, 100, TimeUnit.MILLISECONDS);
     }
 
     // 增加或减少天数
@@ -106,17 +117,9 @@ public class UserLoginRegisterAction extends WebsiteBaseAction {
         return startDT.getTime();
     }
 
-    private class ClearThread extends TimerTask {
-        public void run() {
-            map.clear();
-            logger.info("清空校验码map内容！");
-        }
-    }
-
     /**
      * 登录页面.
      *
-     * @param req 请求.
      * @return 返回.
      */
     @RequestMapping(value = "/login")
@@ -204,7 +207,6 @@ public class UserLoginRegisterAction extends WebsiteBaseAction {
     /**
      * 修改密码成功后.
      *
-     * @param req 请求参数.
      * @return 参数返回.
      */
     @RequestMapping(value = "/updatePwdSuccess")
@@ -323,7 +325,6 @@ public class UserLoginRegisterAction extends WebsiteBaseAction {
     /**
      * 判断是否登录.
      *
-     * @param req 请求参数.
      * @return 参数返回.
      */
     @RequestMapping(value = {"/islogin", "/is_login"}, method = RequestMethod.POST)
